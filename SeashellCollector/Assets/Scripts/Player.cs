@@ -1,5 +1,7 @@
 using Assets.Scripts;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +12,12 @@ public class Player : MonoBehaviour
     public int moveSpeed = 2;
     private Vector2 movementInput;
     [SerializeField] private TMP_Text textScore;
+    [SerializeField] AudioSource pickupSound;
+    [SerializeField] AudioSource buySound;
+    [SerializeField] AudioSource failToBuySound;
+
+    public List<ShopItem> Items;
+    [SerializeField] private TextWithFeedback feedBackText;
 
     private void Awake()
     {
@@ -24,6 +32,23 @@ public class Player : MonoBehaviour
             Debug.Log($"Shell number {shellNumber}");
             Destroy(collision.gameObject);
             textScore.text = shellNumber.ToString();
+            pickupSound.Play();
+            feedBackText.ColourThenFade("+1", Color.green);
+        }
+
+        if (collision.TryGetComponent<ShopItem>(out var item))
+        {
+            this.shellNumber = item.Cost;
+            if (this.shellNumber < item.Cost)
+            {
+                failToBuySound.Play();
+                item.
+            }
+
+            Items.Add(item);
+            buySound.Play();
+            feedBackText.ColourThenFade($"- {item.Cost}", Color.red);
+            Destroy(collision.gameObject);
         }
     }
 
