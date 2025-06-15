@@ -16,6 +16,11 @@ public class ShopItemSpawner : MonoBehaviour
     /// </summary>
     public void SpawnRandoms()
     {
+        if (this.current3items.Count == 3)
+        {
+            return;
+        }
+
         List<int> indices = new();
         foreach (var location in ItemSpawnLocations)
         {
@@ -29,7 +34,12 @@ public class ShopItemSpawner : MonoBehaviour
         }
     }
 
-    public void OnItemBought()
+    public void DespawnRandoms()
+    {
+        RemoveAllShopItems();
+    }
+
+    public void RemoveAllShopItems()
     {
         foreach(var item in current3items)
         {
@@ -53,7 +63,7 @@ public class ShopItemSpawner : MonoBehaviour
         {
             if (item.IsDestroyed())
             {
-                OnItemBought();
+                RemoveAllShopItems();
             }
         }
     }
