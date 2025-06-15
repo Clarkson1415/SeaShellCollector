@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 6042503760864372732}
   - component: {fileID: 4599537829090613214}
   - component: {fileID: 5256048989935621584}
+  - component: {fileID: 970692479966379974}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -240,6 +241,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &970692479966379974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006655856732084010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159db80bdbaad2b42963ea413e8db2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutToInvisibleTime: 0.5
 --- !u!1 &3485862958716105430
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,8 +303,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cost: 10
   Name: Storage Box
-  CostText: {fileID: 7178764026040936837}
-  NameText: {fileID: 5256048989935621584}
+  CostText: {fileID: 40603566016123207}
+  NameText: {fileID: 970692479966379974}
 --- !u!212 &8363381724898668357
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -478,6 +492,7 @@ GameObject:
   - component: {fileID: 2938838259291528783}
   - component: {fileID: 1076544687667954147}
   - component: {fileID: 7178764026040936837}
+  - component: {fileID: 40603566016123207}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -603,3 +618,16 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &40603566016123207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141789252950770881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159db80bdbaad2b42963ea413e8db2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutToInvisibleTime: 0.5

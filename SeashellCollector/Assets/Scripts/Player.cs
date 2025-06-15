@@ -38,13 +38,14 @@ public class Player : MonoBehaviour
 
         if (collision.TryGetComponent<ShopItem>(out var item))
         {
-            this.shellNumber = item.Cost;
             if (this.shellNumber < item.Cost)
             {
                 failToBuySound.Play();
-                item.
+                item.FlashTextRed();
+                return;
             }
 
+            this.shellNumber -= item.Cost;
             Items.Add(item);
             buySound.Play();
             feedBackText.ColourThenFade($"- {item.Cost}", Color.red);

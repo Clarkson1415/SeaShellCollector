@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5242608637727460017}
   - component: {fileID: 9001696062413033787}
   - component: {fileID: 8344383672570945079}
+  - component: {fileID: 6099840860805453664}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -136,6 +137,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6099840860805453664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4091817970771340659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159db80bdbaad2b42963ea413e8db2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutToInvisibleTime: 0.5
 --- !u!1 &5874055236164380915
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,8 +378,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cost: 20
   Name: Storage Box
-  CostText: {fileID: 3335362798714612123}
-  NameText: {fileID: 8344383672570945079}
+  CostText: {fileID: 3452026047246636579}
+  NameText: {fileID: 6099840860805453664}
 --- !u!212 &4693745930024044248
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -478,6 +492,7 @@ GameObject:
   - component: {fileID: 2226336259181442117}
   - component: {fileID: 2419550364041142672}
   - component: {fileID: 3335362798714612123}
+  - component: {fileID: 3452026047246636579}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -603,3 +618,16 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &3452026047246636579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9136989457790479851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159db80bdbaad2b42963ea413e8db2ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutToInvisibleTime: 0.5

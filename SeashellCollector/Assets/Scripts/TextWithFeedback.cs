@@ -14,6 +14,8 @@ namespace Assets.Scripts
 
         public void PlainUpdateText(string text)
         {
+            tmpText = this.GetComponent<TMP_Text>();
+
             tmpText.color = Color.white;
             tmpText.text = text;
         }
@@ -21,11 +23,11 @@ namespace Assets.Scripts
         private void Awake()
         {
             tmpText = this.GetComponent<TMP_Text>();
-            this.tmpText.text = string.Empty;
         }
 
         public void ColourThenFade(string text, Color color)
         {
+            tmpText = this.GetComponent<TMP_Text>();
             this.tmpText.ForceMeshUpdate();
             this.tmpText.color = color;
             this.tmpText.text = text;

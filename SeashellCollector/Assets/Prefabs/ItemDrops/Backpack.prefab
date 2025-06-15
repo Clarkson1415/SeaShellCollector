@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159db80bdbaad2b42963ea413e8db2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 0.5
+  fadeOutToInvisibleTime: 0.5
 --- !u!1 &5874055236164380915
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,8 +378,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cost: 12
   Name: Backpack
-  CostText: {fileID: 3335362798714612123}
-  NameText: {fileID: 8344383672570945079}
+  CostText: {fileID: 6885122879528376590}
+  NameText: {fileID: 2376490943644112386}
 --- !u!212 &4693745930024044248
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -630,4 +630,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159db80bdbaad2b42963ea413e8db2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeDuration: 0.5
+  fadeOutToInvisibleTime: 0.5
