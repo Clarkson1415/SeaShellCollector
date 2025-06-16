@@ -263,9 +263,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   textScore: {fileID: 0}
-  pickupSound: {fileID: 7775957856346253233}
+  pickupSound: {fileID: 6853254692529984404}
   buySound: {fileID: 8000876477006396465}
-  failToBuySound: {fileID: 0}
+  failToBuySound: {fileID: 3995674304376343646}
   Items: []
   feedBackText: {fileID: 0}
 --- !u!61 &8418244766406382549
@@ -351,6 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4829317438398493598}
   - component: {fileID: 7775957856346253233}
+  - component: {fileID: 6853254692529984404}
   m_Layer: 0
   m_Name: pickup
   m_TagString: Untagged
@@ -470,6 +471,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6853254692529984404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197284529917395590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 230ab8d195c372d48b2790b2328054f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Clips:
+  - {fileID: 8300000, guid: 189f188620afc564ebcc829bd0473d0a, type: 3}
+  - {fileID: 8300000, guid: b6d74e60357b7a641a5616e023061510, type: 3}
+  - {fileID: 8300000, guid: 73befa63824467e4db0a5d0d4ac3fedc, type: 3}
+  - {fileID: 8300000, guid: bd32e825659eb98409a8263c703ef7c9, type: 3}
+  - {fileID: 8300000, guid: 8a32870833008304580ae4983701cbc2, type: 3}
 --- !u!1 &4575482788879824342
 GameObject:
   m_ObjectHideFlags: 0

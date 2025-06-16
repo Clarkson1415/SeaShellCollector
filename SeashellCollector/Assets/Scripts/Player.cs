@@ -12,9 +12,9 @@ public class Player : MonoBehaviour
     public int moveSpeed = 2;
     private Vector2 movementInput;
     [SerializeField] private TMP_Text textScore;
-    [SerializeField] AudioSource pickupSound;
+    [SerializeField] RandomSoundPlayer pickupSound;
     [SerializeField] AudioSource buySound;
-    [SerializeField] RandomSoundPlayer failToBuySound;
+    [SerializeField] AudioSource failToBuySound;
 
     public List<ShopItem> Items;
     [SerializeField] private TextWithFeedback feedBackText;
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
             Debug.Log($"Shell number {shellNumber}");
             Destroy(collision.gameObject);
             textScore.text = shellNumber.ToString();
-            pickupSound.Play();
+            pickupSound.PlayRandomSound();
             feedBackText.ColourThenFade("+1", Color.green);
         }
 
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         {
             if (this.shellNumber < item.Cost)
             {
-                failToBuySound.PlayRandomSound();
+                failToBuySound.Play();
                 item.FlashTextRed();
                 return;
             }
