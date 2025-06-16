@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private TMP_Text textScore;
     [SerializeField] AudioSource pickupSound;
     [SerializeField] AudioSource buySound;
-    [SerializeField] AudioSource failToBuySound;
+    [SerializeField] RandomSoundPlayer failToBuySound;
 
     public List<ShopItem> Items;
     [SerializeField] private TextWithFeedback feedBackText;
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         {
             if (this.shellNumber < item.Cost)
             {
-                failToBuySound.Play();
+                failToBuySound.PlayRandomSound();
                 item.FlashTextRed();
                 return;
             }
