@@ -20,16 +20,30 @@ public class Player : MonoBehaviour
 
     private ShopItemSpawner shopItemSpawner;
 
-    [SerializeField] private int _shellNumberPrivate = 0; // only serialized for testing;
+    [SerializeField] private int _PinkShellNumberPrivate = 0; // only serialized for testing;
     private PauseMenu pauseMenu;
 
-    private int ShellNumber
+    private int TotalShells
+    {
+        get
+        {
+            return this.TotalShells;
+        }
+        set
+        {
+            this.playerTopUI.playerBag.UpdateTotalShellCounter(this.PinkShellNumber);
+            TotalShells = value;
+        }
+    }
+
+    private int PinkShellNumber
     { 
-        get => this._shellNumberPrivate;
+        get => this._PinkShellNumberPrivate;
         set 
         {
-            this._shellNumberPrivate = value;
-            this.playerTopUI.playerBag.UpdateBagFill((float)this.ShellNumber / this.MaxCapacity);
+            this._PinkShellNumberPrivate = value;
+            this.playerTopUI.playerBag.UpdatePinkShellCounter(this.PinkShellNumber);
+            this.TotalShells++;
         }
     }
 
@@ -40,7 +54,7 @@ public class Player : MonoBehaviour
         set
         {
             this._maxCapacity = value;
-            this.playerTopUI.playerBag.UpdateBagFill((float)this.ShellNumber / value);
+            this.playerTopUI.playerBag.UpdateMaxCapacity(value);
         }
     }
 
@@ -55,15 +69,15 @@ public class Player : MonoBehaviour
     {
         if (collision.TryGetComponent<Pickup>(out var p))
         {
-            if (ShellNumber == MaxCapacity)
+            if (PinkShellNumber == MaxCapacity)
             {
                 cannotDoSound.Play();
                 feedBackText.ColourThenFade("Capacity full", Color.red);
                 return;
             }
 
-            ShellNumber++;
-            Debug.Log($"Shell number {ShellNumber}");
+            PinkShellNumber++;
+            Debug.Log($"Shell number {PinkShellNumber}");
             
             Destroy(p.gameObject);
             pickupSound.PlayRandomSound();
@@ -72,7 +86,7 @@ public class Player : MonoBehaviour
 
         if (collision.TryGetComponent<ShopItem>(out var item))
         {
-            if (this.ShellNumber < item.Cost)
+            if (this.PinkShellNumber < item.Cost)
             {
                 cannotDoSound.Play();
                 item.FlashTextRed();
@@ -81,7 +95,7 @@ public class Player : MonoBehaviour
 
             this.playerTopUI.pickupList.AddToList(item);
             item.ApplyItemEffect(this);
-            this.ShellNumber -= item.Cost;
+            this.PinkShellNumber -= item.Cost;
             Items.Add(item);
             buySound.Play();
             feedBackText.ColourThenFade($"- {item.Cost}", Color.red);
