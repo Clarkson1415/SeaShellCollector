@@ -82,7 +82,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1966535729
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e19c9f05db541874284ba0aa837b7448, type: 3}
   m_Color: {r: 0.19933473, g: 0.8679245, b: 0.061409745, a: 1}
@@ -262,12 +262,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  textScore: {fileID: 0}
   pickupSound: {fileID: 6853254692529984404}
   buySound: {fileID: 8000876477006396465}
-  failToBuySound: {fileID: 3995674304376343646}
+  cannotDoSound: {fileID: 3995674304376343646}
   Items: []
   feedBackText: {fileID: 8122166905113743583}
+  playerTopUI: {fileID: 0}
 --- !u!61 &8418244766406382549
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

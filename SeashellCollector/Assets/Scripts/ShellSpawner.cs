@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShellSpawner : MonoBehaviour
@@ -40,11 +39,5 @@ public class ShellSpawner : MonoBehaviour
 
         var shell = Instantiate(Shells[index]);
         shell.transform.position = new Vector3(posX, posY);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

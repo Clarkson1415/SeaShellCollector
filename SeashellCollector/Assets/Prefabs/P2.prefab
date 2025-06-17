@@ -462,7 +462,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1966535729
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e19c9f05db541874284ba0aa837b7448, type: 3}
   m_Color: {r: 0, g: 0.9568691, b: 1, a: 1}
@@ -641,11 +641,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2699febe752c724db6407c0bb4786ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shellNumber: 0
+  MaxCapacity: 20
   moveSpeed: 5
   textScore: {fileID: 0}
   pickupSound: {fileID: 433194129734035278}
   buySound: {fileID: 1878880201115010078}
-  failToBuySound: {fileID: 8253734793898409086}
+  cannotDoSound: {fileID: 8253734793898409086}
   Items: []
   feedBackText: {fileID: 6910771607078753930}
 --- !u!61 &5399057615328100151
@@ -1085,7 +1087,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

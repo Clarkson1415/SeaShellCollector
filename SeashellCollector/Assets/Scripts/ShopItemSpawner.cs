@@ -9,28 +9,34 @@ public class ShopItemSpawner : MonoBehaviour
 
     public List<GameObject> AllItemDrops;
 
-    public List<GameObject> current3items = new();
+    public List<GameObject> currentlySpawnedItems = new();
 
     /// <summary>
     /// Spawn 3 random item drops.
     /// </summary>
     public void SpawnRandoms()
     {
-        if (this.current3items.Count == 3)
+        List<int> indices = new();
+
+        if (this.AllItemDrops.Count < 3)
         {
+            foreach (var item in this.AllItemDrops)
+            {
+                var newItem = Instantiate(item);
+                currentlySpawnedItems.Add(newItem);
+            }
+
             return;
         }
 
-        List<int> indices = new();
         foreach (var location in ItemSpawnLocations)
         {
-            var randomIndex = Random.Range(0, AllItemDrops.Count);
-            while (indices.Contains(randomIndex))
-            {
-                randomIndex = Random.Range(0, AllItemDrops.Count);
-            }
+            var possibleIndices = Enumerable.Range(0, AllItemDrops.Count).ToList();
+            possibleIndices.RemoveAll(i => indices.Contains(i)); // Remove already used indices
+            var randomIndex = possibleIndices[Random.Range(0, possibleIndices.Count)];
+            indices.Add(randomIndex);
             var newItem = Instantiate(AllItemDrops[randomIndex], location.transform);
-            current3items.Add(newItem);
+            currentlySpawnedItems.Add(newItem);
         }
     }
 
@@ -41,7 +47,7 @@ public class ShopItemSpawner : MonoBehaviour
 
     public void RemoveAllShopItems()
     {
-        foreach(var item in current3items)
+        foreach (var item in currentlySpawnedItems)
         {
             if (!item.IsDestroyed())
             {
@@ -49,22 +55,13 @@ public class ShopItemSpawner : MonoBehaviour
             }
         }
 
-        current3items.Clear();
+        currentlySpawnedItems.Clear();
     }
 
-    private void FixedUpdate()
+    public void RemoveItem(GameObject item)
     {
-        if (!current3items.Any())
-        {
-            return;
-        }
-
-        foreach (var item in current3items.ToList())
-        {
-            if (item.IsDestroyed())
-            {
-                RemoveAllShopItems();
-            }
-        }
+        this.AllItemDrops.Remove(item);
+        Destroy(item.gameObject);
+        RemoveAllShopItems();
     }
 }

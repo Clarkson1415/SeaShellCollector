@@ -1,10 +1,13 @@
 using System.Collections;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShopGuy : MonoBehaviour
 {
     [SerializeField] private ShopItemSpawner spawner;
     private float timeEnteredShop;
+    Coroutine ShopTimeoutCoroutine;
     
     /// <summary>
     /// How long player has to be not touching shop guy for shop to dissapear.
@@ -13,13 +16,23 @@ public class ShopGuy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        spawner.SpawnRandoms();
         timeEnteredShop = Time.time;
+
+        if (spawner.currentlySpawnedItems.Any())
+        {
+            spawner.RemoveAllShopItems();
+        }
+
+        spawner.SpawnRandoms();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        StartCoroutine(ShopTimeout());
+        if (ShopTimeoutCoroutine != null)
+        {
+            StopCoroutine(ShopTimeoutCoroutine);
+        }
+        this.ShopTimeoutCoroutine = StartCoroutine(ShopTimeout());
     }
 
     IEnumerator ShopTimeout()
@@ -29,7 +42,7 @@ public class ShopGuy : MonoBehaviour
 
         while (Time.time < timeEnteredShop + notInShopTimeout)
         {
-            yield return null;
+            yield return new WaitForSeconds(1f);
         }
 
         spawner.DespawnRandoms();
