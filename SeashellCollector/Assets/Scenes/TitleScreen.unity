@@ -119,17 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &142874669 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1588068377254943794, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
-  m_PrefabInstance: {fileID: 444589587584509201}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d61f3cb4d035aa74fa6c3b6046d9a39f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &175648037
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,14 +343,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 252958769758372778, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 142874669}
-    - target: {fileID: 252958769758372778, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GotoScene
-      objectReference: {fileID: 0}
     - target: {fileID: 263493792370667793, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
       propertyPath: mainEventSytem
       value: 

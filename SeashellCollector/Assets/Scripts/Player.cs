@@ -14,35 +14,35 @@ public class Player : MonoBehaviour
     [SerializeField] AudioSource buySound;
     [SerializeField] AudioSource cannotDoSound;
 
+    private PauseMenu pauseMenu;
     public List<ShopItem> Items;
     [SerializeField] private TextWithFeedback feedBackText;
     [SerializeField] private PlayerTopUI playerTopUI;
 
     private ShopItemSpawner shopItemSpawner;
 
-    [SerializeField] private int _PinkShellNumberPrivate = 0; // only serialized for testing;
-    private PauseMenu pauseMenu;
-
+    [SerializeField] private int _TotalShellNumberPriv = 0; // only serialized for testing;
     private int TotalShells
     {
         get
         {
-            return this.TotalShells;
+            return this._TotalShellNumberPriv;
         }
         set
         {
-            this.playerTopUI.playerBag.UpdateTotalShellCounter(this.PinkShellNumber);
-            TotalShells = value;
+            _TotalShellNumberPriv = value;
+            this.playerTopUI.playerBag.UpdateTotalShellCounter(this._PinkShellNumberPrivate);
         }
     }
 
+    [SerializeField] private int _PinkShellNumberPrivate = 0; // only serialized for testing;
     private int PinkShellNumber
     { 
         get => this._PinkShellNumberPrivate;
         set 
         {
             this._PinkShellNumberPrivate = value;
-            this.playerTopUI.playerBag.UpdatePinkShellCounter(this.PinkShellNumber);
+            this.playerTopUI.playerBag.UpdatePinkShellCounter(this._PinkShellNumberPrivate);
             this.TotalShells++;
         }
     }

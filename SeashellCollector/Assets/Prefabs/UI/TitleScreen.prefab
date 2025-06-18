@@ -554,7 +554,7 @@ PrefabInstance:
     - target: {fileID: 3134771773323162848, guid: 1f1e6d23cef564243bdeef66603f4ddc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1508722577591796985}
+      objectReference: {fileID: 1588068377254943794}
     - target: {fileID: 3134771773323162848, guid: 1f1e6d23cef564243bdeef66603f4ddc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -709,18 +709,18 @@ PrefabInstance:
     - target: {fileID: 3134771773323162848, guid: 1f1e6d23cef564243bdeef66603f4ddc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4744931401958309005}
+      objectReference: {fileID: 1508722577591796985}
     - target: {fileID: 3134771773323162848, guid: 1f1e6d23cef564243bdeef66603f4ddc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3134771773323162848, guid: 1f1e6d23cef564243bdeef66603f4ddc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Quit
+      value: GotoScene
       objectReference: {fileID: 0}
     - target: {fileID: 3134771773323162848, guid: 1f1e6d23cef564243bdeef66603f4ddc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: QuitGame, Assembly-CSharp
+      value: LoadScene, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3134771773323162848, guid: 1f1e6d23cef564243bdeef66603f4ddc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
