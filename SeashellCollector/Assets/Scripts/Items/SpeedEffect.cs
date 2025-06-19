@@ -2,22 +2,22 @@
 
 namespace Assets.Scripts.Items
 {
-    [CreateAssetMenu(fileName = "Capacity Effect", menuName = "Item Effects/Capacity")]
-    public class CapacityEffect : ItemEffect
+    [CreateAssetMenu(fileName = "Speed Effect", menuName = "Item Effects/Speed")]
+    public class SpeedEffect : ItemEffect
     {
         public override void Apply(Player player, int value)
         {
-            player.ModifyMaxCap(value);
+            player.ModifySpeed(value);
         }
 
         public override void Apply(Player player, int value, float timeout)
         {
-            player.ModifyMaxCap(value, timeout);
+            player.ModifySpeed(value, timeout);
         }
 
         public override void Remove(Player player, int value)
         {
-            player.ModifyMaxCap(-value);
+            player.ModifySpeed(-value);
         }
     }
 }

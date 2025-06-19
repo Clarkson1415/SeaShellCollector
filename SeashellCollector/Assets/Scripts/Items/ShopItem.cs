@@ -4,12 +4,26 @@ using UnityEngine;
 
 public class ShopItem : MonoBehaviour
 {
+    /// <summary>
+    /// Whether should be removed from the shop.
+    /// </summary>
+    public bool OneTimeOnly;
+
+    public int EffectValue;
+
+    [SerializeField] private bool HasTimeout;
+
+    [SerializeField] private float effectTimeout;
+
     public int Cost;
 
     public string Name;
 
+    public string Description;
+
     [SerializeField] TextWithFeedback CostText;
     [SerializeField] TextWithFeedback NameText;
+    [SerializeField] TextWithFeedback DescriptionText;
 
     public List<ItemEffect> Effects = new();
 
@@ -17,27 +31,39 @@ public class ShopItem : MonoBehaviour
     {
         this.CostText.ColourThenFadeToColour(Color.red, Color.white, 1f);
         this.NameText.ColourThenFadeToColour(Color.red, Color.white, 1f);
+        this.DescriptionText.ColourThenFadeToColour(Color.red, Color.white, 1f);
     }
 
     private void Awake()
     {
         this.CostText.PlainUpdateText(this.Cost.ToString());
         this.NameText.PlainUpdateText(this.Name.ToString());
+        this.DescriptionText.PlainUpdateText(this.Description.ToString());
     }
 
     public void ApplyItemEffect(Player player)
     {
-        foreach(var effect in Effects)
+        if (this.HasTimeout)
         {
-            effect.Apply(player);
+            foreach (var effect in Effects)
+            {
+                effect.Apply(player, this.EffectValue, this.effectTimeout);
+            }
+
+            return;
+        }
+
+        foreach (var effect in Effects)
+        {
+            effect.Apply(player, this.EffectValue);
         }
     }
 
-    /// <summary>
-    /// Function To be called when the item is bought. e.g. For storage box it will spawn a storage box down the bottom of the screen. So maybe this needs to be the shop item parent class then? but then I have to make a separate class for each item :( 
-    /// </summary>
-    //public void OnBought()
-    //{
-    //    throw new NotImplementedException();
-    //}
+    public void RemoveEffect(Player player)
+    {
+        foreach (var effect in Effects)
+        {
+            effect.Remove(player, this.EffectValue);
+        }
+    }
 }

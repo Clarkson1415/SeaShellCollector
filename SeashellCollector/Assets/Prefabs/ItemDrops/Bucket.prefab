@@ -20,6 +20,26 @@ PrefabInstance:
       propertyPath: Name
       value: Bucket
       objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: Description
+      value: Carry 30 more shells.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: EffectValue
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: OneTimeOnly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: Effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: 'Effects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 177fcc02612a2954c949dca49580d503, type: 2}
     - target: {fileID: 5615105297221387082, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

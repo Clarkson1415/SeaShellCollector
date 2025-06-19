@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3416950352543182540, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416950352543182540, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 1
       objectReference: {fileID: 0}
@@ -18,27 +22,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3485862958716105430, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: m_Name
-      value: Backpack
-      objectReference: {fileID: 0}
-    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
-      propertyPath: Cost
-      value: 200
+      value: Frappacino
       objectReference: {fileID: 0}
     - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: Name
-      value: Backpack
+      value: Coffee!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: HasTimeout
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: Description
-      value: Increase shell capacity by 100
+      value: Double speed for 30 seconds
       objectReference: {fileID: 0}
     - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: EffectValue
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
-      propertyPath: OneTimeOnly
-      value: 1
+      propertyPath: effectTimeout
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: Effects.Array.size
@@ -47,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: 'Effects.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 177fcc02612a2954c949dca49580d503, type: 2}
+      objectReference: {fileID: 11400000, guid: 9e63d1f4661ff734a96d6a3e4ec0f765, type: 2}
     - target: {fileID: 5615105297221387082, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -91,11 +95,7 @@ PrefabInstance:
     - target: {fileID: 8363381724898668357, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9569faff484b7a841a89c0bd7388375a, type: 3}
-    - target: {fileID: 8363381724898668357, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 2e19eccc5d92f694e8119700229b62c0, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

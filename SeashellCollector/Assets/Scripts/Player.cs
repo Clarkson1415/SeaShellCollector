@@ -1,13 +1,17 @@
 using Assets.Scripts;
+using System.Collections;
 using System.Collections.Generic;
-using TMPro;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
-    public int moveSpeed = 2;
+
+    [SerializeField] private int baseMoveSpeed = 2;
+    [SerializeField] private float moveSpeedModifer = 1;
+
     private Vector2 movementInput;
 
     [SerializeField] RandomSoundPlayer pickupSound;
@@ -21,25 +25,26 @@ public class Player : MonoBehaviour
 
     private ShopItemSpawner shopItemSpawner;
 
-    [SerializeField] private int _TotalShellNumberPriv = 0; // only serialized for testing;
+    [SerializeField] private int _totalShellNumberPriv = 0; // only serialized for testing;
+
     private int TotalShells
     {
         get
         {
-            return this._TotalShellNumberPriv;
+            return this._totalShellNumberPriv;
         }
         set
         {
-            _TotalShellNumberPriv = value;
+            _totalShellNumberPriv = value;
             this.playerTopUI.playerBag.UpdateTotalShellCounter(this._PinkShellNumberPrivate);
         }
     }
 
     [SerializeField] private int _PinkShellNumberPrivate = 0; // only serialized for testing;
     private int PinkShellNumber
-    { 
+    {
         get => this._PinkShellNumberPrivate;
-        set 
+        set
         {
             this._PinkShellNumberPrivate = value;
             this.playerTopUI.playerBag.UpdatePinkShellCounter(this._PinkShellNumberPrivate);
@@ -47,10 +52,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    private int _maxCapacity = 20;
-    public int MaxCapacity 
-    { 
-        get => _maxCapacity;
+    [SerializeField] private int maxCapModifer = 0; // only serialized for testing;
+
+    [SerializeField] private int _maxCapacity = 20;
+
+    private int MaxCapacity
+    {
+        get => _maxCapacity + maxCapModifer;
         set
         {
             this._maxCapacity = value;
@@ -78,7 +86,7 @@ public class Player : MonoBehaviour
 
             PinkShellNumber++;
             Debug.Log($"Shell number {PinkShellNumber}");
-            
+
             Destroy(p.gameObject);
             pickupSound.PlayRandomSound();
             feedBackText.ColourThenFade("+1", Color.green);
@@ -111,12 +119,38 @@ public class Player : MonoBehaviour
             return;
         }
 
-        Vector2 move = moveSpeed * Time.fixedDeltaTime * movementInput;
+        Vector2 move = baseMoveSpeed * moveSpeedModifer * Time.fixedDeltaTime * movementInput;
         rb.MovePosition(rb.position + move);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         this.movementInput = context.ReadValue<Vector2>();
+    }
+
+    public void ModifySpeed(int value, float timeout = -1f)
+    {
+        this.moveSpeedModifer += value / 100f;
+
+        if (timeout > 0)
+        {
+            StartCoroutine(RemoveModAfterTimeout(value, timeout, () => this.moveSpeedModifer -= value / 100f));
+        }
+    }
+
+    public void ModifyMaxCap(int value, float timeout = -1f)
+    {
+        this.maxCapModifer += value;
+
+        if (timeout > 0)
+        {
+            StartCoroutine(RemoveModAfterTimeout(value, timeout, () => this.maxCapModifer -= value));
+        }
+    }
+
+    private IEnumerator RemoveModAfterTimeout(int valueUsed, float timeout, System.Action removeAction)
+    {
+        yield return new WaitForSeconds(timeout);
+        removeAction?.Invoke();
     }
 }

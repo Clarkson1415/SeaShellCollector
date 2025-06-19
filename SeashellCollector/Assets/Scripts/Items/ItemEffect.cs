@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NUnit.Framework.Internal.Commands;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -7,14 +8,10 @@ namespace Assets.Scripts
     /// </summary>
     public abstract class ItemEffect : ScriptableObject
     {
-        /// <summary>
-        /// The amount that the effect will change something.
-        /// </summary>:
-        public int Value { get; set; }
+        public abstract void Apply(Player player, int value);
 
-        /// <summary>
-        /// Apply effect to the player.
-        /// </summary>
-        public abstract void Apply(Player player);
+        public abstract void Apply(Player player, int value, float timeout);
+
+        public abstract void Remove(Player player, int value);
     }
 }

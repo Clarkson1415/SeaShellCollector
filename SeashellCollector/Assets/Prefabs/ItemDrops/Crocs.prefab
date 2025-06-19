@@ -28,6 +28,30 @@ PrefabInstance:
       propertyPath: Name
       value: Crocs
       objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: HasTimeout
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: Description
+      value: Walk and run 20% faster!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: EffectValue
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: OneTimeOnly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: Effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: 'Effects.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e63d1f4661ff734a96d6a3e4ec0f765, type: 2}
     - target: {fileID: 5615105297221387082, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
