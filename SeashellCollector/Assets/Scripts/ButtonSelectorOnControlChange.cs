@@ -29,18 +29,21 @@ public class ButtonSelectorOnControlChange : MonoBehaviour, IPointerEnterHandler
     /// <param name="context"></param>
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (this.pauseMenu != null)
+        if (this.pauseMenu == null)
         {
-            var pauseMenuState = pauseMenu.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
-            if (!pauseMenuState.IsName("StayIn"))
-            {
-                return;
-            }
+            return;
         }
 
-        if (context.started && this.mainEventSytem.currentSelectedGameObject == null)
+        var pauseMenuState = pauseMenu.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+        if (!pauseMenuState.IsName("StayIn"))
         {
-            this.mainEventSytem.SetSelectedGameObject(null);
+            Debug.Log("Not Stay in");
+            return;
+        }
+
+        if (context.performed && this.mainEventSytem.currentSelectedGameObject == null)
+        {
+            Debug.Log("should do button things");
             this.mainEventSytem.SetSelectedGameObject(this.buttonToSelect); 
         }
     }
