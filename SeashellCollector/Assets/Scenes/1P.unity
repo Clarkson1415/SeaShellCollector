@@ -47439,16 +47439,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3640019421973810922, guid: c67d67110109e1a418ac1e4e555e697b, type: 3}
-      propertyPath: m_UIInputModule
-      value: 
-      objectReference: {fileID: 1109940587}
-    - target: {fileID: 4418303808468402549, guid: c67d67110109e1a418ac1e4e555e697b, type: 3}
-      propertyPath: m_UIInputModule
-      value: 
-      objectReference: {fileID: 1109940587}
+      propertyPath: m_NeverAutoSwitchControlSchemes
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4418303808468402549, guid: c67d67110109e1a418ac1e4e555e697b, type: 3}
       propertyPath: m_NeverAutoSwitchControlSchemes
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5089246172201022528, guid: c67d67110109e1a418ac1e4e555e697b, type: 3}
       propertyPath: mainEventSytem
