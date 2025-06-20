@@ -9,12 +9,6 @@ public class ShopItem : MonoBehaviour
     /// </summary>
     public bool OneTimeOnly;
 
-    public int EffectValue;
-
-    [SerializeField] private bool HasTimeout;
-
-    [SerializeField] private float effectTimeout;
-
     public int Cost;
 
     public string Name;
@@ -43,19 +37,9 @@ public class ShopItem : MonoBehaviour
 
     public void ApplyItemEffect(Player player)
     {
-        if (this.HasTimeout)
-        {
-            foreach (var effect in Effects)
-            {
-                effect.Apply(player, this.EffectValue, this.effectTimeout);
-            }
-
-            return;
-        }
-
         foreach (var effect in Effects)
         {
-            effect.Apply(player, this.EffectValue);
+            effect.Apply(player);
         }
     }
 
@@ -63,7 +47,7 @@ public class ShopItem : MonoBehaviour
     {
         foreach (var effect in Effects)
         {
-            effect.Remove(player, this.EffectValue);
+            effect.Remove(player);
         }
     }
 }

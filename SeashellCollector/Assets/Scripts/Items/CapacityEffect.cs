@@ -1,23 +1,25 @@
 ﻿using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Assets.Scripts.Items
 {
     [CreateAssetMenu(fileName = "Capacity Effect", menuName = "Item Effects/Capacity")]
     public class CapacityEffect : ItemEffect
     {
-        public override void Apply(Player player, int value)
+
+        public override void ApplyWithoutTimeout(Player player)
         {
-            player.ModifyMaxCap(value);
+            player.ModifyMaxCap(this.Value);
         }
 
-        public override void Apply(Player player, int value, float timeout)
+        public override void ApplyWithTimeout(Player player)
         {
-            player.ModifyMaxCap(value, timeout);
+            player.ModifyMaxCap(this.Value, this.Timeout);
         }
 
-        public override void Remove(Player player, int value)
+        public override void Remove(Player player)
         {
-            player.ModifyMaxCap(-value);
+            player.ModifyMaxCap(-this.Value);
         }
     }
 }

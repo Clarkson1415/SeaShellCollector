@@ -1,7 +1,6 @@
 using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,19 +35,19 @@ public class Player : MonoBehaviour
         set
         {
             _totalShellNumberPriv = value;
-            this.playerTopUI.playerBag.UpdateTotalShellCounter(this._PinkShellNumberPrivate);
+            this.playerTopUI.playerBag.UpdateTotalShellCounter(this._totalShellNumberPriv);
         }
     }
 
-    [SerializeField] private int _PinkShellNumberPrivate = 0; // only serialized for testing;
+    [SerializeField] private int _pinkShellNumberPrivate = 0; // only serialized for testing;
     private int PinkShellNumber
     {
-        get => this._PinkShellNumberPrivate;
+        get => this._pinkShellNumberPrivate;
         set
         {
-            this._PinkShellNumberPrivate = value;
-            this.playerTopUI.playerBag.UpdatePinkShellCounter(this._PinkShellNumberPrivate);
-            this.TotalShells++;
+            this._pinkShellNumberPrivate = value;
+            this.playerTopUI.playerBag.UpdatePinkShellCounter(this._pinkShellNumberPrivate);
+            this.TotalShells += value;
         }
     }
 
@@ -62,7 +61,7 @@ public class Player : MonoBehaviour
         set
         {
             this._maxCapacity = value;
-            this.playerTopUI.playerBag.UpdateMaxCapacity(value);
+            this.playerTopUI.playerBag.UpdateMaxCapacity(_maxCapacity + maxCapModifer);
         }
     }
 
@@ -134,7 +133,7 @@ public class Player : MonoBehaviour
 
         if (timeout > 0)
         {
-            StartCoroutine(RemoveModAfterTimeout(value, timeout, () => this.moveSpeedModifer -= value / 100f));
+            StartCoroutine(RemoveModAfterTimeout(timeout, () => this.moveSpeedModifer -= value / 100f));
         }
     }
 
@@ -144,11 +143,11 @@ public class Player : MonoBehaviour
 
         if (timeout > 0)
         {
-            StartCoroutine(RemoveModAfterTimeout(value, timeout, () => this.maxCapModifer -= value));
+            StartCoroutine(RemoveModAfterTimeout(timeout, () => this.maxCapModifer -= value));
         }
     }
 
-    private IEnumerator RemoveModAfterTimeout(int valueUsed, float timeout, System.Action removeAction)
+    private IEnumerator RemoveModAfterTimeout(float timeout, System.Action removeAction)
     {
         yield return new WaitForSeconds(timeout);
         removeAction?.Invoke();

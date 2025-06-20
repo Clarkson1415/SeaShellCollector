@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -16,6 +17,8 @@ public class ShopItemSpawner : MonoBehaviour
     /// </summary>
     public void SpawnRandoms()
     {
+        var startPos = this.transform.position;
+
         List<int> indices = new();
 
         if (this.AllItemDrops.Count < 3)
@@ -37,7 +40,40 @@ public class ShopItemSpawner : MonoBehaviour
             indices.Add(randomIndex);
             var newItem = Instantiate(AllItemDrops[randomIndex], location.transform);
             currentlySpawnedItems.Add(newItem);
+
+            // Start animation to spots.
+            Debug.Log("Player coin cash shop sound or pop , pop for the items");
+            newItem.transform.localScale = Vector3.zero;
+            newItem.transform.position = this.transform.position; 
+            StartCoroutine(GrowAndMove(newItem.transform, location.transform.position));
         }
+    }
+
+    [SerializeField] private float growDuration = 0.5f; // Duration for the grow animation
+    [SerializeField] private float moveDuration = 0.5f; // Duration for the move
+
+    private IEnumerator GrowAndMove(Transform objTransform, Vector3 targetPosition)
+    {
+        Vector3 initialPosition = objTransform.position;
+        Vector3 initialScale = objTransform.localScale;
+        float elapsed = 0f;
+
+        while (elapsed < Mathf.Max(growDuration, moveDuration))
+        {
+            float tGrow = Mathf.Clamp01(elapsed / growDuration);
+            float tMove = Mathf.Clamp01(elapsed / moveDuration);
+
+            // Lerp scale and position
+            objTransform.localScale = Vector3.Lerp(initialScale, new Vector3(1, 1, 1), tGrow);
+            objTransform.position = Vector3.Lerp(initialPosition, targetPosition, tMove);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure final values are set
+        objTransform.localScale = new Vector3(1, 1, 1);
+        objTransform.position = targetPosition;
     }
 
     public void DespawnRandoms()

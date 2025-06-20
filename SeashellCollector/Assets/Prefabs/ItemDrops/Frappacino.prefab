@@ -95,7 +95,7 @@ PrefabInstance:
     - target: {fileID: 8363381724898668357, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2e19eccc5d92f694e8119700229b62c0, type: 3}
+      objectReference: {fileID: 21300000, guid: d2b8e90eaee4c56429f97c316cb245b5, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

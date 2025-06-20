@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -44,7 +43,7 @@ public class ButtonSelectorOnControlChange : MonoBehaviour, IPointerEnterHandler
         if (context.performed && this.mainEventSytem.currentSelectedGameObject == null)
         {
             Debug.Log("should do button things");
-            this.mainEventSytem.SetSelectedGameObject(this.buttonToSelect); 
+            this.mainEventSytem.SetSelectedGameObject(this.buttonToSelect);
         }
     }
 }
