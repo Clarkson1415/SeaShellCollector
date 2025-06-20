@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class ShopItemSpawner : MonoBehaviour
@@ -18,52 +19,51 @@ public class ShopItemSpawner : MonoBehaviour
     /// </summary>
     public void SpawnRandoms()
     {
-        var startPos = this.transform.position;
+        StartCoroutine(SpawnShopItemsOneAtATime());
+    }
 
-        List<int> indices = new();
+    IEnumerator SpawnShopItemsOneAtATime()
+    {
+        List<GameObject> itemsToSpawn = new();
+        var numberOfItemsToSpawn = Mathf.Min(3, AllItemDrops.Count); // Ensure we don't try to spawn more items than available.
 
-        if (this.AllItemDrops.Count < 3)
+        List<int> usedIndicies = new();
+        var possibleIndices = Enumerable.Range(0, AllItemDrops.Count).ToList();
+
+        for (int i = 0; i < numberOfItemsToSpawn; i++)
         {
-            foreach (var item in this.AllItemDrops)
-            {
-                var newItem = Instantiate(item);
-                currentlySpawnedItems.Add(newItem);
-            }
-
-            return;
+            possibleIndices.RemoveAll(i => usedIndicies.Contains(i)); // Remove already used indices
+            var randomIndex = possibleIndices[UnityEngine.Random.Range(0, possibleIndices.Count)];
+            usedIndicies.Add(randomIndex);
+            itemsToSpawn.Add(AllItemDrops[randomIndex]);
         }
 
-        foreach (var location in ItemSpawnLocations)
+        Debug.Log("Player coin cash shop sound or pop, pop, pop for the items appearing.");
+        for (int i = 0; i < itemsToSpawn.Count; i++)
         {
-            var possibleIndices = Enumerable.Range(0, AllItemDrops.Count).ToList();
-            possibleIndices.RemoveAll(i => indices.Contains(i)); // Remove already used indices
-            var randomIndex = possibleIndices[UnityEngine.Random.Range(0, possibleIndices.Count)];
-            indices.Add(randomIndex);
-            var newItem = Instantiate(AllItemDrops[randomIndex], location.transform);
-            currentlySpawnedItems.Add(newItem);
-
-            // Start animation to spots.
-            Debug.Log("Player coin cash shop sound or pop , pop for the items");
+            var newItem = Instantiate(itemsToSpawn[i], ItemSpawnLocations[i].transform);
+            this.currentlySpawnedItems.Add(newItem);
             newItem.transform.localScale = Vector3.zero;
             newItem.transform.position = this.transform.position;
             newItem.GetComponent<BoxCollider2D>().enabled = false;
-            StartCoroutine(ChangeSizeAndMove(newItem.transform, location.transform.position, Vector3.one, () => newItem.gameObject.GetComponent<BoxCollider2D>().enabled = true));
+            StartCoroutine(ChangeSizeAndMove(newItem.transform, ItemSpawnLocations[i].transform.position, Vector3.one));
+            yield return new WaitForSeconds(animationDuration);
+            newItem.GetComponent<BoxCollider2D>().enabled = true;
         }
     }
 
-    [SerializeField] private float growDuration = 3f; // Duration for the grow animation
-    [SerializeField] private float moveDuration = 3f; // Duration for the move
+    [SerializeField] private float animationDuration = 3f; // Duration for the grow animation
 
-    private IEnumerator ChangeSizeAndMove(Transform objTransform, Vector3 targetPosition, Vector3 targetScale, Action action)
+    private IEnumerator ChangeSizeAndMove(Transform objTransform, Vector3 targetPosition, Vector3 targetScale)
     {
         Vector3 initialPosition = objTransform.position;
         Vector3 initialScale = objTransform.localScale;
         float elapsed = 0f;
 
-        while (elapsed < Mathf.Max(growDuration, moveDuration))
+        while (elapsed < Mathf.Max(animationDuration, animationDuration))
         {
-            float tGrow = Mathf.Clamp01(elapsed / growDuration);
-            float tMove = Mathf.Clamp01(elapsed / moveDuration);
+            float tGrow = Mathf.Clamp01(elapsed / animationDuration);
+            float tMove = Mathf.Clamp01(elapsed / animationDuration);
 
             // Lerp scale and position
             objTransform.localScale = Vector3.Lerp(initialScale, targetScale, tGrow);
@@ -83,23 +83,29 @@ public class ShopItemSpawner : MonoBehaviour
         RemoveAllShopItems();
     }
 
-    public void RemoveAllShopItems()
+    private IEnumerator RemoveOneAtATime()
     {
         foreach (var item in currentlySpawnedItems)
         {
-            if (!item.IsDestroyed())
-            {
-                StartCoroutine(ChangeSizeAndMove(item.transform, this.transform.position, new Vector3(0, 0, 0), () => Destroy(item)));
-            }
+            item.GetComponent<BoxCollider2D>().enabled = false;
+            StartCoroutine(ChangeSizeAndMove(item.transform, this.transform.position, new Vector3(0, 0, 0)));
+            yield return new WaitForSeconds(animationDuration);
+            Destroy(item);
         }
 
         currentlySpawnedItems.Clear();
     }
 
+    public void RemoveAllShopItems()
+    {
+        StartCoroutine(RemoveOneAtATime());
+    }
+
     public void RemoveItem(GameObject item)
     {
         this.AllItemDrops.Remove(item);
-        Destroy(item.gameObject);
+        currentlySpawnedItems.Remove(item);
+        Destroy(item);
         RemoveAllShopItems();
     }
 }

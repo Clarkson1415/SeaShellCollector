@@ -1,9 +1,12 @@
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : GameMenu
 {
+    public override bool IsMenuOpen => this.animator.GetCurrentAnimatorStateInfo(0).IsName("StayIn");
+
     private Animator animator;
     [SerializeField] private EventSystem mainEventSytem;
 

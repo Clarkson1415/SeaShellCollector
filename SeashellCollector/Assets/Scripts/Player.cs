@@ -24,18 +24,11 @@ public class Player : MonoBehaviour
 
     private ShopItemSpawner shopItemSpawner;
 
-    [SerializeField] private int _totalShellNumberPriv = 0; // only serialized for testing;
-
     private int TotalShells
     {
         get
         {
-            return this._totalShellNumberPriv;
-        }
-        set
-        {
-            _totalShellNumberPriv = value;
-            this.playerTopUI.playerBag.UpdateTotalShellCounter(this._totalShellNumberPriv);
+            return this._pinkShellNumberPrivate + this._purpleShellNumberPrivate;
         }
     }
 
@@ -47,9 +40,23 @@ public class Player : MonoBehaviour
         {
             this._pinkShellNumberPrivate = value;
             this.playerTopUI.playerBag.UpdatePinkShellCounter(this._pinkShellNumberPrivate);
-            this.TotalShells += value;
+            this.playerTopUI.playerBag.UpdateTotalShellCounter(this.TotalShells); // ew I have to do this in every type of shell Setter.
         }
     }
+
+    [SerializeField] private int _purpleShellNumberPrivate = 0; // only serialized for testing;
+    private int PurpleShellNumber
+    {
+        get => this._purpleShellNumberPrivate;
+        set
+        {
+            this._purpleShellNumberPrivate = value;
+            this.playerTopUI.playerBag.UpdatePinkShellCounter(this._purpleShellNumberPrivate);
+            this.playerTopUI.playerBag.UpdateTotalShellCounter(this.TotalShells); // ew I have to do this in every type of shell Setter.
+        }
+    }
+
+
 
     [SerializeField] private int maxCapModifer = 0; // only serialized for testing;
 

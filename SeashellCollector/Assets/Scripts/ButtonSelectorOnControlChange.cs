@@ -1,25 +1,31 @@
+using Assets.Scripts;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
 /// <summary>
 /// This guy will auto select the button when the controls change to either wasd, arrows keys or controller.
 /// </summary>
 public class ButtonSelectorOnControlChange : MonoBehaviour, IPointerEnterHandler
 {
-    public GameObject buttonToSelect;
     public EventSystem mainEventSytem;
-    private PauseMenu? pauseMenu;
+    private GameMenu menu;
+
+    private void Awake()
+    {
+        this.menu = this.GetComponent<GameMenu>();
+        if (this.menu == null)
+        {
+            throw new ArgumentNullException($"NO MENU ON BUTTON SELECTOR {this.gameObject.name}");
+        }
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         Debug.Log("Pointer entered " + eventData.hovered);
         this.mainEventSytem.SetSelectedGameObject(null);
-    }
-
-    private void Awake()
-    {
-        this.pauseMenu = FindFirstObjectByType<PauseMenu>();
     }
 
     /// <summary>
@@ -28,22 +34,15 @@ public class ButtonSelectorOnControlChange : MonoBehaviour, IPointerEnterHandler
     /// <param name="context"></param>
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (this.pauseMenu == null)
+        if (!this.menu.IsMenuOpen)
         {
-            return;
-        }
-
-        var pauseMenuState = pauseMenu.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
-        if (!pauseMenuState.IsName("StayIn"))
-        {
-            Debug.Log("Not Stay in");
             return;
         }
 
         if (context.performed && this.mainEventSytem.currentSelectedGameObject == null)
         {
             Debug.Log("should do button things");
-            this.mainEventSytem.SetSelectedGameObject(this.buttonToSelect);
+            this.mainEventSytem.SetSelectedGameObject(this.menu.FirstButtonToSelect);
         }
     }
 }

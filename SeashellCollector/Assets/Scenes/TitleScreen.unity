@@ -343,7 +343,7 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 263493792370667793, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
+    - target: {fileID: 2420983270638245266, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
       propertyPath: mainEventSytem
       value: 
       objectReference: {fileID: 1310484835}

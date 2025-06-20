@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShopGuy : MonoBehaviour
 {
     [SerializeField] private ShopItemSpawner spawner;
-    private float timeEnteredShop;
+    private float timeExitShop;
     Coroutine ShopTimeoutCoroutine;
-    
+
     /// <summary>
     /// How long player has to be not touching shop guy for shop to dissapear.
     /// </summary>
@@ -16,8 +15,6 @@ public class ShopGuy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        timeEnteredShop = Time.time;
-
         if (spawner.currentlySpawnedItems.Any())
         {
             spawner.RemoveAllShopItems();
@@ -28,6 +25,8 @@ public class ShopGuy : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        timeExitShop = Time.time;
+
         if (ShopTimeoutCoroutine != null)
         {
             StopCoroutine(ShopTimeoutCoroutine);
@@ -41,7 +40,7 @@ public class ShopGuy : MonoBehaviour
         Debug.Log("todo add a cool animation like the shop items float back while shrinking to the shop guy before they dissapear.");
         Debug.Log("add animation where shop items appear from the shop owner starting as tiny small growing to their size while floating to their positions.");
 
-        while (Time.time < timeEnteredShop + notInShopTimeout)
+        while (Time.time < timeExitShop + notInShopTimeout)
         {
             yield return new WaitForSeconds(1f);
         }

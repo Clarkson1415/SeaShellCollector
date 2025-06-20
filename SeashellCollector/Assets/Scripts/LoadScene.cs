@@ -5,7 +5,6 @@ public class LoadScene : MonoBehaviour
 {
     [SerializeField] private string sceneName = "Game";
     [SerializeField] private TransitionSettings transitionSettings;
-    public string? testNullable;
 
     public void GotoScene()
     {
