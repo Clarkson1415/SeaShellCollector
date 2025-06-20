@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ public class ShopItemSpawner : MonoBehaviour
         {
             var possibleIndices = Enumerable.Range(0, AllItemDrops.Count).ToList();
             possibleIndices.RemoveAll(i => indices.Contains(i)); // Remove already used indices
-            var randomIndex = possibleIndices[Random.Range(0, possibleIndices.Count)];
+            var randomIndex = possibleIndices[UnityEngine.Random.Range(0, possibleIndices.Count)];
             indices.Add(randomIndex);
             var newItem = Instantiate(AllItemDrops[randomIndex], location.transform);
             currentlySpawnedItems.Add(newItem);
@@ -44,15 +45,16 @@ public class ShopItemSpawner : MonoBehaviour
             // Start animation to spots.
             Debug.Log("Player coin cash shop sound or pop , pop for the items");
             newItem.transform.localScale = Vector3.zero;
-            newItem.transform.position = this.transform.position; 
-            StartCoroutine(GrowAndMove(newItem.transform, location.transform.position));
+            newItem.transform.position = this.transform.position;
+            newItem.GetComponent<BoxCollider2D>().enabled = false;
+            StartCoroutine(ChangeSizeAndMove(newItem.transform, location.transform.position, Vector3.one, () => newItem.gameObject.GetComponent<BoxCollider2D>().enabled = true));
         }
     }
 
-    [SerializeField] private float growDuration = 0.5f; // Duration for the grow animation
-    [SerializeField] private float moveDuration = 0.5f; // Duration for the move
+    [SerializeField] private float growDuration = 3f; // Duration for the grow animation
+    [SerializeField] private float moveDuration = 3f; // Duration for the move
 
-    private IEnumerator GrowAndMove(Transform objTransform, Vector3 targetPosition)
+    private IEnumerator ChangeSizeAndMove(Transform objTransform, Vector3 targetPosition, Vector3 targetScale, Action action)
     {
         Vector3 initialPosition = objTransform.position;
         Vector3 initialScale = objTransform.localScale;
@@ -64,7 +66,7 @@ public class ShopItemSpawner : MonoBehaviour
             float tMove = Mathf.Clamp01(elapsed / moveDuration);
 
             // Lerp scale and position
-            objTransform.localScale = Vector3.Lerp(initialScale, new Vector3(1, 1, 1), tGrow);
+            objTransform.localScale = Vector3.Lerp(initialScale, targetScale, tGrow);
             objTransform.position = Vector3.Lerp(initialPosition, targetPosition, tMove);
 
             elapsed += Time.deltaTime;
@@ -72,7 +74,7 @@ public class ShopItemSpawner : MonoBehaviour
         }
 
         // Ensure final values are set
-        objTransform.localScale = new Vector3(1, 1, 1);
+        objTransform.localScale = targetScale;
         objTransform.position = targetPosition;
     }
 
@@ -87,7 +89,7 @@ public class ShopItemSpawner : MonoBehaviour
         {
             if (!item.IsDestroyed())
             {
-                Destroy(item);
+                StartCoroutine(ChangeSizeAndMove(item.transform, this.transform.position, new Vector3(0, 0, 0), () => Destroy(item)));
             }
         }
 

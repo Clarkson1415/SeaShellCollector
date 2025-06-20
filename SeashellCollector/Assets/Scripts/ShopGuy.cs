@@ -32,6 +32,7 @@ public class ShopGuy : MonoBehaviour
         {
             StopCoroutine(ShopTimeoutCoroutine);
         }
+
         this.ShopTimeoutCoroutine = StartCoroutine(ShopTimeout());
     }
 
