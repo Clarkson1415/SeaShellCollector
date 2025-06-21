@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ShopItem : MonoBehaviour
 {
+    public float Timeout = -1f;
+
     /// <summary>
     /// Whether should be removed from the shop.
     /// </summary>
@@ -21,11 +23,13 @@ public class ShopItem : MonoBehaviour
 
     public List<ItemEffect> Effects = new();
 
+    public ItemShop ShopBelongsTo;
+
     public void FlashTextRed()
     {
-        this.CostText.ColourThenFadeToColour(Color.red, Color.white, 1f);
-        this.NameText.ColourThenFadeToColour(Color.red, Color.white, 1f);
-        this.DescriptionText.ColourThenFadeToColour(Color.red, Color.white, 1f);
+        this.CostText.ColourThenFadeToColour(Color.red, Color.black, 1f);
+        this.NameText.ColourThenFadeToColour(Color.red, Color.black, 1f);
+        this.DescriptionText.ColourThenFadeToColour(Color.red, Color.black, 1f);
     }
 
     private void Awake()
@@ -35,7 +39,7 @@ public class ShopItem : MonoBehaviour
         this.DescriptionText.PlainUpdateText(this.Description.ToString());
     }
 
-    public void ApplyItemEffect(Player player)
+    public virtual void ApplyItemEffects(Player player)
     {
         foreach (var effect in Effects)
         {
@@ -43,7 +47,7 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    public void RemoveEffect(Player player)
+    public virtual void RemoveEffects(Player player)
     {
         foreach (var effect in Effects)
         {

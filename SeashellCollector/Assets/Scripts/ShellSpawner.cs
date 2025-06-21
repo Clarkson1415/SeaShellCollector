@@ -37,7 +37,7 @@ public class ShellSpawner : MonoBehaviour
 
         var index = Random.Range(0, Shells.Count);
 
-        var shell = Instantiate(Shells[index]);
+        var shell = Instantiate(Shells[index], this.transform);
         shell.transform.position = new Vector3(posX, posY);
     }
 }

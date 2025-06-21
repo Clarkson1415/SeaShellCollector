@@ -10,24 +10,11 @@ namespace Assets.Scripts
     {
         [SerializeField] protected int Value;
 
-        [SerializeField] protected float Timeout;
-
-        [SerializeField] protected bool HasTimeout;
-
         public abstract void ApplyWithoutTimeout(Player player);
-
-        public abstract void ApplyWithTimeout(Player player);
 
         public void Apply(Player player)
         {
-            if (this.HasTimeout)
-            {
-                this.ApplyWithTimeout(player);
-            }
-            else
-            {
-                this.ApplyWithoutTimeout(player);
-            }
+            this.ApplyWithoutTimeout(player);
         }
 
         public abstract void Remove(Player player);

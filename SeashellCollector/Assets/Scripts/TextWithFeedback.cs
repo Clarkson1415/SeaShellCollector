@@ -15,8 +15,6 @@ namespace Assets.Scripts
         public void PlainUpdateText(string text)
         {
             tmpText = this.GetComponent<TMP_Text>();
-
-            tmpText.color = Color.white;
             tmpText.text = text;
         }
 
@@ -34,6 +32,21 @@ namespace Assets.Scripts
             this.tmpText.ForceMeshUpdate();
 
             StartCoroutine(FadeOut());
+        }
+
+        public void ColourThenFade(int value)
+        {
+            this.ColourThenFade($"{GetSign(value)} {value}", this.GetSignColor(value));
+        }
+
+        private string GetSign(int value)
+        {
+            return value >= 0 ? "+" : "-";
+        }
+
+        private Color GetSignColor(int value)
+        {
+            return value >= 0 ? Color.green : Color.red;
         }
 
         /// <summary>

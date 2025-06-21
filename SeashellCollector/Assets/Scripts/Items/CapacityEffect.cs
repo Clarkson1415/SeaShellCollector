@@ -12,11 +12,6 @@ namespace Assets.Scripts.Items
             player.ModifyMaxCap(this.Value);
         }
 
-        public override void ApplyWithTimeout(Player player)
-        {
-            player.ModifyMaxCap(this.Value, this.Timeout);
-        }
-
         public override void Remove(Player player)
         {
             player.ModifyMaxCap(-this.Value);
