@@ -1,9 +1,6 @@
 using Assets.Scripts;
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 /// <summary>

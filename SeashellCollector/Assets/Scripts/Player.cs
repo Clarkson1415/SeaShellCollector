@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Animator animator;
 
     [SerializeField] private int baseMoveSpeed = 2;
     [SerializeField] private float moveSpeedModifer = 1;
@@ -68,6 +69,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         rb = this.GetComponent<Rigidbody2D>();
         this.pauseMenu = FindFirstObjectByType<PauseMenu>();
 
@@ -156,6 +158,30 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         this.movementInput = context.ReadValue<Vector2>();
+        this.animator.SetFloat("velocityX", this.movementInput.x);
+        this.animator.SetFloat("velocityY", this.movementInput.y);
+
+        if (this.movementInput != Vector2.zero)
+        {
+            this.animator.SetFloat("lastVelocityX", this.movementInput.x);
+            this.animator.SetFloat("lastVelocityY", this.movementInput.y);
+        }
+
+        if (context.started)
+        {
+            this.animator.SetTrigger("Walk");
+        }
+        else if (context.performed)
+        {
+        }
+        else if (context.canceled)
+        {
+            this.animator.SetTrigger("Idle");
+        }
+        else
+        {
+
+        }
     }
 
     public void ModifySpeed(int value, float timeout = -1f)
