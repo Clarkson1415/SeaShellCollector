@@ -297,7 +297,6 @@ MonoBehaviour:
   Items: []
   feedBackText: {fileID: 8122166905113743583}
   playerTopUI: {fileID: 0}
-  _totalShellNumberPriv: 0
   _pinkShellNumberPrivate: 0
   maxCapModifer: 0
   _maxCapacity: 20

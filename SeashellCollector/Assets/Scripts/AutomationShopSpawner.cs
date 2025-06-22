@@ -1,6 +1,8 @@
+using Assets.Scripts;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
@@ -11,6 +13,7 @@ public class AutomationShopSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject shopPrefab; // Prefab for the shop to spawn
     [SerializeField] private int numberOfShopsPerRegion = 5;
+    [SerializeField] private float minDistanceApart = 5f;
     [SerializeField] private BoxCollider2D spawnerRegion;
     [SerializeField] private float TimeBetweenSpawns = 10f; // Time between shop spawns
     private List<GameObject> shops = new();
@@ -32,6 +35,17 @@ public class AutomationShopSpawner : MonoBehaviour
                 0f, // Assuming a flat ground for the shops
                 Random.Range(-spawnerRegion.size.y / 2, spawnerRegion.size.y / 2)
             );
+
+            var closestShop = Utility.GetClosest<Sandcastle>(spawnPosition);
+
+            while (closestShop != null && Vector3.Distance(spawnPosition, closestShop.transform.position) < minDistanceApart)
+            {
+                spawnPosition.x += 1;
+                spawnPosition.y += 1;
+
+                if (!this.spawnerRegion.OverlapPoint(spawnPosition)) // if outside spawn region give up.
+                    yield break;
+            }
 
             var shop = Instantiate(shopPrefab, spawnPosition, Quaternion.identity);
             shops.Add(shop);

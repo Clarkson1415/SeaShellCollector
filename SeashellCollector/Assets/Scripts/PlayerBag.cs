@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class PlayerBag : MonoBehaviour
 {
-    [SerializeField] private TMP_Text count;
-    [SerializeField] private TMP_Text capacityText;
-    [SerializeField] private TMP_Text totalSHells;
+    [SerializeField] private TMP_Text pinkShellCount; // pink shells.
+    [SerializeField] private TMP_Text totalShellsText;
+    private int maxCapacity;
+    private int totalShells;
 
     /// <summary>
     /// Update fill amount of the bag UI As value between 0 and 1.
@@ -13,16 +14,23 @@ public class PlayerBag : MonoBehaviour
     /// <param name="fillAmount"></param>
     public void UpdatePinkShellCounter(int shells)
     {
-        count.text = shells.ToString();
+        pinkShellCount.text = shells.ToString();
     }
 
     public void UpdateTotalShellCounter(int total)
     {
-        this.totalSHells.text = total.ToString();
+        totalShells = total;
+        this.UpdateText();
     }
 
     public void UpdateMaxCapacity(int cap)
     {
-        capacityText.text = cap.ToString();
+        maxCapacity = cap;
+        this.UpdateText();
+    }
+
+    private void UpdateText()
+    {
+        this.totalShellsText.text = $"{this.totalShells}/{this.maxCapacity}";
     }
 }

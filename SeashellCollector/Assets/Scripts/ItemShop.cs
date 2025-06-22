@@ -137,7 +137,8 @@ public class ItemShop : MonoBehaviour
 
     private IEnumerator RemoveOneAtATime(bool destroyShop)
     {
-        foreach (var item in currentlySpawnedItems)
+        var itemsCopy = new List<GameObject>(currentlySpawnedItems);
+        foreach (var item in itemsCopy)
         {
             item.GetComponent<BoxCollider2D>().enabled = false;
             StartCoroutine(ChangeSizeAndMove(item.transform, this.transform.position, new Vector3(0, 0, 0)));

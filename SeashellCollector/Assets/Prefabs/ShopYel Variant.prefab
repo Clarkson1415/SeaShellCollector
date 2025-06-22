@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 628457440889672942, guid: 4a483667fed571148816f4796e81610f, type: 3}
+      propertyPath: AllItemDrops.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 628457440889672942, guid: 4a483667fed571148816f4796e81610f, type: 3}
+      propertyPath: 'AllItemDrops.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3140271723020542597, guid: 5e9c027ec9b22eb4baaacd16bdd09235, type: 3}
+    - target: {fileID: 628457440889672942, guid: 4a483667fed571148816f4796e81610f, type: 3}
+      propertyPath: 'AllItemDrops.Array.data[1]'
+      value: 
+      objectReference: {fileID: 3140271723020542597, guid: 8fab334e6ddcade4e9a335dc76198704, type: 3}
+    - target: {fileID: 628457440889672942, guid: 4a483667fed571148816f4796e81610f, type: 3}
+      propertyPath: 'AllItemDrops.Array.data[2]'
+      value: 
+      objectReference: {fileID: 3140271723020542597, guid: 45bcdb5fb2dcf7f4e96d46047f2d9908, type: 3}
     - target: {fileID: 4873674098778876787, guid: 4a483667fed571148816f4796e81610f, type: 3}
       propertyPath: m_Name
       value: ShopYel Variant

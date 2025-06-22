@@ -11,14 +11,18 @@ PrefabInstance:
     - target: {fileID: 252958769758372778, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5269150160717186205}
     - target: {fileID: 1508722577591796985, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
       propertyPath: sceneName
       value: TitleScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1667547387409886721, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
+      propertyPath: m_Name
+      value: ToTitle
+      objectReference: {fileID: 0}
     - target: {fileID: 2215634252795340935, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
       propertyPath: m_Name
-      value: TitleScreen
+      value: LoadTitle
       objectReference: {fileID: 0}
     - target: {fileID: 4422120940986858177, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
       propertyPath: m_Name
@@ -228,6 +232,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8460264275608551021, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
   m_PrefabInstance: {fileID: 6768847669650849892}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5269150160717186205 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1508722577591796985, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
+  m_PrefabInstance: {fileID: 6768847669650849892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61f3cb4d035aa74fa6c3b6046d9a39f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6967421045893724837 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4422120940986858177, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}

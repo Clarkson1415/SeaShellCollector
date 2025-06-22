@@ -12,7 +12,7 @@ namespace Assets.Scripts
     [RequireComponent(typeof(Rigidbody2D))]
     public class Collector : MonoBehaviour
     {
-        [SerializeField] private PickupType canPickupThis; // What this guy can pick up.
+        [SerializeField] private List<PickupType> canPickupThis; // What this guy can pick up.
 
         public List<Pickup> Pickups { get; set; } = new();
 
@@ -20,7 +20,7 @@ namespace Assets.Scripts
 
         private Vector3 target;
 
-        private Transform SandcastleHome; // Where to go when full to deposit. Or player can walk over the guy to collect.
+        [SerializeField] private Transform SandcastleHome; // Where to go when full to deposit. Or player can walk over the guy to collect.
 
         public float Speed = 1f;
 
@@ -34,7 +34,7 @@ namespace Assets.Scripts
         {
             if (collision.TryGetComponent<Pickup>(out var p))
             {
-                if (this.canPickupThis != p.PickupType)
+                if (!this.canPickupThis.Contains(p.PickupType))
                 {
                     Debug.Log($"Critter did not pickup {p.name}, wrong type.");
                     return;
@@ -58,7 +58,7 @@ namespace Assets.Scripts
             {
                 if (this.Pickups.Count > 0)
                 {
-                    s.PickupStore.AddRange(this.Pickups);
+                    s.PickupStore = new List<Pickup>(s.PickupStore.Concat(this.Pickups)); // Must do this to trigger the setter.
                     this.Pickups.Clear();
                 }
             }
@@ -74,8 +74,8 @@ namespace Assets.Scripts
 
         private void PickNewPickupTarget()
         {
-            var findShell = FindObjectsByType<Pickup>(FindObjectsSortMode.None).FirstOrDefault(x => x.PickupType == this.canPickupThis);
-            target = findShell.transform.position;
+            var closest = Utility.GetClosestPickup(this.transform.position, this.canPickupThis);
+            target = closest.transform.position;
         }
 
         // Update is called once per frame

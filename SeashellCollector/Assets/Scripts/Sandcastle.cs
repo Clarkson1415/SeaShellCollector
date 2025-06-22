@@ -14,7 +14,7 @@ namespace Assets.Scripts
 
         private List<Pickup> privatePickupList = new();
 
-        [SerializeField] private float timeUntilNewCritterShopSpawns = 10f;
+        [SerializeField] private float TimeUntilShopSpawn = 10f;
 
         [SerializeField] private ItemShop currentShop;
 
@@ -31,7 +31,7 @@ namespace Assets.Scripts
             get => this.privatePickupList;
             set
             {
-                this.feedBackText.ColourThenFade(value.Count);
+                this.feedBackText.ColourThenFade(value.Count - this.privatePickupList.Count);
                 privatePickupList.AddRange(value);
             }
         }
@@ -43,11 +43,19 @@ namespace Assets.Scripts
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            StopCoroutine(newShopCo);
+            if (newShopCo != null)
+            {
+                StopCoroutine(newShopCo);
+            }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
+            if (newShopCo != null)
+            {
+                StopCoroutine(newShopCo);
+            }
+
             newShopCo = StartCoroutine(SpawnNewShop(true));
         }
 
@@ -55,7 +63,7 @@ namespace Assets.Scripts
         {
             if (initialDelay)
             {
-                yield return new WaitForSeconds(timeUntilNewCritterShopSpawns);
+                yield return new WaitForSeconds(TimeUntilShopSpawn);
             }
 
             while (true)
@@ -67,8 +75,10 @@ namespace Assets.Scripts
 
                 currentShop = Instantiate(itemShopPrefab, this.placeToPutShop.transform).GetComponent<ItemShop>();
                 this.currentShop.AllItemDrops = this.ItemsToSell;
-                yield return new WaitForSeconds(timeUntilNewCritterShopSpawns);
+                yield return new WaitForSeconds(TimeUntilShopSpawn);
             }
+
+            newShopCo = null;
         }
     }
 }
