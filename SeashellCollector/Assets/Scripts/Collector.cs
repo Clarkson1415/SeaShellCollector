@@ -75,6 +75,12 @@ namespace Assets.Scripts
         private void PickNewPickupTarget()
         {
             var closest = Utility.GetClosestPickup(this.transform.position, this.canPickupThis);
+            if (closest == null)
+            {
+                this.SetPositionToHome();
+                return;
+            }
+
             target = closest.transform.position;
         }
 
