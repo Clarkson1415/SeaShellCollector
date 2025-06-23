@@ -66,6 +66,7 @@ namespace Assets.Scripts
         private void Start()
         {
             newShopCo = StartCoroutine(SpawnNewShop());
+            castlePickupDisplay.UpdatePickupDisplay(privatePickupList);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

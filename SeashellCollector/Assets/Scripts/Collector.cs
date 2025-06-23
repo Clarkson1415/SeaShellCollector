@@ -40,25 +40,23 @@ namespace Assets.Scripts
                     return;
                 }
 
-                this.Pickups.Add(p);
-                Debug.Log($"Critter pickup {p.name}");
-                Destroy(p.gameObject);
-
-                if (Pickups.Count == maxCap)
+                if (Pickups.Count + 1 > maxCap)
                 {
                     this.SetPositionToHome();
                     return;
                 }
-                else
-                {
-                    PickNewPickupTarget();
-                }
+
+                this.Pickups.Add(p);
+                Debug.Log($"Critter pickup {p.name}");
+                Destroy(p.gameObject);
+                PickNewPickupTarget();
             }
             else if (collision.TryGetComponent<Sandcastle>(out var sandy))
             {
                 if (this.Pickups.Count > 0)
                 {
                     sandy.AddPickups(this.Pickups);
+                    this.Pickups.Clear();
                 }
             }
         }
@@ -100,7 +98,20 @@ namespace Assets.Scripts
                 // Move towards the target position
                 Vector3 direction = (target - this.transform.position).normalized;
                 this.transform.position += direction * Time.deltaTime * Speed;
+                if (direction.x > 0 && this.transform.localScale.x < 0)
+                {
+                    Flip();
+                }
+                else if (direction.x < 0 && this.transform.localScale.x > 0)
+                {
+                    Flip();
+                }
             }
+        }
+
+        private void Flip()
+        {
+            this.transform.localScale = new Vector3(this.transform.localScale.x * -1, this.transform.localScale.y, this.transform.localScale.z);
         }
 
         private bool NearPosition()
