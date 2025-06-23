@@ -162,7 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timeout: -1
   OneTimeOnly: 0
-  Cost: 65
+  PinkShellCost: 50
+  CoralCost: 0
+  PearlCost: 0
   Name: Sandcastle With Moat
   Description: Doesn't get washed away by the tides
   CostText: {fileID: 1973835717996019988}

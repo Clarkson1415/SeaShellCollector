@@ -1,12 +1,14 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ShellSpawner : MonoBehaviour
 {
     public List<GameObject> Shells;
 
-    public float TimeBetweenSpawns = 1f;
+    public float spawnRatePerCritterInScene = 2f; // Shells spawned per second per Collector in scene + player.
 
     private BoxCollider2D bounds;
 
@@ -25,8 +27,16 @@ public class ShellSpawner : MonoBehaviour
     {
         while (true)
         {
-            Spawn();
-            yield return new WaitForSeconds(this.TimeBetweenSpawns);
+            var crittersInScene = FindObjectsByType<Collector>(FindObjectsSortMode.None);
+            var players = FindObjectsByType<Player>(FindObjectsSortMode.None);
+            var peopleInScene = crittersInScene.Length + players.Length;
+            for (int i = 0; i < peopleInScene; i++)
+            {
+                Spawn();
+                var wait = peopleInScene == 0 ? 1f : (1f / peopleInScene);
+                // spawn each shell over an even spacing of 1 sec.
+                yield return new WaitForSeconds(wait); 
+            }
         }
     }
 

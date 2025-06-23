@@ -158,7 +158,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timeout: -1
   OneTimeOnly: 0
-  Cost: 18
+  PinkShellCost: 5
+  CoralCost: 0
+  PearlCost: 0
   Name: Baby Turtle
   Description: 'Picks up Pearls. Speed: 1 Capacity 5.'
   CostText: {fileID: 1973835717996019988}

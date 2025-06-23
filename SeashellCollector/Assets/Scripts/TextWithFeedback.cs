@@ -12,10 +12,28 @@ namespace Assets.Scripts
         private TMP_Text tmpText;
         public float fadeOutToInvisibleTime = 0.5f;
 
-        public void PlainUpdateText(string text)
+        /// <summary>
+        /// Update text string, option to set opacity. Otherwise fully visible opaque.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="opacity"></param>
+        public void PlainUpdateText(string text, float opacity = 1)
         {
             tmpText = this.GetComponent<TMP_Text>();
             tmpText.text = text;
+            tmpText.color = new Color(tmpText.color.r, tmpText.color.g, tmpText.color.b, opacity);
+        }
+
+        /// <summary>
+        /// Update text with colour.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="colour"></param>
+        public void PlainUpdateText(string text, Color colour)
+        {
+            tmpText = this.GetComponent<TMP_Text>();
+            tmpText.text = text;
+            tmpText.color = colour;
         }
 
         private void Awake()

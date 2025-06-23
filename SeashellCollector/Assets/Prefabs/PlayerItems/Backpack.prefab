@@ -41,6 +41,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: PinkShellCost
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: Effects.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -48,6 +52,10 @@ PrefabInstance:
       propertyPath: 'Effects.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: dc4232a926bb65044bd4784017fadd86, type: 2}
+    - target: {fileID: 5256048989935621584, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: m_text
+      value: Backpack
+      objectReference: {fileID: 0}
     - target: {fileID: 5615105297221387082, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: m_LocalScale.x
       value: 0

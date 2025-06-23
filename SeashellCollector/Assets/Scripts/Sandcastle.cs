@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -16,7 +17,7 @@ namespace Assets.Scripts
 
         [SerializeField] private float TimeUntilShopSpawn = 10f;
 
-        [SerializeField] private ItemShop currentShop;
+        [SerializeField] private ItemShop currentCritterShop;
 
         [SerializeField] private GameObject itemShopPrefab;
 
@@ -26,14 +27,40 @@ namespace Assets.Scripts
 
         private Coroutine newShopCo;
 
-        public List<Pickup> PickupStore
+        [SerializeField] private CastlePickupDisplay castlePickupDisplay;
+
+        private List<Pickup> Pickups
         {
             get => this.privatePickupList;
             set
             {
                 this.feedBackText.ColourThenFade(value.Count - this.privatePickupList.Count);
-                privatePickupList.AddRange(value);
+                privatePickupList = value;
+                castlePickupDisplay.UpdatePickupDisplay(privatePickupList);
             }
+        }
+
+        /// <summary>
+        /// Must do this to trigger the setter.
+        /// </summary>
+        public void AddPickups(List<Pickup> picks)
+        {
+            this.Pickups = new List<Pickup>(this.Pickups.Concat(picks));
+        }
+
+        public List<Pickup> GetCopyOfPickups()
+        {
+            return new List<Pickup>(this.Pickups);
+        }
+
+        /// <summary>
+        /// Must do this to trigger the setter.
+        /// </summary>
+        public List<Pickup> TakePickups()
+        {
+            var pickups = new List<Pickup>(this.Pickups);
+            this.Pickups = new List<Pickup>();
+            return pickups;
         }
 
         private void Start()
@@ -68,17 +95,15 @@ namespace Assets.Scripts
 
             while (true)
             {
-                if (currentShop != null)
-                { 
-                    Destroy(currentShop.gameObject);
+                if (currentCritterShop != null)
+                {
+                    yield return new WaitForSeconds(1f);
                 }
 
-                currentShop = Instantiate(itemShopPrefab, this.placeToPutShop.transform).GetComponent<ItemShop>();
-                this.currentShop.AllItemDrops = this.ItemsToSell;
+                currentCritterShop = Instantiate(itemShopPrefab, this.placeToPutShop.transform).GetComponent<ItemShop>();
+                this.currentCritterShop.AllItemDrops = this.ItemsToSell;
                 yield return new WaitForSeconds(TimeUntilShopSpawn);
             }
-
-            newShopCo = null;
         }
     }
 }

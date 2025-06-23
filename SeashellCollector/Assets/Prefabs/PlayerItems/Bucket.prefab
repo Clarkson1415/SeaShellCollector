@@ -33,6 +33,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: PinkShellCost
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: Effects.Array.size
       value: 1
       objectReference: {fileID: 0}

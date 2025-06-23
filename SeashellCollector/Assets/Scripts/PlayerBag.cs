@@ -1,3 +1,7 @@
+using Assets.Scripts;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -12,15 +16,23 @@ public class PlayerBag : MonoBehaviour
     /// Update fill amount of the bag UI As value between 0 and 1.
     /// </summary>
     /// <param name="fillAmount"></param>
-    public void UpdatePinkShellCounter(int shells)
+    private void UpdatePinkShellCounter(int shells)
     {
         pinkShellCount.text = shells.ToString();
     }
 
-    public void UpdateTotalShellCounter(int total)
+    /// <summary>
+    /// Updates total, pink shells, coral and pearl counter.
+    /// </summary>
+    /// <param name="total"></param>
+    public void UpdateMoneyCounterUi(List<Pickup> total)
     {
-        totalShells = total;
+        totalShells = total.Count;
         this.UpdateText();
+
+        // TODO update pink shells here
+        this.UpdatePinkShellCounter(total.Where(x => x.PickupType == PickupType.PinkShell).Count());
+        Debug.Log("Update coral, update pearl counter");
     }
 
     public void UpdateMaxCapacity(int cap)

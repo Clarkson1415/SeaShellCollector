@@ -19,7 +19,7 @@ namespace Assets.Scripts
         /// <param name="player"></param>
         public override void ApplyItemEffects(Player player)
         {
-            Instantiate(PrefabToSpawn, player.transform.position, Quaternion.identity);
+            Instantiate(PrefabToSpawn, this.ShopBelongsTo.transform.position, Quaternion.identity);
         }
     }
 }

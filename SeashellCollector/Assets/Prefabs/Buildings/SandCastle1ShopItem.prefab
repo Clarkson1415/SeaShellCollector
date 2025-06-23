@@ -162,7 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timeout: -1
   OneTimeOnly: 0
-  Cost: 25
+  PinkShellCost: 20
+  CoralCost: 0
+  PearlCost: 0
   Name: Sandcastle
   Description: AttractCritter
   CostText: {fileID: 1973835717996019988}

@@ -1466,6 +1466,8 @@ Transform:
   m_Children:
   - {fileID: 2019541826}
   - {fileID: 271537802}
+  - {fileID: 1788644607}
+  - {fileID: 1385916650}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &86919424
@@ -7420,11 +7422,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8640208087610780136, guid: 318d24b09e830cc49986dba60649373b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.15
+      value: -7.58
       objectReference: {fileID: 0}
     - target: {fileID: 8640208087610780136, guid: 318d24b09e830cc49986dba60649373b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.95
+      value: -5.02
       objectReference: {fileID: 0}
     - target: {fileID: 8640208087610780136, guid: 318d24b09e830cc49986dba60649373b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8279,14 +8281,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopPrefab: {fileID: 5201478101734694238, guid: 318d24b09e830cc49986dba60649373b, type: 3}
-  numberOfShopsPerRegion: 5
-  minDistanceApart: 5
+  numberOfShopsPerRegion: 10
+  minDistanceFromSandcastles: 5
+  minDistanceFromOtherShops: 5
   spawnerRegion: {fileID: 799486461}
-  TimeBetweenSpawns: 25
+  TimeBetweenSpawns: 10
   itemsForShops:
   - {fileID: 3140271723020542597, guid: 8fab334e6ddcade4e9a335dc76198704, type: 3}
-  - {fileID: 3140271723020542597, guid: 8fab334e6ddcade4e9a335dc76198704, type: 3}
-  - {fileID: 3140271723020542597, guid: 8fab334e6ddcade4e9a335dc76198704, type: 3}
+  - {fileID: 3140271723020542597, guid: 45bcdb5fb2dcf7f4e96d46047f2d9908, type: 3}
+  - {fileID: 3140271723020542597, guid: 5e9c027ec9b22eb4baaacd16bdd09235, type: 3}
 --- !u!61 &799486461
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8321,7 +8324,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 2.0896988, y: 0.81914115}
+  m_Offset: {x: 2.0896988, y: 1.4900224}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -8331,7 +8334,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 86.3062, y: 8.044413}
+  m_Size: {x: 86.3062, y: 9.386175}
   m_EdgeRadius: 0
 --- !u!1 &802811624
 GameObject:
@@ -42871,12 +42874,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385916646}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.04, y: -4.53, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.54, y: -10.030001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 84119489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1389042324
 GameObject:
@@ -46625,12 +46628,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1788644605}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5, y: -5, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2, y: -10.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 84119489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1788644608
 MonoBehaviour:
@@ -49335,7 +49338,7 @@ GameObject:
   - component: {fileID: 2009810065}
   - component: {fileID: 2009810064}
   m_Layer: 0
-  m_Name: ShellSpawnArea
+  m_Name: PickupSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49402,7 +49405,7 @@ MonoBehaviour:
   Shells:
   - {fileID: 2041841834294028128, guid: f605aed6605721f41af99af340fc7b5e, type: 3}
   - {fileID: 5832072271273161561, guid: 5e61ff7f0c54a07438ce65a364960e46, type: 3}
-  TimeBetweenSpawns: 3
+  spawnRatePerCritterInScene: 2
 --- !u!4 &2009810066
 Transform:
   m_ObjectHideFlags: 0
@@ -51090,9 +51093,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2008929495}
     - target: {fileID: 6345860048522543791, guid: 48a15846ff7f75d488a4eca98d8499b6, type: 3}
+      propertyPath: pinkShells
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345860048522543791, guid: 48a15846ff7f75d488a4eca98d8499b6, type: 3}
       propertyPath: playerTopUI
       value: 
       objectReference: {fileID: 7575782780249801295}
+    - target: {fileID: 6345860048522543791, guid: 48a15846ff7f75d488a4eca98d8499b6, type: 3}
+      propertyPath: pinkShellPickup
+      value: 
+      objectReference: {fileID: -1941534026422962576, guid: f605aed6605721f41af99af340fc7b5e, type: 3}
+    - target: {fileID: 6345860048522543791, guid: 48a15846ff7f75d488a4eca98d8499b6, type: 3}
+      propertyPath: _totalPickupsPriv.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6345860048522543791, guid: 48a15846ff7f75d488a4eca98d8499b6, type: 3}
+      propertyPath: '_totalPickupsPriv.Array.data[0]'
+      value: 
+      objectReference: {fileID: -1941534026422962576, guid: f605aed6605721f41af99af340fc7b5e, type: 3}
+    - target: {fileID: 6345860048522543791, guid: 48a15846ff7f75d488a4eca98d8499b6, type: 3}
+      propertyPath: '_totalPickupsPriv.Array.data[1]'
+      value: 
+      objectReference: {fileID: -1941534026422962576, guid: f605aed6605721f41af99af340fc7b5e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -51212,8 +51235,6 @@ SceneRoots:
   - {fileID: 7273055323147174932}
   - {fileID: 48787002}
   - {fileID: 84119489}
-  - {fileID: 1788644607}
-  - {fileID: 1385916650}
   - {fileID: 799486459}
   - {fileID: 1920760965}
   - {fileID: 729250577}

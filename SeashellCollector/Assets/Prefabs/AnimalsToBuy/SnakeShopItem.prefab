@@ -166,7 +166,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timeout: -1
   OneTimeOnly: 0
-  Cost: 12
+  PinkShellCost: 5
+  CoralCost: 0
+  PearlCost: 0
   Name: Snake
   Description: 'Collects: Shells, Coral, Junk. Speed 3, Capcity 10. Swallows them
     Whole then shits them in the sandcastle'

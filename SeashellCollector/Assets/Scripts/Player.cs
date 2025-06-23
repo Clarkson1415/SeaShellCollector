@@ -1,6 +1,7 @@
 using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,34 +24,34 @@ public class Player : MonoBehaviour
     [SerializeField] private TextWithFeedback feedBackText;
     [SerializeField] private PlayerTopUI playerTopUI;
 
-    private int TotalShells
+    private List<Pickup> _totalPickupsPriv = new();
+    private List<Pickup> TotalPickups
     {
         get
         {
-            return this._pinkShellNumberPrivate;
+            return this._totalPickupsPriv;
+        }
+        set
+        {
+            this._totalPickupsPriv = value;
+            feedBackText.ColourThenFade(value.Count - this._totalPickupsPriv.Count);
+            this.playerTopUI.playerBag.UpdateMoneyCounterUi(this.TotalPickups);
         }
     }
 
-    [SerializeField] private int _pinkShellNumberPrivate = 0; // only serialized for testing;
-    private int PinkShellNumber
+    private int PinkShellCount
     {
-        get => this._pinkShellNumberPrivate;
-        set
-        {
-            if (value > 0)
-            {
-                pickupSound.PlayRandomSound();
-            }
-            else
-            {
-                buySound.Play();
-            }
+        get => this._totalPickupsPriv.Where(x => x.PickupType == PickupType.PinkShell).Count();
+    }
 
-            feedBackText.ColourThenFade(value - this._pinkShellNumberPrivate);
-            this._pinkShellNumberPrivate = value;
-            this.playerTopUI.playerBag.UpdatePinkShellCounter(this._pinkShellNumberPrivate);
-            this.playerTopUI.playerBag.UpdateTotalShellCounter(this.TotalShells); // ew I have to do this in every type of shell Setter.
-        }
+    private int CoralCount
+    {
+        get => this._totalPickupsPriv.Where(x => x.PickupType == PickupType.Coral).Count();
+    }
+
+    private int PearlCount
+    {
+        get => this._totalPickupsPriv.Where(x => x.PickupType == PickupType.Pearl).Count();
     }
 
     [SerializeField] private int maxCapModifer = 0; // only serialized for testing;
@@ -67,6 +68,14 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    [Header("For Cheats")]
+    [SerializeField] private Pickup pinkShellPickup;
+    [SerializeField] private int pinkShells;
+    [SerializeField] private Pickup coralPickup;
+    [SerializeField] private Pickup pearlPickup;
+
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -74,42 +83,77 @@ public class Player : MonoBehaviour
         this.pauseMenu = FindFirstObjectByType<PauseMenu>();
 
         this.playerTopUI.playerBag.UpdateMaxCapacity(_maxCapacity + maxCapModifer);
-        this.playerTopUI.playerBag.UpdatePinkShellCounter(this._pinkShellNumberPrivate);
-        this.playerTopUI.playerBag.UpdateTotalShellCounter(this.TotalShells); // ew I have to do this in every type of shell Setter.
+        this.playerTopUI.playerBag.UpdateMoneyCounterUi(this.TotalPickups);
 
+        List<Pickup> pickups = Enumerable.Repeat(pinkShellPickup, pinkShells).ToList();
+        this.TotalPickups = pickups;
+    }
+
+    /// <summary>
+    /// Must do this to trigger the setter.
+    /// </summary>
+    public void AddPickups(List<Pickup> picks)
+    {
+        pickupSound.PlayRandomSound();
+        this.TotalPickups = new List<Pickup>(this.TotalPickups.Concat(picks));
+    }
+
+    private bool CanBuy(ShopItem item)
+    {
+        return this.PinkShellCount >= item.PinkShellCost && this.CoralCount >= item.CoralCost && this.PearlCount >= item.PearlCost;
+    }
+
+    /// <summary>
+    /// Must do this to trigger the setter. Type used to pay, value to pay from those pickups.
+    /// </summary>
+    private void PayForItem(ShopItem item)
+    {
+        buySound.Play();
+
+        var pinkShellsList = new List<Pickup>(this.TotalPickups.Where(x => x.PickupType == PickupType.PinkShell).ToList());
+        pinkShellsList.RemoveRange(0, item.PinkShellCost);
+
+        var coralList = new List<Pickup>(this.TotalPickups.Where(x => x.PickupType == PickupType.Coral).ToList());
+        coralList.RemoveRange(0, item.CoralCost);
+
+        var pearlList = new List<Pickup>(this.TotalPickups.Where(x => x.PickupType == PickupType.Pearl).ToList());
+        pearlList.RemoveRange(0, item.PearlCost);
+
+        this.TotalPickups = new List<Pickup> (pinkShellsList.Concat(coralList).Concat(pearlList));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // If sandcastle = pickup from it
+        // If sandcastle -> pickup from it
         // if critter pickup from it.
 
         if (collision.TryGetComponent<Pickup>(out var p))
         {
-            if (PinkShellNumber == MaxCapacity)
+            if (this.TotalPickups.Count + 1 > MaxCapacity)
             {
                 cannotDoSound.Play();
                 feedBackText.ColourThenFade("Capacity full", Color.red);
                 return;
             }
 
-            PinkShellNumber++;
-            Debug.Log($"Shell number {PinkShellNumber}");
+            this.AddPickups(new List<Pickup> { p });
+            Debug.Log($"Shell number {PinkShellCount}");
             Destroy(p.gameObject);
         }
         else if (collision.TryGetComponent<ShopItem>(out var item))
         {
-            if (this.PinkShellNumber < item.Cost)
+            if (!CanBuy(item))
             {
                 cannotDoSound.Play();
                 item.FlashTextRed();
+                feedBackText.ColourThenFade("Can't afford :(", Color.red);
                 return;
             }
 
-            Debug.Log("picked up item: " + item.name);
-            this.PinkShellNumber -= item.Cost;
+            Debug.Log("item: " + item.name);
+            this.PayForItem(item);
+
             item.ApplyItemEffects(this);
-            
             if (item is not AutomationShopItem)
             {
                 Items.Add(item);
@@ -125,12 +169,18 @@ public class Player : MonoBehaviour
         }
         else if (collision.TryGetComponent<Sandcastle>(out var sandy))
         {
-            if (sandy.PickupStore.Count > 0)
+            if (sandy.GetCopyOfPickups().Count == 0)
             {
-                this.PinkShellNumber += sandy.PickupStore.Count;
+                return;
+            }
+            else if (this.TotalPickups.Count + sandy.GetCopyOfPickups().Count > MaxCapacity)
+            {
+                cannotDoSound.Play();
+                feedBackText.ColourThenFade("Capacity full", Color.red);
+                return;
             }
 
-            Debug.Log("Just get total from sandcastle for now untill have specific types for player and critters to collect.");
+            this.AddPickups(sandy.TakePickups());
         }
     }
 
@@ -171,16 +221,9 @@ public class Player : MonoBehaviour
         {
             this.animator.SetTrigger("Walk");
         }
-        else if (context.performed)
-        {
-        }
         else if (context.canceled)
         {
             this.animator.SetTrigger("Idle");
-        }
-        else
-        {
-
         }
     }
 
@@ -192,5 +235,6 @@ public class Player : MonoBehaviour
     public void ModifyMaxCap(int value, float timeout = -1f)
     {
         this.maxCapModifer += value;
+        this.playerTopUI.playerBag.UpdateMaxCapacity(_maxCapacity + maxCapModifer);
     }
 }

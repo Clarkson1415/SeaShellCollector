@@ -158,7 +158,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timeout: -1
   OneTimeOnly: 0
-  Cost: 12
+  PinkShellCost: 5
+  CoralCost: 0
+  PearlCost: 0
   Name: Hermit Crab
   Description: 'Picks up shells for you and deposits them at the sandcastle. Speed:
     2, Max Capacity: 8'

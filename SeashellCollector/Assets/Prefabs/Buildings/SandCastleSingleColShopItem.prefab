@@ -170,7 +170,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timeout: -1
   OneTimeOnly: 0
-  Cost: 12
+  PinkShellCost: 5
+  CoralCost: 0
+  PearlCost: 0
   Name: Basic Castle
   Description: pussy ass effort
   CostText: {fileID: 1973835717996019988}

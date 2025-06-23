@@ -54,12 +54,11 @@ namespace Assets.Scripts
                     PickNewPickupTarget();
                 }
             }
-            else if (collision.TryGetComponent<Sandcastle>(out var s))
+            else if (collision.TryGetComponent<Sandcastle>(out var sandy))
             {
                 if (this.Pickups.Count > 0)
                 {
-                    s.PickupStore = new List<Pickup>(s.PickupStore.Concat(this.Pickups)); // Must do this to trigger the setter.
-                    this.Pickups.Clear();
+                    sandy.AddPickups(this.Pickups);
                 }
             }
         }

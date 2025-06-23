@@ -11,7 +11,11 @@ public class ShopItem : MonoBehaviour
     /// </summary>
     public bool OneTimeOnly;
 
-    public int Cost;
+    public int PinkShellCost;
+    
+    public int CoralCost;
+
+    public int PearlCost;
 
     public string Name;
 
@@ -27,14 +31,14 @@ public class ShopItem : MonoBehaviour
 
     public void FlashTextRed()
     {
-        this.CostText.ColourThenFadeToColour(Color.red, Color.black, 1f);
-        this.NameText.ColourThenFadeToColour(Color.red, Color.black, 1f);
-        this.DescriptionText.ColourThenFadeToColour(Color.red, Color.black, 1f);
+        this.CostText.ColourThenFadeToColour(Color.red, Color.white, 1f);
+        this.NameText.ColourThenFadeToColour(Color.red, Color.white, 1f);
+        this.DescriptionText.ColourThenFadeToColour(Color.red, Color.white, 1f);
     }
 
     private void Awake()
     {
-        this.CostText.PlainUpdateText(this.Cost.ToString());
+        this.CostText.PlainUpdateText(this.PinkShellCost.ToString());
         this.NameText.PlainUpdateText(this.Name.ToString());
         this.DescriptionText.PlainUpdateText(this.Description.ToString());
     }

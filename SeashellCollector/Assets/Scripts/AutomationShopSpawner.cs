@@ -1,6 +1,7 @@
 using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 /// <summary>
@@ -10,10 +11,11 @@ public class AutomationShopSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject shopPrefab; // Prefab for the shop to spawn
     [SerializeField] private int numberOfShopsPerRegion = 5;
-    [SerializeField] private float minDistanceApart = 5f;
+    [SerializeField] private float minDistanceFromSandcastles = 5f;
+    [SerializeField] private float minDistanceFromOtherShops = 5f;
     [SerializeField] private BoxCollider2D spawnerRegion;
     [SerializeField] private float TimeBetweenSpawns = 10f; // Time between shop spawns
-    private List<GameObject> shops = new();
+    private List<GameObject> spawnedShops = new();
     [SerializeField] private List<GameObject> itemsForShops = new();
 
     private void Start()
@@ -23,30 +25,46 @@ public class AutomationShopSpawner : MonoBehaviour
 
     private IEnumerator SpawnShops()
     {
-        yield return new WaitForSeconds(TimeBetweenSpawns);
-
-        if (this.shops.Count < this.numberOfShopsPerRegion)
+        while (true)
         {
-            Vector3 spawnPosition = new(
-                Random.Range(-spawnerRegion.size.x / 2, spawnerRegion.size.x / 2),
-                0f, // Assuming a flat ground for the shops
-                Random.Range(-spawnerRegion.size.y / 2, spawnerRegion.size.y / 2)
-            );
+            yield return new WaitForSeconds(TimeBetweenSpawns);
 
-            var closestShop = Utility.GetClosest<Sandcastle>(spawnPosition);
-
-            while (closestShop != null && Vector3.Distance(spawnPosition, closestShop.transform.position) < minDistanceApart)
+            if (this.spawnedShops.Count < this.numberOfShopsPerRegion)
             {
-                spawnPosition.x += 1;
-                spawnPosition.y += 1;
+                Vector3 spawnPosition = new(
+                    Random.Range(-spawnerRegion.size.x / 2, spawnerRegion.size.x / 2),
+                    0f, // Assuming a flat ground for the shops
+                    Random.Range(-spawnerRegion.size.y / 2, spawnerRegion.size.y / 2)
+                );
 
-                if (!this.spawnerRegion.OverlapPoint(spawnPosition)) // if outside spawn region give up.
-                    yield break;
+                var closestSandcastle = Utility.GetClosest<Sandcastle>(spawnPosition);
+                var closestShop = Utility.GetClosest<ItemShop>(spawnPosition);
+
+                // While 
+                // if closest sandcastle not null and too close = increment
+                // if closetst shop not null and too close increment
+                // if out of spawn region dont spawn.
+
+                while ((closestSandcastle != null && (Vector3.Distance(spawnPosition, closestSandcastle.transform.position) < minDistanceFromSandcastles)) ||
+                    ((closestShop != null && Vector3.Distance(spawnPosition, closestShop.transform.position) < minDistanceFromOtherShops)))
+                {
+                    if (!this.spawnerRegion.OverlapPoint(spawnPosition))
+                    {
+                        Debug.Log("Failed to spawn shop: outside spawn region.");
+                        yield break;
+                    } // if outside spawn region give up.
+                }
+
+                SpawnShop(spawnPosition);
             }
-
-            var shop = Instantiate(shopPrefab, spawnPosition, Quaternion.identity);
-            shops.Add(shop);
-            shop.GetComponent<ItemShop>().AllItemDrops = itemsForShops;
         }
+    }
+
+    private void SpawnShop(Vector3 spawnPosition)
+    {
+        Debug.Log("Spawned Shop. Check items are being assigned for real because loooks like theyre not.");
+        var shop = Instantiate(shopPrefab, spawnPosition, Quaternion.identity);
+        spawnedShops.Add(shop);
+        shop.GetComponent<ItemShop>().AllItemDrops = itemsForShops;
     }
 }
