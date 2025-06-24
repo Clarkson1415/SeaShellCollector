@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Player : MonoBehaviour
 {
@@ -33,9 +34,8 @@ public class Player : MonoBehaviour
         }
         set
         {
-            this._totalPickupsPriv = value;
-            feedBackText.ColourThenFade(value.Count - this._totalPickupsPriv.Count);
             this.playerTopUI.playerBag.UpdateMoneyCounterUi(this.TotalPickups);
+            this._totalPickupsPriv = value;
         }
     }
 
@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
         this.playerTopUI.playerBag.UpdateMoneyCounterUi(this.TotalPickups);
 
         List<Pickup> pickups = Enumerable.Repeat(pinkShellPickup, pinkShells).ToList();
-        this.TotalPickups = pickups;
+        this._totalPickupsPriv = pickups;
     }
 
     /// <summary>
@@ -94,6 +94,11 @@ public class Player : MonoBehaviour
     /// </summary>
     public void AddPickups(List<Pickup> picks)
     {
+        feedBackText.ColourThenFade(picks.Count);
+
+        Debug.Log($"[AddPickups] Called with {picks.Count} item(s): " +
+              $"{string.Join(", ", picks.Select(p => p?.PickupType.ToString() ?? "null"))}");
+
         pickupSound.PlayRandomSound();
         this.TotalPickups = new List<Pickup>(this.TotalPickups.Concat(picks));
     }

@@ -298,9 +298,12 @@ MonoBehaviour:
   Items: []
   feedBackText: {fileID: 8122166905113743583}
   playerTopUI: {fileID: 0}
-  _pinkShellNumberPrivate: 0
   maxCapModifer: 0
   _maxCapacity: 20
+  pinkShellPickup: {fileID: -1941534026422962576, guid: f605aed6605721f41af99af340fc7b5e, type: 3}
+  pinkShells: 0
+  coralPickup: {fileID: 0}
+  pearlPickup: {fileID: 0}
 --- !u!61 &8418244766406382549
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -442,7 +445,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 309e1ed5c2d5710449361d5f1e740c52, type: 3}
   m_Resource: {fileID: 8300000, guid: 309e1ed5c2d5710449361d5f1e740c52, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -739,7 +742,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 70d5448074a514e48ac243f8b388be34, type: 3}
   m_Resource: {fileID: 8300000, guid: 70d5448074a514e48ac243f8b388be34, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -970,7 +973,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: b2a54a1256105544cb063af0050a2700, type: 3}
   m_Resource: {fileID: 8300000, guid: b2a54a1256105544cb063af0050a2700, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
