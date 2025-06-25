@@ -21,7 +21,7 @@ public class ItemShop : MonoBehaviour
             return;
         }
 
-        // If shop not got items then spawn them.
+        // If shop not spawned items then spawn them.
         if (!this.currentlySpawnedItems.Any())
         {
             this.SpawnRandoms();
@@ -32,6 +32,7 @@ public class ItemShop : MonoBehaviour
         if (ShopTimeoutCoroutine != null)
         {
             StopCoroutine(ShopTimeoutCoroutine);
+            ShopTimeoutCoroutine = null;
         }
     }
 
@@ -40,6 +41,7 @@ public class ItemShop : MonoBehaviour
         if (ShopTimeoutCoroutine != null)
         {
             StopCoroutine(ShopTimeoutCoroutine);
+            ShopTimeoutCoroutine = null;
         }
 
         this.ShopTimeoutCoroutine = StartCoroutine(ShopTimeout());
@@ -106,6 +108,7 @@ public class ItemShop : MonoBehaviour
     {
         if (objTransform == null)
         {
+            Debug.Log("obj null top");
             yield break; // Exit if the object transform is null
         }
 
@@ -117,6 +120,7 @@ public class ItemShop : MonoBehaviour
         {
             if (objTransform == null)
             {
+                Debug.Log("obj null");
                 yield break; // Exit if the object transform is null
             }
 
@@ -131,6 +135,12 @@ public class ItemShop : MonoBehaviour
             yield return null;
         }
 
+        if (objTransform == null)
+        {
+            Debug.Log("obj null bottom");
+            yield break; // Exit if the object transform is null
+        }
+
         // Ensure final values are set
         objTransform.localScale = targetScale;
         objTransform.position = targetPosition;
@@ -138,6 +148,7 @@ public class ItemShop : MonoBehaviour
     
     private IEnumerator RemoveOneAtATime(bool destroyShop)
     {
+        Debug.Log("callong one at a time remove");
         var itemsCopy = new List<GameObject>(currentlySpawnedItems);
         foreach (var item in itemsCopy)
         {
@@ -154,9 +165,12 @@ public class ItemShop : MonoBehaviour
             if (ShopTimeoutCoroutine != null)
             {
                 StopCoroutine(ShopTimeoutCoroutine);
+                ShopTimeoutCoroutine = null;
             }
 
+            StopCoroutine(RemovingItems);
             Destroy(this.gameObject);
+            yield break;
         }
 
         RemovingItems = null; // Reset the coroutine reference
@@ -166,6 +180,12 @@ public class ItemShop : MonoBehaviour
 
     public void RemoveAllShopItemsAnimated(bool destroyShop = false)
     {
+        if (ShopTimeoutCoroutine != null)
+        {
+            StopCoroutine(ShopTimeoutCoroutine);
+            ShopTimeoutCoroutine = null;
+        }
+
         if (RemovingItems != null)
         {
             StopCoroutine(RemovingItems);
