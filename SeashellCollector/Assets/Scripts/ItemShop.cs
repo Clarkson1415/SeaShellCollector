@@ -7,7 +7,7 @@ using UnityEngine;
 public class ItemShop : MonoBehaviour
 {
     private float timeExitShop;
-    [HideInInspector] public Coroutine ShopTimeoutCoroutine;
+    [HideInInspector] public Coroutine ShopTimeoutCoroutine = null;
 
     /// <summary>
     /// How long player has to be not touching shop guy for shop to dissapear.
@@ -37,8 +37,6 @@ public class ItemShop : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        timeExitShop = Time.time;
-
         if (ShopTimeoutCoroutine != null)
         {
             StopCoroutine(ShopTimeoutCoroutine);
@@ -52,12 +50,9 @@ public class ItemShop : MonoBehaviour
         Debug.Log("todo add a cool animation like the shop items float back while shrinking to the shop guy before they dissapear.");
         Debug.Log("add animation where shop items appear from the shop owner starting as tiny small growing to their size while floating to their positions.");
 
-        while (Time.time < timeExitShop + notInShopTimeout)
-        {
-            yield return new WaitForSeconds(1f);
-        }
-        
+        yield return new WaitForSeconds(notInShopTimeout);        
         this.RemoveAllShopItemsAnimated();
+        this.ShopTimeoutCoroutine = null;
     }
 
     public List<GameObject> ItemSpawnLocations;
@@ -100,7 +95,7 @@ public class ItemShop : MonoBehaviour
             newItem.transform.position = this.transform.position;
             newItem.GetComponent<BoxCollider2D>().enabled = false;
             StartCoroutine(ChangeSizeAndMove(newItem.transform, ItemSpawnLocations[i].transform.position, Vector3.one));
-            yield return new WaitForSeconds(animationDuration);
+            yield return new WaitForSeconds(animationDuration + 0.1f);
             newItem.GetComponent<BoxCollider2D>().enabled = true;
         }
     }
@@ -109,12 +104,22 @@ public class ItemShop : MonoBehaviour
 
     private IEnumerator ChangeSizeAndMove(Transform objTransform, Vector3 targetPosition, Vector3 targetScale)
     {
+        if (objTransform == null)
+        {
+            yield break; // Exit if the object transform is null
+        }
+
         Vector3 initialPosition = objTransform.position;
         Vector3 initialScale = objTransform.localScale;
         float elapsed = 0f;
 
-        while (elapsed < Mathf.Max(animationDuration, animationDuration))
+        while (elapsed < animationDuration)
         {
+            if (objTransform == null)
+            {
+                yield break; // Exit if the object transform is null
+            }
+
             float tGrow = Mathf.Clamp01(elapsed / animationDuration);
             float tMove = Mathf.Clamp01(elapsed / animationDuration);
 
@@ -130,7 +135,7 @@ public class ItemShop : MonoBehaviour
         objTransform.localScale = targetScale;
         objTransform.position = targetPosition;
     }
-
+    
     private IEnumerator RemoveOneAtATime(bool destroyShop)
     {
         var itemsCopy = new List<GameObject>(currentlySpawnedItems);
@@ -138,7 +143,7 @@ public class ItemShop : MonoBehaviour
         {
             item.GetComponent<BoxCollider2D>().enabled = false;
             StartCoroutine(ChangeSizeAndMove(item.transform, this.transform.position, new Vector3(0, 0, 0)));
-            yield return new WaitForSeconds(this.animationDuration);
+            yield return new WaitForSeconds(animationDuration + 0.1f);
             Destroy(item);
         }
 
@@ -146,9 +151,9 @@ public class ItemShop : MonoBehaviour
 
         if (destroyShop)
         {
-            if (this.GetComponent<ItemShop>().ShopTimeoutCoroutine != null)
+            if (ShopTimeoutCoroutine != null)
             {
-                StopCoroutine(this.GetComponent<ItemShop>().ShopTimeoutCoroutine);
+                StopCoroutine(ShopTimeoutCoroutine);
             }
 
             Destroy(this.gameObject);
@@ -163,6 +168,7 @@ public class ItemShop : MonoBehaviour
     {
         if (RemovingItems != null)
         {
+            StopCoroutine(RemovingItems);
             return;
         }
 

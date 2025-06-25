@@ -47,6 +47,9 @@ TagManager:
   - name: Player
     uniqueID: 2328431567
     locked: 0
+  - name: Wind
+    uniqueID: 3455944077
+    locked: 0
   - name: UI
     uniqueID: 3847797205
     locked: 0

@@ -41,6 +41,8 @@ namespace Assets.Scripts
             tmpText = this.GetComponent<TMP_Text>();
         }
 
+        private Coroutine FadeOutCoroutine = null;
+
         public void ColourThenFade(string text, Color color)
         {
             tmpText = this.GetComponent<TMP_Text>();
@@ -49,7 +51,12 @@ namespace Assets.Scripts
             this.tmpText.text = text;
             this.tmpText.ForceMeshUpdate();
 
-            StartCoroutine(FadeOut());
+            if (FadeOutCoroutine != null)
+            {
+                StopCoroutine(FadeOutCoroutine);
+            }
+
+            FadeOutCoroutine = StartCoroutine(FadeOut());
         }
 
         public void ColourThenFade(int value)
@@ -108,6 +115,7 @@ namespace Assets.Scripts
             }
 
             tmpText.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
+            FadeOutCoroutine = null;
         }
     }
 }

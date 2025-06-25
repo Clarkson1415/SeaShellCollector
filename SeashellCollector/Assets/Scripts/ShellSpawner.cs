@@ -9,6 +9,8 @@ public class ShellSpawner : MonoBehaviour
 
     public float spawnRatePerCritterInScene = 2f; // Shells spawned per second per Collector in scene + player.
 
+    public float minDistanceFromClosestShell = 5f;
+
     private BoxCollider2D bounds;
 
     private void Awake()
@@ -47,9 +49,9 @@ public class ShellSpawner : MonoBehaviour
 
         var index = Random.Range(0, Shells.Count);
 
-        // Don't spawn on top of player otherwise random pops?
+        // Don't spawn on top of player.
         var player = FindFirstObjectByType<Player>();
-        while (player.GetComponent<BoxCollider2D>().OverlapPoint(new Vector2(posX, posY)))
+        while (player.GetComponent<BoxCollider2D>().OverlapPoint(new Vector2(posX, posY)) || TooCloseToShell(new Vector2(posX, posY)))
         {
             posX = Random.Range(bounds.bounds.min.x, bounds.bounds.max.x);
             posY = Random.Range(bounds.bounds.min.y, bounds.bounds.max.y);
@@ -57,5 +59,15 @@ public class ShellSpawner : MonoBehaviour
 
         var shell = Instantiate(Shells[index], this.transform);
         shell.transform.position = new Vector3(posX, posY);
+    }
+
+    /// <summary>
+    /// Returns true if the shell is too close to a pink shell pickup.
+    /// </summary>
+    /// <returns></returns>
+    private bool TooCloseToShell(Vector2 possibleSpawn)
+    {
+        var nearestShell = Utility.GetClosestPickup(possibleSpawn, new List<PickupType>() {PickupType.PinkShell});
+        return nearestShell != null && Vector2.Distance(possibleSpawn, nearestShell.transform.position) < minDistanceFromClosestShell;
     }
 }
