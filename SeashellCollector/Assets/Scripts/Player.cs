@@ -34,8 +34,8 @@ public class Player : MonoBehaviour
         }
         set
         {
-            this.playerTopUI.playerBag.UpdateMoneyCounterUi(this.TotalPickups);
             this._totalPickupsPriv = value;
+            this.playerTopUI.playerBag.UpdateMoneyCounterUi(this.TotalPickups);
         }
     }
 
@@ -125,6 +125,7 @@ public class Player : MonoBehaviour
         pearlList.RemoveRange(0, item.PearlCost);
 
         this.TotalPickups = new List<Pickup> (pinkShellsList.Concat(coralList).Concat(pearlList));
+        feedBackText.ColourThenFade(-(item.PinkShellCost + item.CoralCost + item.PearlCost));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

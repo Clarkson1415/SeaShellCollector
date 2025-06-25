@@ -11,8 +11,8 @@ public class AutomationShopSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject shopPrefab; // Prefab for the shop to spawn
     [SerializeField] private int numberOfShopsPerRegion = 5;
-    [SerializeField] private float minDistanceFromSandcastles = 5f;
-    [SerializeField] private float minDistanceFromOtherShops = 5f;
+    [SerializeField] private float minDistanceFromSandcastles = 8f;
+    [SerializeField] private float minDistanceFromOtherShops = 8f;
     [SerializeField] private BoxCollider2D spawnerRegion;
     [SerializeField] private float TimeBetweenSpawns = 10f; // Time between shop spawns
     private List<GameObject> spawnedShops = new();
@@ -31,12 +31,7 @@ public class AutomationShopSpawner : MonoBehaviour
 
             if (this.spawnedShops.Count < this.numberOfShopsPerRegion)
             {
-                Vector3 spawnPosition = new(
-                    Random.Range(-spawnerRegion.size.x / 2, spawnerRegion.size.x / 2),
-                    0f, // Assuming a flat ground for the shops
-                    Random.Range(-spawnerRegion.size.y / 2, spawnerRegion.size.y / 2)
-                );
-
+                Vector3 spawnPosition = GetNewSpawnPosition();
                 var closestSandcastle = Utility.GetClosest<Sandcastle>(spawnPosition);
                 var closestShop = Utility.GetClosest<ItemShop>(spawnPosition);
 
@@ -48,16 +43,29 @@ public class AutomationShopSpawner : MonoBehaviour
                 while ((closestSandcastle != null && (Vector3.Distance(spawnPosition, closestSandcastle.transform.position) < minDistanceFromSandcastles)) ||
                     ((closestShop != null && Vector3.Distance(spawnPosition, closestShop.transform.position) < minDistanceFromOtherShops)))
                 {
-                    if (!this.spawnerRegion.OverlapPoint(spawnPosition))
-                    {
-                        Debug.Log("Failed to spawn shop: outside spawn region.");
-                        yield break;
-                    } // if outside spawn region give up.
+                    closestSandcastle = Utility.GetClosest<Sandcastle>(spawnPosition);
+                    closestShop = Utility.GetClosest<ItemShop>(spawnPosition);
+
+                    spawnPosition = GetNewSpawnPosition();
                 }
 
-                SpawnShop(spawnPosition);
+                // shouldn't be outside of region but added this check for extra safety
+                if (!this.spawnerRegion.OverlapPoint(spawnPosition))
+                {
+                    this.SpawnShop(spawnPosition);
+                }
             }
         }
+    }
+
+    private Vector3 GetNewSpawnPosition()
+    {
+        Vector3 spawnPosition = new(
+                    Random.Range(-spawnerRegion.size.x / 2, spawnerRegion.size.x / 2),
+                    0f, // Assuming a flat ground for the shops
+                    Random.Range(-spawnerRegion.size.y / 2, spawnerRegion.size.y / 2)
+                );
+        return spawnPosition;
     }
 
     private void SpawnShop(Vector3 spawnPosition)

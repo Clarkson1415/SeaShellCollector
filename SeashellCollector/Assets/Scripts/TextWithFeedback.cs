@@ -54,15 +54,15 @@ namespace Assets.Scripts
 
         public void ColourThenFade(int value)
         {
-            this.ColourThenFade($"{GetSign(value)} {value}", this.GetSignColor(value));
+            this.ColourThenFade($"{GetSign(value)} {value}", this.GetColor(value));
         }
 
         private string GetSign(int value)
         {
-            return value >= 0 ? "+" : "-";
+            return value >= 0 ? "+" : ""; // Negative number has sign automatically.
         }
 
-        private Color GetSignColor(int value)
+        private Color GetColor(int value)
         {
             return value >= 0 ? Color.green : Color.red;
         }

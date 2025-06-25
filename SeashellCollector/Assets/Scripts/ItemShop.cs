@@ -21,22 +21,18 @@ public class ItemShop : MonoBehaviour
             return;
         }
 
-        if (this.currentlySpawnedItems.Any())
+        // If shop not got items then spawn them.
+        if (!this.currentlySpawnedItems.Any())
         {
-            this.RemoveAllShopItemsAnimated();
+            this.SpawnRandoms();
+            return;
         }
 
-        StartCoroutine(WaitTillRemovedThenSpawn());
-    }
-
-    private IEnumerator WaitTillRemovedThenSpawn()
-    {
-        while (this.currentlySpawnedItems.Any())
+        // If close routine in progress stop it. It will restart when you leave shop again.
+        if (ShopTimeoutCoroutine != null)
         {
-            yield return new WaitForSeconds(0.1f);
+            StopCoroutine(ShopTimeoutCoroutine);
         }
-
-        this.SpawnRandoms();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -168,6 +164,11 @@ public class ItemShop : MonoBehaviour
         if (RemovingItems != null)
         {
             return;
+        }
+
+        if (destroyShop)
+        {
+            this.animationDuration = 0f;
         }
 
         RemovingItems = StartCoroutine(RemoveOneAtATime(destroyShop));

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 namespace Assets.Scripts
 {
@@ -34,9 +35,8 @@ namespace Assets.Scripts
             get => this.privatePickupList;
             set
             {
-                this.feedBackText.ColourThenFade(value.Count - this.privatePickupList.Count);
+                castlePickupDisplay.UpdatePickupDisplay(value);
                 privatePickupList = value;
-                castlePickupDisplay.UpdatePickupDisplay(privatePickupList);
             }
         }
 
@@ -45,6 +45,7 @@ namespace Assets.Scripts
         /// </summary>
         public void AddPickups(List<Pickup> picks)
         {
+            this.feedBackText.ColourThenFade(picks.Count);
             this.Pickups = new List<Pickup>(this.Pickups.Concat(picks));
         }
 
@@ -58,6 +59,7 @@ namespace Assets.Scripts
         /// </summary>
         public List<Pickup> TakePickups()
         {
+            this.feedBackText.ColourThenFade(-this.Pickups.Count);
             var pickups = new List<Pickup>(this.Pickups);
             this.Pickups = new List<Pickup>();
             return pickups;
@@ -98,7 +100,7 @@ namespace Assets.Scripts
             {
                 if (currentCritterShop != null)
                 {
-                    yield return new WaitForSeconds(1f);
+                    Destroy(currentCritterShop);
                 }
 
                 currentCritterShop = Instantiate(itemShopPrefab, this.placeToPutShop.transform).GetComponent<ItemShop>();
