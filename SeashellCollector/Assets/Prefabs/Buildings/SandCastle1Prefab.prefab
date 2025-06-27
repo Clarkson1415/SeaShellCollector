@@ -451,6 +451,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6914565921585014866}
     m_Modifications:
+    - target: {fileID: 1469571124387725931, guid: d9c762fdabb56b945a9d525c4d8f38b1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819701963017938192, guid: d9c762fdabb56b945a9d525c4d8f38b1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.245
+      objectReference: {fileID: 0}
     - target: {fileID: 6270461909643858514, guid: d9c762fdabb56b945a9d525c4d8f38b1, type: 3}
       propertyPath: m_Name
       value: WhatPickupsHave

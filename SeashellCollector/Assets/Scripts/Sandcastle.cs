@@ -105,6 +105,7 @@ namespace Assets.Scripts
 
                 currentCritterShop = Instantiate(itemShopPrefab, this.placeToPutShop.transform).GetComponent<ItemShop>();
                 this.currentCritterShop.AllItemDrops = this.ItemsToSell;
+                this.currentCritterShop.SandcastleSpawnedBy = this;
                 yield return new WaitForSeconds(TimeUntilShopSpawn);
             }
         }

@@ -32,7 +32,6 @@ public class PlayerBag : MonoBehaviour
 
         // TODO update pink shells here
         this.UpdatePinkShellCounter(total.Where(x => x.PickupType == PickupType.PinkShell).Count());
-        Debug.Log("Update coral, update pearl counter");
     }
 
     public void UpdateMaxCapacity(int cap)

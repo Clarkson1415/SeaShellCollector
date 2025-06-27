@@ -20,14 +20,13 @@ namespace Assets.Scripts
 
         private Vector3 target;
 
-        [SerializeField] private Transform SandcastleHome; // Where to go when full to deposit. Or player can walk over the guy to collect.
+        public Sandcastle SandcastleHome; // Where to go when full to deposit. Or player can walk over the guy to collect.
 
         public float Speed = 1f;
 
         private void Awake()
         {
             PickNewPickupTarget();
-            this.SandcastleHome = FindObjectsByType<Sandcastle>(FindObjectsSortMode.None).FirstOrDefault().transform;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -66,7 +65,7 @@ namespace Assets.Scripts
         /// </summary>
         public void SetPositionToHome()
         {
-            this.target = SandcastleHome.position;
+            this.target = SandcastleHome.transform.position;
         }
 
         private void PickNewPickupTarget()

@@ -1,5 +1,7 @@
 using Assets.Scripts;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class ShopItem : MonoBehaviour
@@ -57,5 +59,49 @@ public class ShopItem : MonoBehaviour
         {
             effect.Remove(player);
         }
+    }
+
+    public bool IsDoingAnimation;
+
+    public void Spawn(Vector3 finishPosition, float animationDuration)
+    {
+        IsDoingAnimation = true;
+        this.transform.localScale = Vector3.zero;
+        this.transform.position = this.ShopBelongsTo.transform.position;
+        this.GetComponent<BoxCollider2D>().enabled = false;
+        StartCoroutine(ChangeSizeAndMove(finishPosition, Vector3.one, animationDuration));
+    }
+
+
+    public void Despawn(Vector3 finishPosition, float animationDuration)
+    {
+        IsDoingAnimation = true;
+        this.GetComponent<BoxCollider2D>().enabled = false;
+        StartCoroutine(ChangeSizeAndMove(finishPosition, Vector3.zero, animationDuration));
+    }
+
+    private IEnumerator ChangeSizeAndMove(Vector3 targetPosition, Vector3 targetScale, float animationDuration)
+    {
+        Vector3 initialPosition = this.transform.position;
+        Vector3 initialScale = this.transform.localScale;
+        float elapsed = 0f;
+
+        while (elapsed < animationDuration)
+        {
+            float tGrow = Mathf.Clamp01(elapsed / animationDuration);
+            float tMove = Mathf.Clamp01(elapsed / animationDuration);
+
+            // Lerp scale and position
+            this.transform.localScale = Vector3.Lerp(initialScale, targetScale, tGrow);
+            this.transform.position = Vector3.Lerp(initialPosition, targetPosition, tMove);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure final values are set
+        this.transform.localScale = targetScale;
+        this.transform.position = targetPosition;
+        IsDoingAnimation = false;
     }
 }

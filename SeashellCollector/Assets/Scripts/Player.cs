@@ -143,8 +143,7 @@ public class Player : MonoBehaviour
             }
 
             this.AddPickups(new List<Pickup> { p });
-            Debug.Log($"Shell number {PinkShellCount}");
-            Destroy(p.gameObject);
+            p.gameObject.SetActive(false); // Return to object pool.
         }
         else if (collision.TryGetComponent<ShopItem>(out var item))
         {
