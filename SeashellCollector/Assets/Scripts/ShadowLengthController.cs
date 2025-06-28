@@ -23,13 +23,16 @@ public class ShadowLengthController : MonoBehaviour
 
     private void Start()
     {
-        initialLocalPosition = transform.localPosition;
-        initialLocalScale = transform.localScale;
-
         shadowSpriteObject = new GameObject("ShadowSprite");
-        shadowSpriteObject.transform.position = new Vector3(0f, 0f, 0f); // Position at origin
-        shadowSpriteObject.transform.SetParent(transform, true); // Set as child of this GameObject
-        this.shadowSpriteRenderer = shadowSpriteObject.GetComponent<SpriteRenderer>();
+        shadowSpriteObject.transform.position = new Vector3(0f, 0f, 0f);
+
+        shadowSpriteObject.transform.SetParent(transform, false); // Set as child of this GameObject
+
+        initialLocalPosition = this.shadowSpriteObject.transform.localPosition;
+        initialLocalScale = this.shadowSpriteObject.transform.localScale;
+
+        this.shadowSpriteRenderer  = shadowSpriteObject.AddComponent<SpriteRenderer>();
+
         var colourSpriteRender = this.GetComponent<SpriteRenderer>();
         
         if (this.shadowSpriteRenderer == null || colourSpriteRender == null)
@@ -39,8 +42,12 @@ public class ShadowLengthController : MonoBehaviour
         }
 
         this.shadowSpriteRenderer.sprite = colourSpriteRender.sprite; // Use parent's sprite
+
         this.shadowSpriteRenderer.color = Color.black; // Match parent's color
+        
         this.shadowSpriteRenderer.color = new Color(this.shadowSpriteRenderer.color.r, this.shadowSpriteRenderer.color.g, this.shadowSpriteRenderer.color.b, 0.5f); // Semi-transparent shadow
+
+        this.shadowSpriteRenderer.sortingLayerName = colourSpriteRender.sortingLayerName; // Match parent's sorting layer
         this.shadowSpriteRenderer.sortingOrder = colourSpriteRender.sortingOrder - 1; // Ensure shadow is drawn behind parent
     }
     void Update()
