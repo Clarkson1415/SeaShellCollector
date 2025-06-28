@@ -170,13 +170,13 @@ MonoBehaviour:
   CoralCost: 0
   PearlCost: 0
   Name: Snake
-  Description: 'Collects: Shells, Coral, Junk. Speed 3, Capcity 10. Swallows them
-    Whole then shits them in the sandcastle'
+  Description: 'Collects: Shells, Coral, Junk. Speed 3, Capacity 10.'
   CostText: {fileID: 1973835717996019988}
   NameText: {fileID: 1624865087823622037}
   DescriptionText: {fileID: 9151615099780865154}
   Effects: []
   ShopBelongsTo: {fileID: 0}
+  IsDoingAnimation: 0
   PrefabToSpawn: {fileID: 1522533379267313782, guid: b9d9e9e30e037704d9edfb3601bd0892, type: 3}
 --- !u!114 &9151615099780865154 stripped
 MonoBehaviour:

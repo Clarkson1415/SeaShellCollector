@@ -40,7 +40,7 @@ public class AnimalAnimatorStateMachine : MonoBehaviour
     void FlyToTarget()
     {
         Vector3 direction = (target - transform.position).normalized;
-        transform.position = Vector3.MoveTowards(transform.position, target, flySpeed * Time.deltaTime);
+        transform.position += (flySpeed * Time.deltaTime * direction);
 
         if (direction.x > 0 && this.transform.localScale.x > 0)
         {
