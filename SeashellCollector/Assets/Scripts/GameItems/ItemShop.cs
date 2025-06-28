@@ -163,6 +163,12 @@ public class ItemShop : MonoBehaviour
             StopCoroutine(this.ShopTimeoutCoroutine);
         }
 
+        if (this.gameObject.activeSelf == false)
+        {
+            Debug.LogWarning("Shop already closed, cannot close again.");
+            return;
+        }
+
         StartCoroutine(RemoveOneAtATime());
     }
 
@@ -175,15 +181,17 @@ public class ItemShop : MonoBehaviour
 
         if (item.OneTimeOnly)
         {
-            this.AllItemDrops.Remove(item.gameObject);
+            var matching = this.AllItemDrops.FirstOrDefault(x => x.GetComponent<ShopItem>().Name == item.Name);
+            this.AllItemDrops.Remove(matching);
         }
 
         Destroy(item.gameObject);
         this.currentlySpawnedItems.Remove(item);
+        
+        StopAllCoroutines();
 
         if (item is AutomationShopItem)
         {
-            StopAllCoroutines();
             foreach (var spawnedItem in this.currentlySpawnedItems)
             {
                 Destroy(spawnedItem.gameObject);

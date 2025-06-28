@@ -26,6 +26,12 @@ namespace Assets.Scripts.GameItems
         {
             for (int i = 0; i < amountToPool; i++)
             {
+                if (pooledObjects[i] == null)
+                {
+                    Debug.LogWarning($"Object at index {i} in the pool is null. This should not happen.{this.name}");
+                    continue;
+                }
+
                 if (!pooledObjects[i].activeInHierarchy)
                 {
                     return pooledObjects[i];

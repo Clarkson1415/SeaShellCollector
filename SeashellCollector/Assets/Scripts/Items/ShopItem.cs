@@ -1,6 +1,7 @@
 using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
@@ -76,7 +77,18 @@ public class ShopItem : MonoBehaviour
     public void Despawn(Vector3 finishPosition, float animationDuration)
     {
         IsDoingAnimation = true;
-        this.GetComponent<BoxCollider2D>().enabled = false;
+
+        if (this == null || gameObject == null)
+        {
+            Debug.Log($"this object was already destroyed");
+            return;
+        }
+
+        if (TryGetComponent<BoxCollider2D>(out var collider))
+        {
+            collider.enabled = false;
+        }
+
         StartCoroutine(ChangeSizeAndMove(finishPosition, Vector3.zero, animationDuration));
     }
 

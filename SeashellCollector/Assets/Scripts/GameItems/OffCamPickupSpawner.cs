@@ -24,7 +24,8 @@ public class OffCamPickupSpawner : Spawner
         var crittersInScene = FindObjectsByType<Collector>(FindObjectsSortMode.None);
         var players = FindObjectsByType<Player>(FindObjectsSortMode.None);
         var peopleInScene = crittersInScene.Length + players.Length;
-        var wait = peopleInScene == 0 ? 1f : (1f / peopleInScene);
+        var spawnRate = peopleInScene * spawnRatePerCritterInScene;
+        var wait = peopleInScene == 0 ? 1f : (1f / spawnRate);
         return wait;
     }
 

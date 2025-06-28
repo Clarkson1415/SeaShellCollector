@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3485862958716105430, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: m_Name
-      value: Bucket
+      value: RedBucket
       objectReference: {fileID: 0}
     - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: Cost
@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: Name
-      value: Bucket
+      value: Red Bucket
       objectReference: {fileID: 0}
     - target: {fileID: 4266800979387829456, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: Description
@@ -99,7 +99,11 @@ PrefabInstance:
     - target: {fileID: 8363381724898668357, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 36cbd91aa7f3a8c44b4d5e6e333f064d, type: 3}
+      objectReference: {fileID: 21300000, guid: 75f18e9b4bf815241bf55d5c37b866ae, type: 3}
+    - target: {fileID: 8363381724898668357, guid: 909e2fa855cffbb47ab7939a04b20638, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
