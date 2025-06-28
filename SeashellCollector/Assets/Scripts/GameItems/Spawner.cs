@@ -48,9 +48,6 @@
 
             private Vector2 GetNewSpawnPosition()
             {
-                //TODO spawn out of screen bounds for player
-                Debug.Log("todo spawn offscreen");
-
                 Vector2 spawnPosition = new(
                             UnityEngine.Random.Range(this.GetMinX(), this.GetMaxX()),
                             UnityEngine.Random.Range(this.GetMinY(), this.GetMaxY())

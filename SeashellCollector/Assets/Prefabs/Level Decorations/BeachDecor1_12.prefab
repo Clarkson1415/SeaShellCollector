@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3455608305294079541}
   - component: {fileID: 5973232774361367483}
-  - component: {fileID: 2153348862635920366}
+  - component: {fileID: 7193831179123047540}
   m_Layer: 0
   m_Name: BeachDecor1_12
   m_TagString: Untagged
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2153348862635920366
+--- !u!114 &7193831179123047540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,47 +97,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4323496500583324322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Script: {fileID: 11500000, guid: e32e8c0ef5700dd4aa962f873e79df9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_Priority: 0
-  m_ComponentVersion: 5
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_AlphaCutoff: 0.1
-  m_ApplyToSortingLayers: 00000000cdd9a9c8cf0bc98a8d85fdcdd5b958e5
-  m_ShapePath:
-  - {x: -0.17643976, y: -0.22728539, z: 0}
-  - {x: -0.23764467, y: -0.009227991, z: 0}
-  - {x: -0.15332842, y: 0.09323883, z: 0}
-  - {x: 0.2550187, y: 0.09786129, z: 0}
-  - {x: 0.2687292, y: -0.25771666, z: 0}
-  m_ShapePathHash: 1189295263
-  m_InstanceId: 0
-  m_ShadowShape2DComponent: {fileID: 0}
-  m_ShadowShape2DProvider:
-    rid: -2
-  m_ShadowCastingSource: 1
-  m_ShadowMesh:
-    m_Mesh: {fileID: 0}
-    m_LocalBounds:
-      m_Center: {x: 0.015542269, y: -0.07992768, z: 0}
-      m_Extent: {x: 0.25318694, y: 0.17778897, z: 0}
-    m_EdgeProcessing: 1
-    m_TrimEdge: 0.05
-    m_FlipX: 0
-    m_FlipY: 0
-    m_InitialTrim: 0.05
-  m_CastingOption: 1
-  m_PreviousTrimEdge: 0.05
-  m_PreviousEdgeProcessing: 1
-  m_PreviousShadowCastingSource: 1
-  m_PreviousShadowShape2DSource: {fileID: 5973232774361367483}
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  timeOfDay: 12
+  maxLength: 2
+  YOffsetModifier: 8

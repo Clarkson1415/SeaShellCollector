@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 486825529422552732}
   - component: {fileID: 6498828628368942845}
-  - component: {fileID: -2461562622439168622}
+  - component: {fileID: -1658022274513260143}
   m_Layer: 0
   m_Name: BeachDecor1_9
   m_TagString: Untagged
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-2461562622439168622
+--- !u!114 &-1658022274513260143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,53 +97,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5510510082011577977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Script: {fileID: 11500000, guid: e32e8c0ef5700dd4aa962f873e79df9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_Priority: 0
-  m_ComponentVersion: 5
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_AlphaCutoff: 0.1
-  m_ApplyToSortingLayers: 00000000cdd9a9c8cf0bc98a8d85fdcdd5b958e5
-  m_ShapePath:
-  - {x: -0.44256592, y: -0.20841146, z: 0}
-  - {x: -0.32603884, y: 0.18752193, z: 0}
-  - {x: -0.15539551, y: 0.3497877, z: 0}
-  - {x: 0.17748547, y: 0.36304176, z: 0}
-  - {x: 0.41176844, y: 0.107997775, z: 0}
-  - {x: 0.43814802, y: -0.11121535, z: 0}
-  - {x: 0.23946619, y: -0.24544287, z: 0}
-  - {x: -0.060958385, y: -0.23660672, z: 0}
-  - {x: -0.26860476, y: -0.14382863, z: 0}
-  - {x: -0.237679, y: -0.30287683, z: 0}
-  - {x: -0.40114498, y: -0.30729485, z: 0}
-  m_ShapePathHash: 1154001815
-  m_InstanceId: 0
-  m_ShadowShape2DComponent: {fileID: 0}
-  m_ShadowShape2DProvider:
-    rid: -2
-  m_ShadowCastingSource: 1
-  m_ShadowMesh:
-    m_Mesh: {fileID: 0}
-    m_LocalBounds:
-      m_Center: {x: -0.0022089481, y: 0.027873456, z: 0}
-      m_Extent: {x: 0.44035697, y: 0.3351683, z: 0}
-    m_EdgeProcessing: 1
-    m_TrimEdge: 0.05
-    m_FlipX: 0
-    m_FlipY: 0
-    m_InitialTrim: 0.05
-  m_CastingOption: 1
-  m_PreviousTrimEdge: 0.05
-  m_PreviousEdgeProcessing: 1
-  m_PreviousShadowCastingSource: 1
-  m_PreviousShadowShape2DSource: {fileID: 6498828628368942845}
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  timeOfDay: 12
+  maxLength: 2
+  YOffsetModifier: 8

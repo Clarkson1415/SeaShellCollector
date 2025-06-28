@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1792178020243902118}
   - component: {fileID: 4836469086715395670}
-  - component: {fileID: -7936603143865268657}
+  - component: {fileID: -2167203829686098076}
   m_Layer: 0
   m_Name: BeachDecor2_2
   m_TagString: Untagged
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-7936603143865268657
+--- !u!114 &-2167203829686098076
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,49 +97,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9013985144301058295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Script: {fileID: 11500000, guid: e32e8c0ef5700dd4aa962f873e79df9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_Priority: 0
-  m_ComponentVersion: 5
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_AlphaCutoff: 0.1
-  m_ApplyToSortingLayers: 00000000cdd9a9c8cf0bc98a8d85fdcdd5b958e5
-  m_ShapePath:
-  - {x: -0.4344263, y: -0.24180412, z: 0}
-  - {x: -0.43194008, y: -0.008543968, z: 0}
-  - {x: -0.2972393, y: 0.13941383, z: 0}
-  - {x: 0.30406857, y: 0.13581276, z: 0}
-  - {x: 0.4329996, y: 0.0309906, z: 0}
-  - {x: 0.437047, y: -0.11005688, z: 0}
-  - {x: 0.20491838, y: -0.25000095, z: 0}
-  m_ShapePathHash: 2040265927
-  m_InstanceId: 0
-  m_ShadowShape2DComponent: {fileID: 0}
-  m_ShadowShape2DProvider:
-    rid: -2
-  m_ShadowCastingSource: 1
-  m_ShadowMesh:
-    m_Mesh: {fileID: 0}
-    m_LocalBounds:
-      m_Center: {x: 0.0013103485, y: -0.05529356, z: 0}
-      m_Extent: {x: 0.43573666, y: 0.1947074, z: 0}
-    m_EdgeProcessing: 1
-    m_TrimEdge: 0.05
-    m_FlipX: 0
-    m_FlipY: 0
-    m_InitialTrim: 0.05
-  m_CastingOption: 1
-  m_PreviousTrimEdge: 0.05
-  m_PreviousEdgeProcessing: 1
-  m_PreviousShadowCastingSource: 1
-  m_PreviousShadowShape2DSource: {fileID: 4836469086715395670}
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  timeOfDay: 12
+  maxLength: 2
+  YOffsetModifier: 8

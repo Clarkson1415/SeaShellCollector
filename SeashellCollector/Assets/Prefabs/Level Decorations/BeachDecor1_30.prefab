@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7460016950479272191}
   - component: {fileID: 6446598139117694023}
-  - component: {fileID: 5217118162064035274}
+  - component: {fileID: 7427668443517481835}
   m_Layer: 0
   m_Name: BeachDecor1_30
   m_TagString: Untagged
@@ -88,7 +88,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5217118162064035274
+--- !u!114 &7427668443517481835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,50 +97,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7304953645901012183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Script: {fileID: 11500000, guid: e32e8c0ef5700dd4aa962f873e79df9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShadowGroup: 0
-  m_Priority: 0
-  m_ComponentVersion: 5
-  m_HasRenderer: 1
-  m_UseRendererSilhouette: 1
-  m_CastsShadows: 1
-  m_SelfShadows: 0
-  m_AlphaCutoff: 0.1
-  m_ApplyToSortingLayers: 00000000cdd9a9c8cf0bc98a8d85fdcdd5b958e5
-  m_ShapePath:
-  - {x: -0.21531487, y: -0.31332207, z: 0}
-  - {x: -0.4519024, y: -0.1887865, z: 0}
-  - {x: -0.43066597, y: 0.005414963, z: 0}
-  - {x: -0.18258, y: 0.33049297, z: 0}
-  - {x: 0.030044556, y: 0.33511543, z: 0}
-  - {x: 0.3428421, y: 0.047016144, z: 0}
-  - {x: 0.37978935, y: -0.119330406, z: 0}
-  - {x: 0.061451912, y: -0.30553436, z: 0}
-  m_ShapePathHash: -1028391195
-  m_InstanceId: 0
-  m_ShadowShape2DComponent: {fileID: 0}
-  m_ShadowShape2DProvider:
-    rid: -2
-  m_ShadowCastingSource: 1
-  m_ShadowMesh:
-    m_Mesh: {fileID: 0}
-    m_LocalBounds:
-      m_Center: {x: -0.03605652, y: 0.010896683, z: 0}
-      m_Extent: {x: 0.41584587, y: 0.32421875, z: 0}
-    m_EdgeProcessing: 1
-    m_TrimEdge: 0.05
-    m_FlipX: 0
-    m_FlipY: 0
-    m_InitialTrim: 0.05
-  m_CastingOption: 1
-  m_PreviousTrimEdge: 0.05
-  m_PreviousEdgeProcessing: 1
-  m_PreviousShadowCastingSource: 1
-  m_PreviousShadowShape2DSource: {fileID: 6446598139117694023}
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  timeOfDay: 12
+  maxLength: 2
+  YOffsetModifier: 8
