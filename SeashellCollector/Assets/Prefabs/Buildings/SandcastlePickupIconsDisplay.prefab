@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 8326148371788695866}
   - component: {fileID: 2275945033647874270}
   m_Layer: 5
-  m_Name: WhatPickupsHave
+  m_Name: SandcastlePickupIconsDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

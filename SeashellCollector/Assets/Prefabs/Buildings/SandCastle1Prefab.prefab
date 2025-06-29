@@ -440,8 +440,9 @@ MonoBehaviour:
   placeToPutShop: {fileID: 7971339217998887114}
   ItemsToSell:
   - {fileID: 3140271723020542597, guid: f528055576c6cfe4ba1a27a92884e000, type: 3}
-  - {fileID: 3140271723020542597, guid: b65738301cab82e45aa5bbbd433aaf63, type: 3}
   - {fileID: 3140271723020542597, guid: c2bcf23918a8ea946934c8bc4c89d6a9, type: 3}
+  - {fileID: 3140271723020542597, guid: b65738301cab82e45aa5bbbd433aaf63, type: 3}
+  - {fileID: 3140271723020542597, guid: bc3f480a6a5691e42bf2c0b972b25653, type: 3}
   castlePickupDisplay: {fileID: 2238721425118930012}
 --- !u!1001 &37241237389984898
 PrefabInstance:
