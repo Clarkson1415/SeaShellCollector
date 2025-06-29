@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -13,6 +14,7 @@ public class PauseMenu : GameMenu
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
 
     public void TogglePauseMenu(InputAction.CallbackContext context)
@@ -22,13 +24,16 @@ public class PauseMenu : GameMenu
             return;
         }
 
-        // If menu is not open yet, then we are toggling it on. So pause time.
-        if (!IsMenuOpen)
-        {
-            Time.timeScale = 0;
-        }
-
         this.animator.SetTrigger("Toggle");
         this.mainEventSytem.SetSelectedGameObject(null); // Make sure the button does not be select when pause menu is away.
+
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 0; // Pause the game.
+        }
+        else
+        {
+            Time.timeScale = 1; // Resume the game.
+        }
     }
 }
