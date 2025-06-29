@@ -2,18 +2,16 @@
 
 namespace Assets.Scripts.Items
 {
-    [CreateAssetMenu(fileName = "Capacity Effect", menuName = "Item Effects/Capacity")]
-    public class CapacityEffect : ItemEffect
+    public class CastleUpgradeEffect : ItemEffect
     {
-
         public override void ApplyWithoutTimeout(Player player)
         {
-            player.ModifyMaxCap(this.Value);
+            Debug.Log("Spawning castle upgrade");
         }
 
         public override void Remove(Player player)
         {
-            player.ModifyMaxCap(-this.Value);
+            throw new System.NotImplementedException();
         }
     }
 }

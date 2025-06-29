@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1577827512973834619
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 683869608285995638, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 683869608285995638, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 897957581258888626, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 897957581258888626, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2142877552041000512, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1e2b2cda19afe6a4cb5d2df5571e78c2, type: 3}
+    - target: {fileID: 3306456023449379220, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306456023449379220, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306456023449379220, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306456023449379220, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306456023449379220, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306456023449379220, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306456023449379220, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306456023449379220, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306456023449379220, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306456023449379220, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358327223325007561, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 6898568725738552147, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_Name
+      value: SandCastle_Lvl3_WithMoat
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726130235284665434, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: SandShopItems.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7726130235284665434, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: 'SandShopItems.Array.data[0]'
+      value: 
+      objectReference: {fileID: 321401041317283136, guid: 9464861ec9aa86446a99e49ce8ce4fe3, type: 3}
+    - target: {fileID: 7726130235284665434, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: 'SandShopItems.Array.data[1]'
+      value: 
+      objectReference: {fileID: 321401041317283136, guid: 9bbbc051d8be1a44e97416ea2e98c514, type: 3}
+    - target: {fileID: 7726130235284665434, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: 'SandShopItems.Array.data[2]'
+      value: 
+      objectReference: {fileID: 321401041317283136, guid: 30b595e9bf9e9574198221d3753b4835, type: 3}
+    - target: {fileID: 7726130235284665434, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: 'SandShopItems.Array.data[3]'
+      value: 
+      objectReference: {fileID: 321401041317283136, guid: e5a2be40af959574bbb517c131c12c46, type: 3}
+    - target: {fileID: 7726130235284665434, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: 'SandShopItems.Array.data[4]'
+      value: 
+      objectReference: {fileID: 321401041317283136, guid: 105a8e4f72ee2414e8514b0d2ecb78e4, type: 3}
+    - target: {fileID: 7971339217998887114, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8055009689865776439, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.080000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 8055009689865776439, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.41
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ab29d7ad82e5d1c4186acc92308d598c, type: 3}

@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3884384272144544983
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 863676420991959808, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 15c622b3079669840a4b74e35826e387, type: 3}
+    - target: {fileID: 2018850018590406310, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: Name
+      value: Medium Sandcastle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018850018590406310, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: Description
+      value: Capacity 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018850018590406310, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: PinkShellCost
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 2018850018590406310, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: PrefabToSpawn
+      value: 
+      objectReference: {fileID: 5357368722172887592, guid: 8db0a4627cdc43b4cb6a2c543538de3f, type: 3}
+    - target: {fileID: 3575227401512317335, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_Name
+      value: SandCastle_Lvl2_ShopItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157068051642661663, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157068051642661663, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157068051642661663, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157068051642661663, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157068051642661663, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157068051642661663, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157068051642661663, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157068051642661663, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157068051642661663, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5157068051642661663, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328176501965312942, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5328176501965312942, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}

@@ -117,7 +117,6 @@ public class ItemShop : MonoBehaviour
         while (this.currentlySpawnedItems.Any(x => x.IsDoingAnimation))
         {
             loopCount++;
-            Debug.Log($"Loop {loopCount}: Despawning. Items animating: {this.currentlySpawnedItems.Count(x => x.IsDoingAnimation)}");
             yield return null; // Wait until all animations are done
         }
 

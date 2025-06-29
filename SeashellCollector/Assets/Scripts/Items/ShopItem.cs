@@ -1,9 +1,8 @@
 using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+#nullable enable
 
 public class ShopItem : MonoBehaviour
 {
@@ -15,7 +14,7 @@ public class ShopItem : MonoBehaviour
     public bool OneTimeOnly;
 
     public int PinkShellCost;
-    
+
     public int CoralCost;
 
     public int PearlCost;
@@ -30,7 +29,10 @@ public class ShopItem : MonoBehaviour
 
     public List<ItemEffect> Effects = new();
 
-    public ItemShop ShopBelongsTo;
+    /// <summary>
+    /// Shop belongs to. Could be null after bought, as shop closes.
+    /// </summary>
+    public ItemShop? ShopBelongsTo;
 
     public void FlashTextRed()
     {

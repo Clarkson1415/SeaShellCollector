@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
+#nullable enable
 
 namespace Assets.Scripts
 {
@@ -14,21 +14,38 @@ namespace Assets.Scripts
     {
         [SerializeField] private TextWithFeedback feedBackText;
 
+        [SerializeField] private CastlePickupDisplay castlePickupDisplay;
+
         private List<Pickup> privatePickupList = new();
 
-        [SerializeField] private float TimeUntilShopSpawn = 10f;
+        [Header("Critter Shop Settings")]
+
+        [SerializeField] private float TimeUntilCritterShopSpawn = 10f;
 
         [SerializeField] private ItemShop currentCritterShop;
 
-        [SerializeField] private GameObject itemShopPrefab;
+        [SerializeField] private GameObject CritterItemShopPrefab;
 
-        [SerializeField] private Transform placeToPutShop;
+        [SerializeField] private Transform placeToPutCritterShop;
 
-        [SerializeField] private List<GameObject> ItemsToSell = new();
+        [SerializeField] private List<GameObject> CritterShopItemsToSell = new();
 
-        private Coroutine newShopCo;
+        private Coroutine? newCritterShopCoroutine;
 
-        [SerializeField] private CastlePickupDisplay castlePickupDisplay;
+        [Header("Castle Shop Settings")]
+
+        [SerializeField] private float TimeUntilSandShopSpawn = 10f;
+
+        [SerializeField] private ItemShop currentSandShop;
+
+        [SerializeField] private GameObject SandShopPrefab;
+
+        [SerializeField] private Transform placeToPutSandShop;
+
+        [SerializeField] private List<GameObject> SandShopItems = new();
+
+        private Coroutine? newSandShopCoroutine;
+
 
         private List<Pickup> Pickups
         {
@@ -67,33 +84,33 @@ namespace Assets.Scripts
 
         private void Start()
         {
-            newShopCo = StartCoroutine(SpawnNewShop());
+            newCritterShopCoroutine = StartCoroutine(SpawnNewShop());
             castlePickupDisplay.UpdatePickupDisplay(privatePickupList);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (newShopCo != null)
+            if (newCritterShopCoroutine != null)
             {
-                StopCoroutine(newShopCo);
+                StopCoroutine(newCritterShopCoroutine);
             }
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (newShopCo != null)
+            if (newCritterShopCoroutine != null)
             {
-                StopCoroutine(newShopCo);
+                StopCoroutine(newCritterShopCoroutine);
             }
 
-            newShopCo = StartCoroutine(SpawnNewShop(true));
+            newCritterShopCoroutine = StartCoroutine(SpawnNewShop(true));
         }
 
         private IEnumerator SpawnNewShop(bool initialDelay = false)
         {
             if (initialDelay)
             {
-                yield return new WaitForSeconds(TimeUntilShopSpawn);
+                yield return new WaitForSeconds(TimeUntilCritterShopSpawn);
             }
 
             while (true)
@@ -103,11 +120,32 @@ namespace Assets.Scripts
                     Destroy(currentCritterShop);
                 }
 
-                currentCritterShop = Instantiate(itemShopPrefab, this.placeToPutShop.transform).GetComponent<ItemShop>();
-                this.currentCritterShop.AllItemDrops = this.ItemsToSell;
+                currentCritterShop = Instantiate(CritterItemShopPrefab, this.placeToPutCritterShop.transform).GetComponent<ItemShop>();
+                this.currentCritterShop.AllItemDrops = this.CritterShopItemsToSell;
                 this.currentCritterShop.SandcastleSpawnedBy = this;
-                yield return new WaitForSeconds(TimeUntilShopSpawn);
+                yield return new WaitForSeconds(TimeUntilCritterShopSpawn);
             }
+        }
+
+        private Cannon? cannon;
+
+        public void AddPowerup(Cannon cannon)
+        {
+            this.cannon = cannon;
+            StartCoroutine(ShootCannonAfterTime());
+        }
+
+        private IEnumerator ShootCannonAfterTime()
+        {
+            yield return new WaitForSeconds(30f);
+            Debug.Log("shooting pickups to player");
+            if (this.cannon == null)
+            {
+                Debug.LogError("Cannon is null, cannot shoot pickups to player.");
+                yield break;
+            }
+
+            this.cannon.ShootToPlayer(this.TakePickups());
         }
     }
 }

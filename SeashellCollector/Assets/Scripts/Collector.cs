@@ -65,6 +65,12 @@ namespace Assets.Scripts
         /// </summary>
         public void SetPositionToHome()
         {
+            if (SandcastleHome == null)
+            {
+                Debug.Log($"Critter {this.name} has no home.");
+                return;
+            }
+
             this.target = SandcastleHome.transform.position;
         }
 

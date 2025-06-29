@@ -39,6 +39,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public List<Pickup> GetCopyOfPickups()
+    {
+        return new List<Pickup>(this.TotalPickups);
+    }
+
     private int PinkShellCount
     {
         get => this._totalPickupsPriv.Where(x => x.PickupType == PickupType.PinkShell).Count();

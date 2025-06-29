@@ -17,10 +17,18 @@ public class PauseMenu : GameMenu
 
     public void TogglePauseMenu(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (!context.started)
         {
-            this.animator.SetTrigger("Toggle");
-            this.mainEventSytem.SetSelectedGameObject(null); // Make sure the button does not be select when pause menu is away.
+            return;
         }
+
+        // If menu is not open yet, then we are toggling it on. So pause time.
+        if (!IsMenuOpen)
+        {
+            Time.timeScale = 0;
+        }
+
+        this.animator.SetTrigger("Toggle");
+        this.mainEventSytem.SetSelectedGameObject(null); // Make sure the button does not be select when pause menu is away.
     }
 }
