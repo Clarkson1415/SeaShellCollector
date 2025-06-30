@@ -94,15 +94,14 @@ public class Player : MonoBehaviour
         this._totalPickupsPriv = pickups;
     }
 
+    [SerializeField] private MultiPickupFeedback multiPickupFeedback;
+
     /// <summary>
     /// Must do this to trigger the setter.
     /// </summary>
     public void AddPickups(List<Pickup> picks)
     {
-        feedBackText.ColourThenFade(picks.Count);
-
-        Debug.Log($"[AddPickups] Called with {picks.Count} item(s): " +
-              $"{string.Join(", ", picks.Select(p => p?.PickupType.ToString() ?? "null"))}");
+        this.multiPickupFeedback.ShowPickups(picks);//TODO test this
 
         pickupSound.PlayRandomSound();
         this.TotalPickups = new List<Pickup>(this.TotalPickups.Concat(picks));

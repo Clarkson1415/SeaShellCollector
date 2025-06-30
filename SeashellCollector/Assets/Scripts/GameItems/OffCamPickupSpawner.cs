@@ -13,6 +13,8 @@ public class OffCamPickupSpawner : Spawner
 
     private Camera playerCam;
 
+    [SerializeField] private PickupType thisPickupType;
+
     // DO NOT HAVE A START METHOD, the Spawner base class has one. Otherwise Spawner.Start() will not be called.
     private void Awake()
     {
@@ -39,8 +41,8 @@ public class OffCamPickupSpawner : Spawner
     private bool TooCloseToShell(Vector2 possibleSpawn)
     {
         // TODO will need to remove this getclosetst findobjectsbytype calls, as they are expensive.
-        var nearestShell = Utility.GetClosestPickup(possibleSpawn, new List<PickupType>() { PickupType.PinkShell });
-        return nearestShell != null && Vector2.Distance(possibleSpawn, nearestShell.transform.position) < minDistanceFromClosestShell;
+        var nearestPickup = Utility.GetClosestPickup(possibleSpawn, new List<PickupType>() { thisPickupType });
+        return nearestPickup != null && Vector2.Distance(possibleSpawn, nearestPickup.transform.position) < minDistanceFromClosestShell;
     }
 
     protected override float GetMinX()

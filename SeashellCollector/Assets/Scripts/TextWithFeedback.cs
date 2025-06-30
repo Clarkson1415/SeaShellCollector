@@ -1,6 +1,10 @@
-﻿using System.Collections;
+﻿using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
@@ -10,7 +14,10 @@ namespace Assets.Scripts
     public class TextWithFeedback : MonoBehaviour
     {
         private TMP_Text tmpText;
-        public float fadeOutToInvisibleTime = 0.5f;
+        public float defaultfadeOutToInvisibleTime = 0.5f;
+        private Image shellImage;
+        private Image coralImage;
+        private Image pearlImage;
 
         /// <summary>
         /// Update text string, option to set opacity. Otherwise fully visible opaque.
@@ -56,7 +63,7 @@ namespace Assets.Scripts
                 StopCoroutine(FadeOutCoroutine);
             }
 
-            FadeOutCoroutine = StartCoroutine(FadeOut());
+            FadeOutCoroutine = StartCoroutine(FadeOut(defaultfadeOutToInvisibleTime));
         }
 
         public void ColourThenFade(int value)
@@ -100,15 +107,15 @@ namespace Assets.Scripts
             tmpText.color = endColor; // Ensure it ends exactly at the end color
         }
 
-        private IEnumerator FadeOut()
+        private IEnumerator FadeOut(float fadeTime)
         {
             float elapsed = 0f;
             Color startColor = tmpText.color;
 
-            while (elapsed < fadeOutToInvisibleTime)
+            while (elapsed < fadeTime)
             {
                 elapsed += Time.deltaTime;
-                float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeOutToInvisibleTime);
+                float alpha = Mathf.Lerp(1f, 0f, elapsed / fadeTime);
                 tmpText.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
                 this.tmpText.ForceMeshUpdate();
                 yield return null;

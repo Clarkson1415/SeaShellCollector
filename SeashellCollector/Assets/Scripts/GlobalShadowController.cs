@@ -22,10 +22,18 @@ public class GlobalShadowController : MonoBehaviour
     private void Start()
     {
         shadowControllers = FindObjectsByType<ShadowLengthController>(FindObjectsSortMode.None);
+
+        UpdateShadowTimeOfDay();
+        UpdateShadowLength();
     }
 
     // Update is called once per frame
     void Update()
+    {
+        UpdateShadowsIfChanged();
+    }
+
+    private void UpdateShadowsIfChanged()
     {
         if (lastTimeOfDay != timeOfDay)
         {

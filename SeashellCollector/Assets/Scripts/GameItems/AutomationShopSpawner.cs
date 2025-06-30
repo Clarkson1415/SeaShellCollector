@@ -43,16 +43,16 @@ public class AutomationShopSpawner : Spawner
 
     protected override bool SpawnConditionsAreMet(Vector2 spawnPosition)
     {
-        return !IsTooCloseToSandcastleOrShop(spawnPosition) && spawnerRegion.bounds.Contains(spawnPosition);
+        return IsFarEnoughFromSandAndShop(spawnPosition) && spawnerRegion.bounds.Contains(spawnPosition);
     }
 
-    private bool IsTooCloseToSandcastleOrShop(Vector2 spawnPosition)
+    private bool IsFarEnoughFromSandAndShop(Vector2 spawnPosition)
     {
         var closestSandcastle = Utility.GetClosest<Sandcastle>(spawnPosition);
         var closestShop = Utility.GetClosest<ItemShop>(spawnPosition);
 
-        var tooCloseToSandcastle = closestSandcastle != null && Vector3.Distance(spawnPosition, closestSandcastle.transform.position) <= minDistanceFromSandcastles;
-        var tooCloseToShop = closestShop != null && Vector3.Distance(spawnPosition, closestShop.transform.position) <= minDistanceFromOtherShops;
-        return tooCloseToSandcastle || tooCloseToShop;
+        var farFromSandC = closestSandcastle != null && Vector3.Distance(spawnPosition, closestSandcastle.transform.position) >= minDistanceFromSandcastles;
+        var farFromShop = closestShop != null && Vector3.Distance(spawnPosition, closestShop.transform.position) >= minDistanceFromOtherShops;
+        return farFromSandC && farFromShop;
     }
 }

@@ -1453,6 +1453,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pinkShellCount: {fileID: 4153676933427979565}
+  coralCount: {fileID: 2560790514497035017}
+  pearlCount: {fileID: 8888987183807831277}
   totalShellsText: {fileID: 7587578771785859491}
 --- !u!1 &9015201355994253088
 GameObject:

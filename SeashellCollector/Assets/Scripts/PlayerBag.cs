@@ -8,6 +8,9 @@ using UnityEngine;
 public class PlayerBag : MonoBehaviour
 {
     [SerializeField] private TMP_Text pinkShellCount; // pink shells.
+    [SerializeField] private TMP_Text coralCount;
+    [SerializeField] private TMP_Text pearlCount;
+
     [SerializeField] private TMP_Text totalShellsText;
     private int maxCapacity;
     private int totalShells;
@@ -31,7 +34,19 @@ public class PlayerBag : MonoBehaviour
         this.UpdateText();
 
         // TODO update pink shells here
-        this.UpdatePinkShellCounter(total.Where(x => x.PickupType == PickupType.PinkShell).Count());
+        this.UpdatePinkShellCounter(total.Count(x => x.PickupType == PickupType.PinkShell));
+        this.UpdateCoralCounter(total.Count(x => x.PickupType == PickupType.Coral));
+        this.UpdatePearlCounter(total.Count(x => x.PickupType == PickupType.Pearl));
+    }
+
+    private void UpdatePearlCounter(int value)
+    {
+        pearlCount.text = value.ToString();
+    }
+
+    private void UpdateCoralCounter(int value)
+    {
+         coralCount.text = value.ToString();
     }
 
     public void UpdateMaxCapacity(int cap)
