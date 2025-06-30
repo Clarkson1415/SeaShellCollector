@@ -82,6 +82,8 @@ public class StoryTextController : MonoBehaviour
         InGameWaterSound.volume = this.OriginalGameWaterSoundVolume;
     }
 
+    private Coroutine? CameraFading = null;
+
     private IEnumerator FadeCameraToBlackWhite()
     {
         if (!volumeSettings!.Profile.TryGet<ColorAdjustments>(out var colorAdjustments))
@@ -100,6 +102,7 @@ public class StoryTextController : MonoBehaviour
         }
 
         colorAdjustments.saturation.value = end;
+        CameraFading = null;
     }
 
     private float normalSaturation = 0f;
@@ -122,6 +125,7 @@ public class StoryTextController : MonoBehaviour
         }
 
         colorAdjustments.saturation.value = end;
+        CameraFading = null;
     }
 
     private void Start()
@@ -131,6 +135,8 @@ public class StoryTextController : MonoBehaviour
         {
             throw new ArgumentNullException("vol settings");
         }
+
+        this.TextBoxfullSizeScale = this.textBoxBG.transform.localScale;
     }
 
     void Update()
@@ -138,7 +144,7 @@ public class StoryTextController : MonoBehaviour
         int pickupCount = player1.GetCopyOfPickups().Count;
 
         // Check all untriggered milestones in order
-        if (this.textBoxBG.activeSelf)
+        if (this.textBoxBG.activeSelf || this.LoadingInTextAndAnim || ScalingTextBox != null || this.CameraFading != null)
         {
             return; // already showing text, skip further checks
         }
@@ -157,32 +163,33 @@ public class StoryTextController : MonoBehaviour
     {
         // Animate textbox appear
         this.text.gameObject.SetActive(true);
-        this.textBoxBG.SetActive(true);
-        StartCoroutine(FadeCameraToBlackWhite());
+        this.CameraFading = StartCoroutine(FadeCameraToBlackWhite());
         StartCoroutine(FadeOutGameSound());
-        StartCoroutine(ScalePopIn(this.textBoxBG.transform, 0.5f));
+        this.textBoxBG.SetActive(true);
+        ScalingTextBox = StartCoroutine(ScalePopIn(this.textBoxBG.transform, 0.5f));
     }
 
     private bool LoadingInTextAndAnim;
 
+    private Vector3 TextBoxfullSizeScale;
+
     public IEnumerator ScalePopIn(Transform target, float duration)
     {
         LoadingInTextAndAnim = true;
-
-        Vector3 originalScale = target.localScale;
-        var startVector = new Vector3(0, originalScale.y, originalScale.z);
+        
+        var startVector = new Vector3(0, TextBoxfullSizeScale.y, TextBoxfullSizeScale.z);
         target.localScale = startVector;
 
         float elapsed = 0f;
         while (elapsed < duration)
         {
             float t = elapsed / duration;
-            target.localScale = Vector3.Lerp(startVector, originalScale, t);
+            target.localScale = Vector3.Lerp(startVector, TextBoxfullSizeScale, t);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        target.localScale = originalScale; // Ensure final scale is exact
+        target.localScale = TextBoxfullSizeScale; // Ensure final scale is exact
 
         // write text
         this.text.text = "";
@@ -194,6 +201,7 @@ public class StoryTextController : MonoBehaviour
         }
 
         LoadingInTextAndAnim = false;
+        ScalingTextBox = null;
     }
 
     public IEnumerator ScalePopOut(Transform target, float duration)
@@ -213,7 +221,7 @@ public class StoryTextController : MonoBehaviour
         target.localScale = finalScale; // Ensure final scale is exact
         target.gameObject.SetActive(false);
         currentMilestoneIndex++;
-        scaleout = null;
+        ScalingTextBox = null;
     }
 
     public void OnSpaceOrEnter(InputAction.CallbackContext context)
@@ -223,22 +231,30 @@ public class StoryTextController : MonoBehaviour
             return;
         }
 
-        if (scaleout == null && !this.LoadingInTextAndAnim)
+        // Return to game.
+        if (ScalingTextBox == null && !this.LoadingInTextAndAnim)
         {
+            StopAllCoroutines();
             this.text.text = "";
             this.text.gameObject.SetActive(false);
             StartCoroutine(FadeInGameSound());
-            StartCoroutine(FadeCameraBackToNormal());
-            scaleout = StartCoroutine(ScalePopOut(this.textBoxBG.transform, 0.5f));
+            this.CameraFading = StartCoroutine(FadeCameraBackToNormal());
+            ScalingTextBox = StartCoroutine(ScalePopOut(this.textBoxBG.transform, 0.5f));
+            return;
         }
 
+        // Skip text
         if (this.LoadingInTextAndAnim)
         {
             this.text.text = this.pickupMilestoneText[currentMilestoneIndex];
             StopAllCoroutines();
             LoadingInTextAndAnim = false;
+
+            // TODO have a Set To On function that will just set all values to should be like saturation.
+            ScalingTextBox = null;
+            this.CameraFading = null;
         }
     }
 
-    private Coroutine? scaleout = null;
+    private Coroutine? ScalingTextBox = null;
 }

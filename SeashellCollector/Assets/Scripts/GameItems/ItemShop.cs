@@ -2,7 +2,6 @@ using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 #nullable enable
 
@@ -23,7 +22,7 @@ public class ItemShop : MonoBehaviour
     /// How long player has to be not touching shop guy for shop to dissapear.
     /// </summary>
     public float notInShopTimeout = 5f;
-    
+
     public List<GameObject> ItemSpawnLocations;
 
     public List<GameObject> AllItemDrops;
@@ -43,7 +42,7 @@ public class ItemShop : MonoBehaviour
         }
 
         var shopOpen = this.GetActiveShops().FirstOrDefault(x => x.IsOpen);
-        if (shopOpen != null)
+        if (shopOpen != null && shopOpen != this)
         {
             shopOpen.CloseShop();
         }
@@ -103,7 +102,7 @@ public class ItemShop : MonoBehaviour
             yield return null; // Wait until all animations are done
         }
 
-        foreach(var obj in this.currentlySpawnedItems)
+        foreach (var obj in this.currentlySpawnedItems)
         {
             obj.GetComponent<BoxCollider2D>().enabled = true;
         }
@@ -186,7 +185,7 @@ public class ItemShop : MonoBehaviour
 
         Destroy(item.gameObject);
         this.currentlySpawnedItems.Remove(item);
-        
+
         StopAllCoroutines();
 
         if (item is AutomationShopItem)

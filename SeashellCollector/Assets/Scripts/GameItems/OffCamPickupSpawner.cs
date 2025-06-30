@@ -11,11 +11,14 @@ public class OffCamPickupSpawner : Spawner
 
     private BoxCollider2D bounds;
 
+    private Camera playerCam;
+
     // DO NOT HAVE A START METHOD, the Spawner base class has one. Otherwise Spawner.Start() will not be called.
     private void Awake()
     {
         bounds = this.GetComponent<BoxCollider2D>();
         Debug.Log("Have difference chances of spawning items, e.g. pink shell very high. pearl exreme low, coral medium");
+        playerCam = Camera.main;
     }
 
     protected override float GetSpawnInterval()
@@ -67,9 +70,9 @@ public class OffCamPickupSpawner : Spawner
 
     private bool IsSpawnOffScreen(Vector2 spawnPos)
     {
-        float height = Camera.main.orthographicSize * 2f;
-        float width = height * Camera.main.aspect;
-        Vector2 centre = Camera.main.transform.position;
+        float height = playerCam.orthographicSize * 2f;
+        float width = height * playerCam.aspect;
+        Vector2 centre = playerCam.transform.position;
 
         return spawnPos.x < centre.x - width / 2f || spawnPos.x > centre.x + width / 2f ||
                spawnPos.y < centre.y - height / 2f || spawnPos.y > centre.y + height / 2f;

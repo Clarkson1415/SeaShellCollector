@@ -22,7 +22,7 @@ namespace Assets.Scripts
 
         [SerializeField] private float TimeUntilCritterShopSpawn = 10f;
 
-        [SerializeField] private ItemShop currentCritterShop;
+        [SerializeField] private ItemShop? currentCritterShop;
 
         [SerializeField] private GameObject CritterItemShopPrefab;
 
@@ -30,22 +30,19 @@ namespace Assets.Scripts
 
         [SerializeField] private List<GameObject> CritterShopItemsToSell = new();
 
-        private Coroutine? newCritterShopCoroutine;
+        private Coroutine? newShopCoroutine;
 
         [Header("Castle Shop Settings")]
 
         [SerializeField] private float TimeUntilSandShopSpawn = 10f;
 
-        [SerializeField] private ItemShop currentSandShop;
+        [SerializeField] private ItemShop? currentSandShop;
 
         [SerializeField] private GameObject SandShopPrefab;
 
         [SerializeField] private Transform placeToPutSandShop;
 
         [SerializeField] private List<GameObject> SandShopItems = new();
-
-        private Coroutine? newSandShopCoroutine;
-
 
         private List<Pickup> Pickups
         {
@@ -84,47 +81,58 @@ namespace Assets.Scripts
 
         private void Start()
         {
-            newCritterShopCoroutine = StartCoroutine(SpawnNewShop());
+            newShopCoroutine = StartCoroutine(SpawnNewShop(true));
+            newShopCoroutine = StartCoroutine(SpawnNewShop(false));
             castlePickupDisplay.UpdatePickupDisplay(privatePickupList);
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private IEnumerator SpawnNewShop(bool spawnCritterShop, bool initialDelay = false)
         {
-            if (newCritterShopCoroutine != null)
-            {
-                StopCoroutine(newCritterShopCoroutine);
-            }
-        }
+            var waitTime = spawnCritterShop ? TimeUntilCritterShopSpawn : TimeUntilSandShopSpawn;
+            var shopToSpawn = spawnCritterShop ? CritterItemShopPrefab : SandShopPrefab;
 
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            if (newCritterShopCoroutine != null)
-            {
-                StopCoroutine(newCritterShopCoroutine);
-            }
-
-            newCritterShopCoroutine = StartCoroutine(SpawnNewShop(true));
-        }
-
-        private IEnumerator SpawnNewShop(bool initialDelay = false)
-        {
             if (initialDelay)
             {
-                yield return new WaitForSeconds(TimeUntilCritterShopSpawn);
+                yield return new WaitForSeconds(waitTime);
             }
 
             while (true)
             {
-                if (currentCritterShop != null)
+                if (spawnCritterShop)
                 {
-                    Destroy(currentCritterShop);
+                    this.SpawnCritterShop();
                 }
-
-                currentCritterShop = Instantiate(CritterItemShopPrefab, this.placeToPutCritterShop.transform).GetComponent<ItemShop>();
-                this.currentCritterShop.AllItemDrops = this.CritterShopItemsToSell;
-                this.currentCritterShop.SandcastleSpawnedBy = this;
-                yield return new WaitForSeconds(TimeUntilCritterShopSpawn);
+                else
+                {
+                    this.SpawnSandShop();
+                }
+                
+                yield return new WaitForSeconds(waitTime);
             }
+        }
+
+        private void SpawnCritterShop()
+        {
+            if (currentCritterShop != null)
+            {
+                return; // automation shops get destroyed anyway whenb player buys automation item.
+            }
+
+            currentCritterShop = Instantiate(CritterItemShopPrefab, this.placeToPutCritterShop.transform).GetComponent<ItemShop>();
+            this.currentCritterShop.AllItemDrops = this.CritterShopItemsToSell;
+            this.currentCritterShop.SandcastleSpawnedBy = this;
+        }
+
+        private void SpawnSandShop()
+        {
+            if (currentSandShop != null)
+            {
+                return; // automation shops get destroyed anyway when player buys Automation item.
+            }
+
+            currentSandShop = Instantiate(SandShopPrefab, this.placeToPutSandShop.transform).GetComponent<ItemShop>();
+            this.currentSandShop.AllItemDrops = this.SandShopItems;
+            this.currentSandShop.SandcastleSpawnedBy = this;
         }
 
         private Cannon? cannon;

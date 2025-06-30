@@ -231,7 +231,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +1
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 644f43b8304ac8a40bc9f80b591decc1, type: 2}
   m_sharedMaterial: {fileID: 4144905688088441503, guid: 644f43b8304ac8a40bc9f80b591decc1, type: 2}
@@ -343,7 +343,7 @@ Transform:
   m_GameObject: {fileID: 6898568725738552147}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.06, y: -5.03, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -476,6 +476,7 @@ MonoBehaviour:
   - {fileID: 8761816840129500655, guid: 550c3cfcd00d059408521ca6aaac5fe8, type: 3}
   - {fileID: 8761816840129500655, guid: 8dfde46938c3fd3409c74ff0714c738a, type: 3}
   - {fileID: 8761816840129500655, guid: 70cf2338bb31197418811637be54f376, type: 3}
+  - {fileID: 8761816840129500655, guid: 69cf1d2f185400a45a7263bedd707f0f, type: 3}
   TimeUntilSandShopSpawn: 10
   currentSandShop: {fileID: 0}
   SandShopPrefab: {fileID: 5201478101734694238, guid: 318d24b09e830cc49986dba60649373b, type: 3}

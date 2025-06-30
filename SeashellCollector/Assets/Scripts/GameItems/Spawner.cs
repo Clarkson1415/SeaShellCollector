@@ -29,7 +29,7 @@
                 }
                 else
                 {
-                    Debug.Log("No available object in pool got null.");
+                    MyLog.LogWarning("No available object in pool got null.");
                 }
             
                 return objFromPool;
@@ -85,7 +85,7 @@
                     var newSpawnedItem = this.SpawnPooledObject(spawnPosition, Quaternion.identity);
                     if (newSpawnedItem == null)
                     {
-                        Debug.LogWarning($"Failed to spawn item: {this.gameObject.name} No available object in pool. Continue, wait for available.");
+                        MyLog.LogWarning($"Failed to spawn item: {this.gameObject.name} No available object in pool. Continue, wait for available.");
                         continue; // Skip to the next iteration if no object was spawned
                     }
 
