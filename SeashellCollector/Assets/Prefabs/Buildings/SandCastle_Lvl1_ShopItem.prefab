@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159db80bdbaad2b42963ea413e8db2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeOutToInvisibleTime: 0.5
+  defaultfadeOutToInvisibleTime: 0.5
 --- !u!1 &1423382594513959994
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159db80bdbaad2b42963ea413e8db2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeOutToInvisibleTime: 0.5
+  defaultfadeOutToInvisibleTime: 0.5
 --- !u!1 &1860173860529087578
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159db80bdbaad2b42963ea413e8db2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeOutToInvisibleTime: 0.5
+  defaultfadeOutToInvisibleTime: 0.5
 --- !u!1 &3575227401512317335
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timeout: -1
   OneTimeOnly: 0
-  PinkShellCost: 20
+  PinkShellCost: 10
   CoralCost: 0
   PearlCost: 0
   Name: Small sandcastle

@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2018850018590406310, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
       propertyPath: PinkShellCost
-      value: 250
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2018850018590406310, guid: f09b9fddb2d4d064c9eae69ac7d2079b, type: 3}
       propertyPath: PrefabToSpawn

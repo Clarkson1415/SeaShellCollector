@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ public class ShadowLengthController : MonoBehaviour
         initialLocalPosition = this.shadowSpriteObject.transform.localPosition;
         initialLocalScale = this.shadowSpriteObject.transform.localScale;
 
-        this.shadowSpriteRenderer  = shadowSpriteObject.AddComponent<SpriteRenderer>();
+        this.shadowSpriteRenderer = shadowSpriteObject.AddComponent<SpriteRenderer>();
 
         var colourSpriteRender = this.GetComponent<SpriteRenderer>();
         
@@ -49,7 +50,17 @@ public class ShadowLengthController : MonoBehaviour
 
         this.shadowSpriteRenderer.sortingLayerName = colourSpriteRender.sortingLayerName; // Match parent's sorting layer
         this.shadowSpriteRenderer.sortingOrder = colourSpriteRender.sortingOrder - 1; // Ensure shadow is drawn behind parent
+
+        var globalShadowController = FindFirstObjectByType<GlobalShadowController>();
+        
+        if (globalShadowController != null)
+        {
+            MyLog.LogError("need to have shadow controller.");
+        }
+
+        globalShadowController.UpdateSingleShadow(this);
     }
+
     void Update()
     {
         // Calculate how far from noon we are (0 at noon, 1 at sunrise/sunset)

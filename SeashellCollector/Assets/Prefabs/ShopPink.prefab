@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 8965115672479342387}
   - component: {fileID: 8075116505561183770}
   - component: {fileID: 4499793979571468466}
+  - component: {fileID: 1846748966121080692}
   m_Layer: 0
   m_Name: Money1_0
   m_TagString: Untagged
@@ -106,7 +107,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -447170091
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 591459018, guid: df2fbf9070d6a964ab91f19b01cd6874, type: 3}
   m_Color: {r: 1, g: 0, b: 0.64657784, a: 1}
@@ -141,6 +142,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1846748966121080692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2635746448843087009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e32e8c0ef5700dd4aa962f873e79df9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeOfDay: 12
+  maxLength: 2
+  YOffsetModifier: 2
 --- !u!1 &4873674098778876787
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,15 +250,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 807639174a5f84349b0b4b602a1b4fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SandcastleSpawnedBy: {fileID: 0}
+  animationDuration: 0.2
   notInShopTimeout: 5
   ItemSpawnLocations:
   - {fileID: 8452421737049414396}
   - {fileID: 1275763035145968200}
   - {fileID: 6692587448553580637}
   AllItemDrops:
-  - {fileID: 3140271723020542597, guid: f528055576c6cfe4ba1a27a92884e000, type: 3}
+  - {fileID: 3140271723020542597, guid: 7fc4cd8852c2eec40b04b144a75db460, type: 3}
+  - {fileID: 3140271723020542597, guid: 670be952c2add0148bae270a02c2fdae, type: 3}
+  - {fileID: 3140271723020542597, guid: e058a7fe4a87b5240885e878e26f7582, type: 3}
+  - {fileID: 3140271723020542597, guid: ef21009371a4c944980a555a34b0b394, type: 3}
+  - {fileID: 3140271723020542597, guid: 2b189c9e253bb2d40ac363d37f798180, type: 3}
   currentlySpawnedItems: []
-  animationDuration: 0.2
 --- !u!1 &6692587448553580637
 GameObject:
   m_ObjectHideFlags: 0

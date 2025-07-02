@@ -48,6 +48,12 @@ public class GlobalShadowController : MonoBehaviour
         }
     }
 
+    public void UpdateSingleShadow(ShadowLengthController shadow)
+    {
+        shadow.timeOfDay = this.timeOfDay;
+        shadow.maxLength = this.maxLength;
+    }
+
     private void UpdateShadowTimeOfDay()
     {
         foreach(var shadow in this.shadowControllers)
