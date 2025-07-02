@@ -22,6 +22,8 @@ public class ShadowLengthController : MonoBehaviour
     private SpriteRenderer shadowSpriteRenderer;
     private GameObject shadowSpriteObject;
 
+    [SerializeField] private GlobalShadowController globalShadowController;
+
     private void Start()
     {
         shadowSpriteObject = new GameObject("ShadowSprite");
@@ -51,11 +53,15 @@ public class ShadowLengthController : MonoBehaviour
         this.shadowSpriteRenderer.sortingLayerName = colourSpriteRender.sortingLayerName; // Match parent's sorting layer
         this.shadowSpriteRenderer.sortingOrder = colourSpriteRender.sortingOrder - 1; // Ensure shadow is drawn behind parent
 
-        var globalShadowController = FindFirstObjectByType<GlobalShadowController>();
-        
-        if (globalShadowController != null)
+        if (this.globalShadowController == null)
         {
-            MyLog.LogError("need to have shadow controller.");
+            this.globalShadowController = FindFirstObjectByType<GlobalShadowController>();
+        
+            if (globalShadowController == null)
+            {
+                MyLog.LogError($"need to have a global shadow controller in scene {this.name} didnt find one.");
+                return;
+            }
         }
 
         globalShadowController.UpdateSingleShadow(this);

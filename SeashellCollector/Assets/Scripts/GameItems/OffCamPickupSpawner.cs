@@ -15,8 +15,8 @@ public class OffCamPickupSpawner : Spawner
 
     [SerializeField] private PickupType thisPickupType;
 
-    // DO NOT HAVE A START METHOD, the Spawner base class has one. Otherwise Spawner.Start() will not be called.
-    private void Awake()
+    // DO NOT HAVE A Awake METHOD, the Spawner base class has one. Otherwise Spawner.Start() will not be called.
+    private void Start()
     {
         bounds = this.GetComponent<BoxCollider2D>();
         Debug.Log("Have difference chances of spawning items, e.g. pink shell very high. pearl exreme low, coral medium");

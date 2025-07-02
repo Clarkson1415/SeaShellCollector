@@ -14,7 +14,7 @@ public class AutomationShopSpawner : Spawner
     [SerializeField] private float minDistanceFromSandcastles = 10f; // Minimum distance from sandcastles to spawn shops
     [SerializeField] private float minDistanceFromOtherShops = 5f; // Minimum distance from other shops to spawn new shop
 
-    // DO NOT HAVE A START METHOD, the Spawner base class has one. Otherwise Spawner.Start() will not be called.
+    // DO NOT HAVE A awake METHOD, the Spawner base class has one. Otherwise Spawner.Awake() will not be called.
 
     protected override void DoToItemAfterSpawn(GameObject newSpawnedItem)
     {

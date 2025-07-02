@@ -35,7 +35,7 @@
                 return objFromPool;
             }
 
-            private void Start()
+            private void Awake()
             {
                 objectPooler = this.GetComponent<ObjectPooler>();
                 if (objectPooler == null)
