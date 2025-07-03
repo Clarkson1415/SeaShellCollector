@@ -109,8 +109,8 @@ SpriteRenderer:
   m_SortingLayerID: -447170091
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 591459018, guid: df2fbf9070d6a964ab91f19b01cd6874, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.64657784, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 37535ab9512783e41a6c1448f0904f1c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -156,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeOfDay: 12
   maxLength: 2
+  globalShadowController: {fileID: 0}
   YOffsetModifier: 2
 --- !u!1 &4873674098778876787
 GameObject:
@@ -168,6 +169,7 @@ GameObject:
   - component: {fileID: 8963772365131308997}
   - component: {fileID: 6242368303042381443}
   - component: {fileID: 628457440889672942}
+  - component: {fileID: 1084710850640881546}
   m_Layer: 0
   m_Name: ShopPink
   m_TagString: Untagged
@@ -264,6 +266,22 @@ MonoBehaviour:
   - {fileID: 3140271723020542597, guid: ef21009371a4c944980a555a34b0b394, type: 3}
   - {fileID: 3140271723020542597, guid: 2b189c9e253bb2d40ac363d37f798180, type: 3}
   currentlySpawnedItems: []
+--- !u!114 &1084710850640881546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873674098778876787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da814b4582f409b40aee6aae12784436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitudeY: 0.25
+  amplitudeX: 0
+  speed: 1
+  phaseOffset: {x: 0, y: 0}
 --- !u!1 &6692587448553580637
 GameObject:
   m_ObjectHideFlags: 0

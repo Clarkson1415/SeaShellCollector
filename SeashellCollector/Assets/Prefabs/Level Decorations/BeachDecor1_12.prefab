@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3455608305294079541}
   - component: {fileID: 5973232774361367483}
-  - component: {fileID: 7193831179123047540}
   m_Layer: 0
   m_Name: BeachDecor1_12
   m_TagString: Untagged
@@ -88,18 +87,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7193831179123047540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4323496500583324322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e32e8c0ef5700dd4aa962f873e79df9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeOfDay: 12
-  maxLength: 2
-  YOffsetModifier: 8
