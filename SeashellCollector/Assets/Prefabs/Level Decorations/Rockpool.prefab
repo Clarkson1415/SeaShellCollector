@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6860374322188210808}
   m_Layer: 0
   m_Name: Rockpool
-  m_TagString: Untagged
+  m_TagString: LevelDecor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 412314211105680399}
   m_Layer: 0
   m_Name: SingleWaterTileAnim_0
-  m_TagString: Untagged
+  m_TagString: LevelDecor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,6 +162,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeachDecor1_20 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1492091261364828170, guid: 6e2b6fc0b0840ae4ead47bdd2967760b, type: 3}
+      propertyPath: m_TagString
+      value: LevelDecor
+      objectReference: {fileID: 0}
     - target: {fileID: 2743676688391158620, guid: 6e2b6fc0b0840ae4ead47bdd2967760b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.34
@@ -268,6 +272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeachDecor1_9 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5510510082011577977, guid: faf9e5b93922e194ca4dc08e664e07ef, type: 3}
+      propertyPath: m_TagString
+      value: LevelDecor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -289,6 +297,10 @@ PrefabInstance:
     - target: {fileID: 1492091261364828170, guid: 6e2b6fc0b0840ae4ead47bdd2967760b, type: 3}
       propertyPath: m_Name
       value: BeachDecor1_20 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492091261364828170, guid: 6e2b6fc0b0840ae4ead47bdd2967760b, type: 3}
+      propertyPath: m_TagString
+      value: LevelDecor
       objectReference: {fileID: 0}
     - target: {fileID: 2743676688391158620, guid: 6e2b6fc0b0840ae4ead47bdd2967760b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -351,6 +363,10 @@ PrefabInstance:
     - target: {fileID: 1492091261364828170, guid: 6e2b6fc0b0840ae4ead47bdd2967760b, type: 3}
       propertyPath: m_Name
       value: BeachDecor1_20 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492091261364828170, guid: 6e2b6fc0b0840ae4ead47bdd2967760b, type: 3}
+      propertyPath: m_TagString
+      value: LevelDecor
       objectReference: {fileID: 0}
     - target: {fileID: 2743676688391158620, guid: 6e2b6fc0b0840ae4ead47bdd2967760b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -454,6 +470,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeachDecor1_9
       objectReference: {fileID: 0}
+    - target: {fileID: 5510510082011577977, guid: faf9e5b93922e194ca4dc08e664e07ef, type: 3}
+      propertyPath: m_TagString
+      value: LevelDecor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -475,6 +495,10 @@ PrefabInstance:
     - target: {fileID: 1492091261364828170, guid: 6e2b6fc0b0840ae4ead47bdd2967760b, type: 3}
       propertyPath: m_Name
       value: BeachDecor1_20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492091261364828170, guid: 6e2b6fc0b0840ae4ead47bdd2967760b, type: 3}
+      propertyPath: m_TagString
+      value: LevelDecor
       objectReference: {fileID: 0}
     - target: {fileID: 2743676688391158620, guid: 6e2b6fc0b0840ae4ead47bdd2967760b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -578,6 +602,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeachDecor1_12
       objectReference: {fileID: 0}
+    - target: {fileID: 4323496500583324322, guid: a0ae204858b614f4dae87c958e9d1560, type: 3}
+      propertyPath: m_TagString
+      value: LevelDecor
+      objectReference: {fileID: 0}
     - target: {fileID: 5973232774361367483, guid: a0ae204858b614f4dae87c958e9d1560, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -603,6 +631,10 @@ PrefabInstance:
     - target: {fileID: 7304953645901012183, guid: ff64e8285b3412a439f79896dba05988, type: 3}
       propertyPath: m_Name
       value: BeachDecor1_30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304953645901012183, guid: ff64e8285b3412a439f79896dba05988, type: 3}
+      propertyPath: m_TagString
+      value: LevelDecor
       objectReference: {fileID: 0}
     - target: {fileID: 7460016950479272191, guid: ff64e8285b3412a439f79896dba05988, type: 3}
       propertyPath: m_LocalPosition.x

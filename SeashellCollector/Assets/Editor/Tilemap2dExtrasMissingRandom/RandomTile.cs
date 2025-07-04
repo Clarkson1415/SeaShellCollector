@@ -1,10 +1,7 @@
 using System;
-
-#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine.Tilemaps;
 using UnityEngine;
-#endif
 
 namespace Assets.Tilemap2dExtrasMissingRandom
 {
@@ -19,7 +16,6 @@ namespace Assets.Tilemap2dExtrasMissingRandom
         /// <summary>
         /// The Sprites used for randomizing output.
         /// </summary>
-        [SerializeField]
         public Sprite[] m_Sprites;
 
         /// <summary>
@@ -47,7 +43,6 @@ namespace Assets.Tilemap2dExtrasMissingRandom
         }
     }
 
-#if UNITY_EDITOR
     [CustomEditor(typeof(RandomTile))]
     public class RandomTileEditor : Editor
     {
@@ -104,5 +99,4 @@ namespace Assets.Tilemap2dExtrasMissingRandom
             }
         }
     }
-#endif
 }

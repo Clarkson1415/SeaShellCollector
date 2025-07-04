@@ -4,26 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator animator;
-
     [SerializeField] private int baseMoveSpeed = 2;
     [SerializeField] private float moveSpeedModifer = 1;
-
     private Vector2 movementInput;
 
+    [Header("Sound")]
     [SerializeField] RandomSoundPlayer pickupSound;
     [SerializeField] AudioSource buySound;
     [SerializeField] AudioSource cannotDoSound;
+    [SerializeField] AudioSource footstepsAudio;
 
-    private PauseMenu pauseMenu;
-    public List<ShopItem> Items;
+    [Header("UI")]
     [SerializeField] private TextWithFeedback feedBackText;
     [SerializeField] private PlayerTopUI playerTopUI;
+    [SerializeField] private MultiPickupFeedback multiPickupFeedback;
+    private PauseMenu pauseMenu;
+
+    private List<ShopItem> ShopItems;
 
     private List<Pickup> _totalPickupsPriv = new();
     private List<Pickup> TotalPickups
@@ -76,9 +78,11 @@ public class Player : MonoBehaviour
 
     [Header("For Cheats")]
     [SerializeField] private Pickup pinkShellPickup;
-    [SerializeField] private int pinkShells;
+    [SerializeField] private int pinkShellCheatNum;
     [SerializeField] private Pickup coralPickup;
+    [SerializeField] private int coralCheatNum;
     [SerializeField] private Pickup pearlPickup;
+    [SerializeField] private int pearlCheatNum;
 
 
     private void Awake()
@@ -87,14 +91,30 @@ public class Player : MonoBehaviour
         rb = this.GetComponent<Rigidbody2D>();
         this.pauseMenu = FindFirstObjectByType<PauseMenu>();
 
-        this.playerTopUI.playerBag.UpdateMaxCapacity(_maxCapacity + maxCapModifer);
-        this.playerTopUI.playerBag.UpdateMoneyCounterUi(this.TotalPickups);
-
-        List<Pickup> pickups = Enumerable.Repeat(pinkShellPickup, pinkShells).ToList();
-        this._totalPickupsPriv = pickups;
+        this.CheckUpdateCheatValues();
     }
 
-    [SerializeField] private MultiPickupFeedback multiPickupFeedback;
+    private void CheckUpdateCheatValues()
+    {
+        if (this.TotalPickups.Count() == (pinkShellCheatNum + coralCheatNum + pearlCheatNum))
+        {
+            return;
+        }
+
+        this.TotalPickups.Clear();
+
+        List<Pickup> pickupShells = Enumerable.Repeat(pinkShellPickup, pinkShellCheatNum).ToList();
+        this.TotalPickups = new List<Pickup>(this.TotalPickups.Concat(pickupShells));
+
+        List<Pickup> pickupCoral = Enumerable.Repeat(coralPickup, coralCheatNum).ToList();
+        this._totalPickupsPriv = new List<Pickup>(this.TotalPickups.Concat(pickupCoral));
+
+        List<Pickup> pickupPearl = Enumerable.Repeat(pearlPickup, pearlCheatNum).ToList();
+        this._totalPickupsPriv = new List<Pickup>(this.TotalPickups.Concat(pickupPearl));
+
+        this.playerTopUI.playerBag.UpdateMaxCapacity(_maxCapacity + maxCapModifer);
+        this.playerTopUI.playerBag.UpdateMoneyCounterUi(this.TotalPickups);
+    }
 
     /// <summary>
     /// Must do this to trigger the setter.
@@ -128,7 +148,7 @@ public class Player : MonoBehaviour
         var pearlList = new List<Pickup>(this.TotalPickups.Where(x => x.PickupType == PickupType.Pearl).ToList());
         pearlList.RemoveRange(0, item.PearlCost);
 
-        this.TotalPickups = new List<Pickup> (pinkShellsList.Concat(coralList).Concat(pearlList));
+        this.TotalPickups = new List<Pickup>(pinkShellsList.Concat(coralList).Concat(pearlList));
         feedBackText.ColourThenFade(-(item.PinkShellCost + item.CoralCost + item.PearlCost));
     }
 
@@ -165,7 +185,7 @@ public class Player : MonoBehaviour
             item.ApplyItemEffects(this);
             if (item is not AutomationShopItem)
             {
-                Items.Add(item);
+                ShopItems.Add(item);
                 this.playerTopUI.pickupList.AddToList(item);
             }
 
@@ -199,11 +219,13 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(item.Timeout);
         item.RemoveEffects(this);
         this.playerTopUI.pickupList.Remove(item);
-        this.Items.Remove(item);
+        this.ShopItems.Remove(item);
     }
 
     private void FixedUpdate()
     {
+        CheckUpdateCheatValues();
+
         var pauseMenuState = pauseMenu.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
         if (pauseMenuState.IsName("SlideIn") || pauseMenuState.IsName("StayIn"))
         {
@@ -229,10 +251,12 @@ public class Player : MonoBehaviour
         if (context.started)
         {
             this.animator.SetTrigger("Walk");
+            this.footstepsAudio.Play();
         }
         else if (context.canceled)
         {
             this.animator.SetTrigger("Idle");
+            this.footstepsAudio.Stop();
         }
     }
 

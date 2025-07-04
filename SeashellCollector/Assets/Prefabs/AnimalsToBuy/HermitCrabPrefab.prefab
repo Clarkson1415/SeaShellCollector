@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1522533379267313782}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.23, y: -3.07, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canPickupThis: 000000000100000002000000
   maxCap: 8
+  SandcastleHome: {fileID: 0}
   Speed: 2
 --- !u!50 &882427678817884824
 Rigidbody2D:
