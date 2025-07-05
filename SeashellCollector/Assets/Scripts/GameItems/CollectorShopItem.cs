@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.GameItems
 {
-    internal class CollectorShopItem : AutomationShopItem
+    public class CollectorShopItem : AutomationShopItem
     {
         public override void ApplyItemEffects(Player player)
         {
@@ -13,10 +13,10 @@ namespace Assets.Scripts.GameItems
                 throw new ArgumentNullException("Shop belong to cannot be null when spawning in item. destroy after.");
             }
 
-            var automationItemSpawn = Instantiate(PrefabToSpawn, this.ShopBelongsTo.transform.position, Quaternion.identity);
+            var critterNew = Instantiate(PrefabToSpawn, this.ShopBelongsTo.transform.position, Quaternion.identity);
 
             // if collector:
-            if (!automationItemSpawn.TryGetComponent<Collector>(out var col))
+            if (!critterNew.TryGetComponent<Collector>(out var col))
             {
                 throw new ArgumentException("PrefabToSpawn must have Collector component attached to it.");
             }

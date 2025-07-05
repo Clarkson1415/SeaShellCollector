@@ -12,8 +12,29 @@ namespace Assets.Scripts
     [RequireComponent(typeof(Rigidbody2D))]
     public class Collector : MonoBehaviour
     {
-        [SerializeField] private List<PickupType> canPickupThis; // What this guy can pick up.
+        // Static collection to track all active collectors
+        private static HashSet<Collector> AllCollectors = new HashSet<Collector>();
 
+        [SerializeField] private float distanceToCheckForPickups = 50f;
+
+        public static int CrittersInScene => AllCollectors.Count;
+
+        private void OnEnable()
+        {
+            AllCollectors.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            AllCollectors.Remove(this);
+        }
+
+        private void OnDestroy()
+        {
+            AllCollectors.Remove(this);
+        }
+
+        [SerializeField] private List<PickupType> canPickupThis; // What this guy can pick up.
         public List<Pickup> Pickups { get; set; } = new();
 
         [SerializeField] private int maxCap;
@@ -76,7 +97,7 @@ namespace Assets.Scripts
 
         private void PickNewPickupTarget()
         {
-            var closest = Utility.GetClosestPickup(this.transform.position, this.canPickupThis);
+            var closest = Utility.GetClosestPickupWithinRange(this.transform.position, this.canPickupThis, distanceToCheckForPickups);
             if (closest == null)
             {
                 this.SetPositionToHome();

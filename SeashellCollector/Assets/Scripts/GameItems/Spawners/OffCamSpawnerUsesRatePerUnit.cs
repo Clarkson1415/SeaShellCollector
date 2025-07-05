@@ -1,11 +1,17 @@
 using Assets.Scripts;
 using Assets.Scripts.GameItems;
-using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class OffCamSpawnerUsesRatePerUnit : Spawner
 {
-    public float spawnRatePerUnit = 2f;
+    [SerializeField] private float minTimeInverval = 1f;
+
+    [SerializeField] private float maxTimeInterval = 5f;
+
+    public float spawnTimeDecreaseModifier = 1f;
+
+    public float spawnTimeDecreasePerUnit = 2f;
 
     public float minDistanceFromClosestPickup = 5f;
 
@@ -25,15 +31,21 @@ public class OffCamSpawnerUsesRatePerUnit : Spawner
         playerCam = Camera.main;
     }
 
+    private int numPlayers = 1;
+
     protected override float GetSpawnInterval()
     {
-        // TODO will need to remove thiese findobjects by type calls, as they are expensive.
-        var crittersInScene = FindObjectsByType<Collector>(FindObjectsSortMode.None);
-        var players = FindObjectsByType<Player>(FindObjectsSortMode.None);
-        var peopleInScene = crittersInScene.Length + players.Length;
-        var spawnRate = peopleInScene * spawnRatePerUnit;
-        var wait = peopleInScene == 0 ? 1f : (1f / spawnRate);
-        return wait;
+        // Fast static access - no expensive FindObjectsByType calls
+        var crittersInScene = Collector.CrittersInScene;
+        var players = Player.PlayersInScene;
+        var peopleInScene = crittersInScene + players;
+
+        var spawnInt = Random.Range(this.minTimeInverval, this.maxTimeInterval);
+
+        var SpawnAfterDecreaseMod = spawnInt - this.spawnTimeDecreaseModifier;
+        var spawnAfterUnitDecrease = SpawnAfterDecreaseMod - this.spawnTimeDecreasePerUnit * peopleInScene;
+
+        return spawnAfterUnitDecrease;
     }
 
     protected override float GetMinX()
@@ -61,29 +73,9 @@ public class OffCamSpawnerUsesRatePerUnit : Spawner
 
         var offScreen = IsSpawnOffScreen(spawnPosition);
         var inBounds = spawnRegion.bounds.Contains(spawnPosition);
-        var farFromSandcastleAndShops = IsFarEnoughFromSandcastleAndShops(spawnPosition);
-        var farFromLevelDecor = IsFarEnoughFromLevelDecor(spawnPosition);
-        var farFromPickups = IsFarEnoughFromPickups(spawnPosition);
+        var farFromStuff = IsFarEnoughFromStuff(spawnPosition);
 
-        Debug.Log($"Spawn at {spawnPosition}: OffScreen={offScreen}, InBounds={inBounds}, " +
-          $"FarFromSandcastle={farFromSandcastleAndShops}, FarFromDecor={farFromLevelDecor}, " +
-          $"FarFromPickups={farFromPickups}");
-
-        return offScreen && inBounds && farFromSandcastleAndShops && farFromLevelDecor && farFromPickups;
-    }
-
-    private bool IsFarEnoughFromSandcastleAndShops(Vector2 spawnPosition)
-    {
-        var closestSandcastle = Utility.GetClosest<Sandcastle>(spawnPosition);
-        var closestShop = Utility.GetClosest<ItemShop>(spawnPosition);
-
-        // If no sandcastles exist, we're automatically far enough from them
-        var farFromSandC = closestSandcastle == null || Vector3.Distance(spawnPosition, closestSandcastle.transform.position) >= minDistanceFromSandcastles;
-
-        // If no shops exist, we're automatically far enough from them
-        var farFromShop = closestShop == null || Vector3.Distance(spawnPosition, closestShop.transform.position) >= minDistanceFromOtherShops;
-
-        return farFromSandC && farFromShop;
+        return offScreen && inBounds && farFromStuff;
     }
 
     private bool IsSpawnOffScreen(Vector2 spawnPos)
@@ -98,13 +90,8 @@ public class OffCamSpawnerUsesRatePerUnit : Spawner
 
     [SerializeField] private float minDistanceFromLevelDecor = 10f; // Minimum distance from level decor to spawn shops
 
-    private bool IsFarEnoughFromLevelDecor(Vector2 spawnPosition)
+    private bool IsFarEnoughFromStuff(Vector2 spawnPosition)
     {
-        // Use Physics2D.OverlapCircle to check for any LevelDecor objects within the minimum distance
-        // This is more efficient than finding all objects and checking distances
-
-        // Create a layer mask for objects with "LevelDecor" tag (if using layers)
-        // Or use OverlapCircle and filter by tag
         Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(spawnPosition, minDistanceFromLevelDecor);
 
         // Check if any of the nearby colliders have the "LevelDecor" tag
@@ -115,30 +102,24 @@ public class OffCamSpawnerUsesRatePerUnit : Spawner
                 // Found a level decor object within the minimum distance - too close!
                 return false;
             }
-        }
 
-        // No level decor found within the minimum distance - far enough!
-        return true;
-    }
-
-    private bool IsFarEnoughFromPickups(Vector2 spawnPosition)
-    {
-        // Use Physics2D.OverlapCircle to check for any LevelDecor objects within the minimum distance
-        // This is more efficient than finding all objects and checking distances
-
-        // Create a layer mask for objects with "LevelDecor" tag (if using layers)
-        // Or use OverlapCircle and filter by tag
-        Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(spawnPosition, minDistanceFromClosestPickup);
-
-        // Check if any of the nearby colliders have the "LevelDecor" tag
-        foreach (Collider2D collider in nearbyColliders)
-        {
             if (collider != null && collider.gameObject.activeInHierarchy && collider.GetComponent<Pickup>())
+            {
+                return false;
+            }
+
+            if (collider != null && collider.gameObject.activeInHierarchy && collider.GetComponent<Sandcastle>())
+            {
+                return false;
+            }
+
+            if (collider != null && collider.gameObject.activeInHierarchy && collider.GetComponent<ItemShop>())
             {
                 return false;
             }
         }
 
+        // No level decor found within the minimum distance - far enough!
         return true;
     }
 

@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private MultiPickupFeedback multiPickupFeedback;
     private PauseMenu pauseMenu;
 
-    private List<ShopItem> ShopItems;
+    private List<ShopItem> boughtItems;
 
     private List<Pickup> _totalPickupsPriv = new();
     private List<Pickup> TotalPickups
@@ -84,6 +84,24 @@ public class Player : MonoBehaviour
     [SerializeField] private Pickup pearlPickup;
     [SerializeField] private int pearlCheatNum;
 
+    // Static collection to track all active collectors
+    private static HashSet<Player> AllPlayers = new HashSet<Player>();
+    public static int PlayersInScene => AllPlayers.Count;
+
+    private void OnEnable()
+    {
+        AllPlayers.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        AllPlayers.Remove(this);
+    }
+
+    private void OnDestroy()
+    {
+        AllPlayers.Remove(this);
+    }
 
     private void Awake()
     {
@@ -96,7 +114,7 @@ public class Player : MonoBehaviour
 
     private void CheckUpdateCheatValues()
     {
-        if (this.TotalPickups.Count() == (pinkShellCheatNum + coralCheatNum + pearlCheatNum))
+        if (this.TotalPickups.Count() >= (pinkShellCheatNum + coralCheatNum + pearlCheatNum))
         {
             return;
         }
@@ -185,7 +203,7 @@ public class Player : MonoBehaviour
             item.ApplyItemEffects(this);
             if (item is not AutomationShopItem)
             {
-                ShopItems.Add(item);
+                boughtItems.Add(item);
                 this.playerTopUI.pickupList.AddToList(item);
             }
 
@@ -218,8 +236,11 @@ public class Player : MonoBehaviour
         Debug.Log("Removed item after timeout: " + item.name);
         yield return new WaitForSeconds(item.Timeout);
         item.RemoveEffects(this);
+
+        MyLog.Log("Need to store index added at to remove not item.");
+
         this.playerTopUI.pickupList.Remove(item);
-        this.ShopItems.Remove(item);
+        this.boughtItems.Remove(item);
     }
 
     private void FixedUpdate()

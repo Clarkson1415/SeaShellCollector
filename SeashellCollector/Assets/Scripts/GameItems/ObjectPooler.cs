@@ -7,7 +7,10 @@ namespace Assets.Scripts.GameItems
     public class ObjectPooler : MonoBehaviour
     {
         private List<GameObject> pooledObjects;
+        [HideInInspector] public GameObject ObjectPooled => objectToPool;
+
         [SerializeField] private GameObject objectToPool;
+        
         [SerializeField] private int amountToPool;
 
         void Start()

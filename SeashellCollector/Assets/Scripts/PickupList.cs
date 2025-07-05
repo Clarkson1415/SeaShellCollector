@@ -7,6 +7,9 @@ using UnityEngine.UI;
 /// </summary>
 public class PickupList : MonoBehaviour
 {
+    /// <summary>
+    /// Stores the Shop Item and corresponding UI Element game object.
+    /// </summary>
     private Dictionary<ShopItem, GameObject> pickup_index = new();
 
     public void AddToList(ShopItem pickup)

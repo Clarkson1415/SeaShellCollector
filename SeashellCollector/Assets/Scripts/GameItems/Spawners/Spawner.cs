@@ -9,8 +9,12 @@ namespace Assets.Scripts.GameItems
     [RequireComponent(typeof(ObjectPooler))]
     public abstract class Spawner : MonoBehaviour
     {
-        private ObjectPooler objectPooler;
+        /// <summary>
+        /// Gets pickup type spawned. If something thats not a pickup is spawned by the spawner then this will be null.
+        /// </summary>
+        public PickupType? PickupTypeSpawned => this.objectPooler.ObjectPooled.GetComponent<Pickup>() == null ? null : this.objectPooler.ObjectPooled.GetComponent<Pickup>().PickupType;
 
+        private ObjectPooler objectPooler;
         protected abstract float GetMinX();
         protected abstract float GetMaxX();
         protected abstract float GetMinY();
@@ -27,7 +31,7 @@ namespace Assets.Scripts.GameItems
             }
             else
             {
-                MyLog.LogWarning("No available object in pool got null.");
+                //MyLog.LogWarning("No available object in pool got null.");
             }
 
             return objFromPool;
@@ -85,7 +89,7 @@ namespace Assets.Scripts.GameItems
                 var newSpawnedItem = this.SpawnPooledObject(spawnPosition, Quaternion.identity);
                 if (newSpawnedItem == null)
                 {
-                    MyLog.LogWarning($"Failed to spawn item: {this.gameObject.name} No available object in pool. Continue, wait for available.");
+                    //MyLog.LogWarning($"Failed to spawn item: {this.gameObject.name} No available object in pool. Continue, wait for available.");
                     continue; // Skip to the next iteration if no object was spawned
                 }
 

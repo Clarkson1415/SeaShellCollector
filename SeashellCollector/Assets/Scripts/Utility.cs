@@ -34,23 +34,27 @@ namespace Assets.Scripts
             return closest;
         }
 
-        public static Pickup GetClosestPickup(Vector3 position, List<PickupType> types)
+        public static Pickup GetClosestPickupWithinRange(Vector3 position, List<PickupType> types, float distanceToCheck)
         {
-            var objects = FindObjectsByType<Pickup>(FindObjectsSortMode.None).Where(x => types.Contains(x.PickupType));
-
-            if (objects.Count() == 0)
-                return null;
+            Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(position, distanceToCheck);
 
             Pickup closest = null;
             float closestDist = float.MaxValue;
-
-            foreach (var obj in objects)
+            
+            foreach (Collider2D collider in nearbyColliders)
             {
-                float dist = Vector3.Distance(position, obj.transform.position);
+                // if not pickup or if does not match types to look for skip.
+                if (!collider.gameObject.TryGetComponent<Pickup>(out var pick) || !types.Contains(pick.PickupType))
+                {
+                    continue;
+                }
+                
+                float dist = Vector3.Distance(position, pick.gameObject.transform.position);
+
                 if (dist < closestDist)
                 {
                     closestDist = dist;
-                    closest = obj;
+                    closest = pick;
                 }
             }
 
