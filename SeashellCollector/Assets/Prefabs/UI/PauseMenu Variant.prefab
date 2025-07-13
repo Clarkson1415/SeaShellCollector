@@ -330,6 +330,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadTitle
       objectReference: {fileID: 0}
+    - target: {fileID: 2235402307917303394, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
+      propertyPath: m_RaycastPadding.x
+      value: 10.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235402307917303394, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
+      propertyPath: m_RaycastPadding.z
+      value: 11.91
+      objectReference: {fileID: 0}
     - target: {fileID: 2827158609080025373, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
       propertyPath: m_UpdateMode
       value: 2
@@ -506,6 +514,10 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7466133694433427720, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8245385533108248101, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -530,12 +542,29 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -117
       objectReference: {fileID: 0}
+    - target: {fileID: 9027758496004611598, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
+      propertyPath: m_RaycastPadding.w
+      value: -10.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027758496004611598, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
+      propertyPath: m_RaycastPadding.x
+      value: 13.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027758496004611598, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
+      propertyPath: m_RaycastPadding.y
+      value: -10.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027758496004611598, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
+      propertyPath: m_RaycastPadding.z
+      value: 12.07
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3539753049803915268, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
     - {fileID: 2575801215050175140, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
     - {fileID: 4376331672095375196, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
     - {fileID: 6971344556311101713, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
     - {fileID: 3936601488202037490, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
+    - {fileID: 1721516484583271929, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2547709734723568697, guid: 73023056ebbdd764c961c0b1dc73ffed, type: 3}
     m_AddedGameObjects:

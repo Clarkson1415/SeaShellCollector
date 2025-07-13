@@ -78,10 +78,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1966535729
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -595846408, guid: 0d1b473a49de9a54c9d6f83fbcf288f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.2, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a51916cfe46f2849bbaf505bf2dfa5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceToCheckForPickups: 50
   canPickupThis: 000000000100000002000000
   maxCap: 8
   SandcastleHome: {fileID: 0}

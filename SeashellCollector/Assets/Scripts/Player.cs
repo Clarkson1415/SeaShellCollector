@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private MultiPickupFeedback multiPickupFeedback;
     private PauseMenu pauseMenu;
 
-    private List<ShopItem> boughtItems;
+    private List<ShopItem> boughtItems = new();
 
     private List<Pickup> _totalPickupsPriv = new();
     private List<Pickup> TotalPickups

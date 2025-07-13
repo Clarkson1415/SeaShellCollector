@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
 /// <summary>
 /// This guy will auto select the button when the controls change to either wasd, arrows keys or controller.
 /// </summary>

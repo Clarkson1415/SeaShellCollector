@@ -1,13 +1,12 @@
 using Assets.Scripts;
 using Assets.Scripts.GameItems;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class OffCamSpawnerUsesRatePerUnit : Spawner
 {
-    [SerializeField] private float minTimeInverval = 1f;
+    [SerializeField] protected float minTimeInverval = 1f;
 
-    [SerializeField] private float maxTimeInterval = 5f;
+    [SerializeField] protected float maxTimeInterval = 5f;
 
     public float spawnTimeDecreaseModifier = 1f;
 
